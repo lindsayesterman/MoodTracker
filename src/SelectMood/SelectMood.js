@@ -1,8 +1,9 @@
 import React from "react";
+import "./SelectMood.css"
 
 export default function SelectMood(props) {
   return (
-    <div>
+    <div className="selectMood">
       <h1>Hey Lindsay, how are you feeling today?</h1>
       <button value="sad" onClick={props.getButtonClicked} id="sad">
         sad
