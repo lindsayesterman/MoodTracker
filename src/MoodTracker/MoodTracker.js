@@ -38,16 +38,12 @@ export default class MoodTracker extends Component {
   displayExp = (e) => {
     e.preventDefault();
     console.log(this.state.mood.explanation);
-    window.location.href="/graph"
+    window.location.href = "/graph";
   };
 
   render() {
     return (
       <div className="mood-tracker">
-        <SelectMood
-          mood={this.state.mood}
-          getButtonClicked={this.getButtonClicked}
-        ></SelectMood>
         {this.state.mood.feeling !== "" ? (
           <div>
             <MoodExp
@@ -57,7 +53,10 @@ export default class MoodTracker extends Component {
             ></MoodExp>
           </div>
         ) : (
-          console.log("hey")
+          <SelectMood
+            mood={this.state.mood}
+            getButtonClicked={this.getButtonClicked}
+          ></SelectMood>
         )}
       </div>
     );
