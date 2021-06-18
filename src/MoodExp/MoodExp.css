@@ -1,0 +1,19 @@
+.moodExp input.whyMood {
+    width:280px;
+    height:30px;
+    border:none;
+    border-radius:4px;
+    outline:none;
+}
+
+.moodExp h2 {
+    font-size: 20px;
+}
+
+.moodExp button[type="submit"]{
+    width:140px;
+    margin:20px;
+    height:30px;
+    border-radius: 4px;
+    border:none;
+}

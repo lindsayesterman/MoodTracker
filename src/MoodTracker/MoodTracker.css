@@ -1,0 +1,14 @@
+.mood-tracker{
+    background-color: lightblue;
+    width:700px;
+    height:260px;
+    padding:50px;
+    text-align: center;
+    display:block;
+    margin:20px auto;
+    border-radius:4px;
+}
+
+.mood-tracker h1{
+    font-size:23px;
+}
