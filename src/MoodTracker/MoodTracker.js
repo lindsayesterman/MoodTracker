@@ -11,10 +11,12 @@ export default class MoodTracker extends Component {
       mood: {
         feeling: "",
         explanation: "",
+        tags: [],
         key: "",
       },
     };
   }
+
 
   getButtonClicked = (e) => {
     this.setState({
@@ -44,6 +46,8 @@ export default class MoodTracker extends Component {
   render() {
     return (
       <div className="mood-tracker">
+        <div className="c1"></div>
+        <div className="c2"></div>
         {this.state.mood.feeling !== "" ? (
           <div>
             <MoodExp
