@@ -1,15 +1,20 @@
-import React, { Component } from 'react'
-import "./Graph.css"
-import fG from '../fakeGraph.png'
+import React, { Component } from "react";
+import "./Graph.css";
+import fG from "../fakeGraph.png";
 
 export default class Graph extends Component {
-    render() {
-        console.log(this.props.mood)
-        return (
-            <div className="graph">
-                <h1>Awesome! Here are your moods for the past year with Shimmer.</h1>
-                <img alt="fake graph" src={fG}></img>
-            </div>
-        )
-    }
+  render() {
+    console.log(this.props.mood);
+    return (
+      <div className="graph">
+        {this.props.mood.feeling === "happy" ||
+        this.props.mood.feeling === "jubilant" ? (
+          <h1>Awesome, we're glad you're feeling good today!</h1>
+        ) : (
+          <h1>Oh no, we're sorry you're not feeling well today.</h1>
+        )}
+        <img alt="fake graph" src={fG}></img>
+      </div>
+    );
+  }
 }
