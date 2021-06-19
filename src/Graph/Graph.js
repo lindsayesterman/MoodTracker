@@ -4,6 +4,7 @@ import fG from '../fakeGraph.png'
 
 export default class Graph extends Component {
     render() {
+        console.log(this.props.mood)
         return (
             <div className="graph">
                 <h1>Awesome! Here are your moods for the past year with Shimmer.</h1>

@@ -1,9 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import "./MoodExp.css";
 import happyFace from "../happyFace.png";
 import sadFace from "../sadFace.png";
-
+import Graph from "../Graph/Graph";
 export default function MoodExp(props) {
   return (
     <div className="moodExp">
@@ -20,9 +20,9 @@ export default function MoodExp(props) {
         name="whyMood"
       ></input>
       <br></br>
-      <button type="submit" onClick={props.displayExp}>
-        Submit
-      </button>
+      <Link to="/graph">
+        <button type="submit">Submit</button>
+      </Link>
     </div>
   );
 }
