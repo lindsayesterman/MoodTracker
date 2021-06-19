@@ -9,7 +9,7 @@ export default class Graph extends Component {
       <div className="graph">
         {this.props.mood.feeling === "happy" ||
         this.props.mood.feeling === "jubilant" ? (
-          <h1>Awesome, we're glad you're feeling good today!</h1>
+          <h1>Awesome, we're glad you're feeling well today!</h1>
         ) : (
           <h1>Oh no, we're sorry you're not feeling well today.</h1>
         )}

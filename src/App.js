@@ -16,6 +16,7 @@ export default class App extends Component {
         tags: [],
         key: "",
       },
+      allMoods: [], //array of mood objects
     };
   }
 
@@ -38,6 +39,22 @@ export default class App extends Component {
     });
   };
 
+  getTags = (e) => {
+    this.setState({
+      mood: {
+        ...this.state.mood,
+        tags: this.state.mood.tags.concat(e.target.value),
+      },
+    });
+  };
+
+  addToAllMoods = () => {
+    this.setState({
+      allMoods: this.state.allMoods.concat(this.state.mood),
+    });
+    console.log(this.state.allMoods)
+  };
+
   render() {
     return (
       <div className="App">
@@ -48,8 +65,9 @@ export default class App extends Component {
             return (
               <MoodTracker
                 mood={this.state.mood}
-                displayExp={this.props.displayExp}
                 getExp={this.getExp}
+                getTags={this.getTags}
+                addToAllMoods={this.addToAllMoods}
                 getButtonClicked={this.getButtonClicked}
                 {...routeProps}
               />

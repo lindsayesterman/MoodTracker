@@ -23,5 +23,13 @@ img.cartoonFace{
     width:80px;
     height:80px;
     display:block;
-    margin:20px auto;
+    margin:15px auto;
+}
+
+.moodExp button.tags{
+    margin:10px 5px;
+}
+
+.moodExp button.tags:active{
+    background-color: blue;
 }

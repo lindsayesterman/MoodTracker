@@ -14,8 +14,9 @@ export default class MoodTracker extends Component {
         {this.props.mood.feeling !== "" ? (
           <div>
             <MoodExp
-              displayExp={this.props.displayExp}
               getExp={this.props.getExp}
+              getTags={this.props.getTags}
+              addToAllMoods={this.props.addToAllMoods}
               mood={this.props.mood}
             ></MoodExp>
           </div>
