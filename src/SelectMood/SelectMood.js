@@ -1,11 +1,11 @@
 import React from "react";
 import "./SelectMood.css";
 import { Link } from "react-router-dom";
-import f1 from './faceOne.svg'
-import f2 from './faceTwo.svg'
-import f3 from './faceThree.svg'
-import f4 from './faceFour.svg'
-import f5 from './faceFive.svg'
+import f1 from '../img/faceOne.svg'
+import f2 from '../img/faceTwo.svg'
+import f3 from '../img/faceThree.svg'
+import f4 from '../img/faceFour.svg'
+import f5 from '../img/faceFive.svg'
 
 export default function SelectMood(props) {
   return (

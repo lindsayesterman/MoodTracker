@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./MoodExp.css";
-import happyFace from "../happyFace.png";
-import sadFace from "../sadFace.png";
 
 export default function MoodExp(props) {
   return (

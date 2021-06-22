@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Graph.css";
-import fG from "../fakeGraph.png";
+import fG from "../img/fakeGraph.png";
 
 export default class Graph extends Component {
   render() {

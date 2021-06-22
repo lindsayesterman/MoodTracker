@@ -4,7 +4,7 @@ import SelectMood from "./SelectMood/SelectMood";
 import { Route } from "react-router-dom";
 import Graph from "./Graph/Graph";
 import MoodExp from "./MoodExp/MoodExp";
-import star from './shimmerStar.svg'
+import star from "./img/shimmerStar.svg";
 
 export default class MoodTracker extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ export default class MoodTracker extends Component {
         key: Date.now(),
       },
     });
-    console.log(e.target.id)
+    console.log(e.target.id);
   };
 
   getExp = (e) => {
@@ -49,6 +49,7 @@ export default class MoodTracker extends Component {
     });
   };
 
+
   addToAllMoods = () => {
     this.setState({
       allMoods: this.state.allMoods.concat(this.state.mood),
@@ -61,6 +62,8 @@ export default class MoodTracker extends Component {
       <div className="mood-tracker">
         <img className="s1" src={star}></img>
         <img className="s2" src={star}></img>
+        <img className="s3" src={star}></img>
+        <img className="s4" src={star}></img>
         <Route
           exact
           path="/"

@@ -1,6 +1,6 @@
 .mood-tracker {
   background-color: #C9ECFF;
-  width: 60%;
+  width: 50%;
   height: 340px;
   padding: 50px;
   text-align: center;
@@ -14,18 +14,36 @@
 }
 
 .s1 {
-  margin-top: -50px;
-  margin-left: -46%;
+  top: 0px;
+  left: 12px;
+  animation-duration:6s;
 }
 
 .s2{
-  margin-top: 240px;
-  margin-left: 37%;
+  bottom:0px;
+  right:10px;
+  animation-duration:5s;
 }
 
-.s1, .s2{
+.s3{
+  bottom: 70px;
+  right:60px;
+  width:30px;
+  animation-duration:2s;
+}
+
+.s4{
+  bottom: 10px;
+  right: 80px;
+  width:30px;
+  animation-duration:3s;
+}
+
+.s1, .s2, .s3, .s4{
   position: absolute;
   z-index: -1;
+  animation-name: star;
+  animation-iteration-count: infinite;
 }
 
 .mood-tracker h1 {
@@ -33,5 +51,27 @@
   font-weight: normal;
   font-size: 27px;
   line-height: 46px;
+  margin-top: 30px;
   font-family: PoetsenOne-Regular;
+}
+
+@keyframes star {
+  0% {transform: scale(1.0); opacity:100%}
+  30% {transform: scale(1.1);opacity:60%}
+  50% {transform: scale(1.0);opacity:100%}
+  75% {transform: scale(.9);opacity:90%}
+  100% {transform: scale(1.1);opacity:100%}
+}
+
+@media (max-width:800px){
+  .mood-tracker{
+    width:70%;
+  }
+}
+
+@media (max-width:400px){
+  .mood-tracker{
+    width:60%;
+    height:550px;
+  }
 }
