@@ -52,7 +52,7 @@ export default class App extends Component {
     this.setState({
       allMoods: this.state.allMoods.concat(this.state.mood),
     });
-    console.log(this.state.allMoods)
+    console.log(this.state.allMoods);
   };
 
   render() {
@@ -78,6 +78,20 @@ export default class App extends Component {
           path="/graph"
           render={(routeProps) => {
             return <Graph mood={this.state.mood} {...routeProps} />;
+          }}
+        />
+        <Route
+          path="/exp"
+          render={(routeProps) => {
+            return (
+              <MoodExp
+                mood={this.state.mood}
+                getExp={this.getExp}
+                getTags={this.getTags}
+                addToAllMoods={this.addToAllMoods}
+                {...routeProps}
+              />
+            );
           }}
         />
       </div>

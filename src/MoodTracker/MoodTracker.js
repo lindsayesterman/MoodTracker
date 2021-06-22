@@ -11,7 +11,11 @@ export default class MoodTracker extends Component {
       <div className="mood-tracker">
         <div className="c1"></div>
         <div className="c2"></div>
-        {this.props.mood.feeling !== "" ? (
+        <SelectMood
+          mood={this.props.mood}
+          getButtonClicked={this.props.getButtonClicked}
+        ></SelectMood>
+        {/* {this.props.mood.feeling !== "" ? (
           <div>
             <MoodExp
               getExp={this.props.getExp}
@@ -25,7 +29,7 @@ export default class MoodTracker extends Component {
             mood={this.props.mood}
             getButtonClicked={this.props.getButtonClicked}
           ></SelectMood>
-        )}
+        )} */}
       </div>
     );
   }

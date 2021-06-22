@@ -4,7 +4,7 @@ import fG from "../fakeGraph.png";
 
 export default class Graph extends Component {
   render() {
-    console.log(this.props.mood);
+    console.log(this.props.mood.explanation, this.props.mood.tags);
     return (
       <div className="graph">
         {this.props.mood.feeling === "happy" ||

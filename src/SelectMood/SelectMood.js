@@ -6,6 +6,7 @@ export default function SelectMood(props) {
   return (
     <div className="selectMood">
       <h1>Hey Lindsay, how are you feeling today?</h1>
+      <Link to="/exp">
         <button value="sad" onClick={props.getButtonClicked} id="sad">
           sad
         </button>
@@ -21,6 +22,7 @@ export default function SelectMood(props) {
         <button value="jubilant" onClick={props.getButtonClicked} id="jub">
           jubilant
         </button>
+      </Link>
     </div>
   );
 }
