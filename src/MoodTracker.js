@@ -1,12 +1,12 @@
+import React, { Component } from "react";
 import "./MoodTracker.css";
 import SelectMood from "./SelectMood/SelectMood";
 import { Route } from "react-router-dom";
 import Graph from "./Graph/Graph";
 import MoodExp from "./MoodExp/MoodExp";
+import star from './shimmerStar.svg'
 
-import React, { Component } from "react";
-
-export default class App extends Component {
+export default class MoodTracker extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,10 +24,11 @@ export default class App extends Component {
     this.setState({
       mood: {
         ...this.state.mood,
-        feeling: e.target.value,
+        feeling: e.target.id,
         key: Date.now(),
       },
     });
+    console.log(e.target.id)
   };
 
   getExp = (e) => {
@@ -58,8 +59,8 @@ export default class App extends Component {
   render() {
     return (
       <div className="mood-tracker">
-        <div className="c1"></div>
-        <div className="c2"></div>
+        <img className="s1" src={star}></img>
+        <img className="s2" src={star}></img>
         <Route
           exact
           path="/"

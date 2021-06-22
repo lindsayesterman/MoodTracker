@@ -1,31 +1,11 @@
-div.selectMood button {
+div.selectMood img {
   border: none;
   color: black;
   text-align: center;
   display: inline-block;
   font-size: 14px;
-  margin: 10px 3px;
+  margin: 10px 4px;
   height: 70px;
   width: 70px;
   border-radius: 50%;
-}
-
-div.selectMood button[value="sad"] {
-  background-color: rgb(0, 123, 255);
-}
-
-div.selectMood button[value="not well"] {
-  background-color: rgb(0, 179, 255);
-}
-
-div.selectMood button[value="neutral"] {
-  background-color: rgb(250, 245, 99);
-}
-
-div.selectMood button[value="happy"] {
-  background-color: rgb(255, 247, 1);
-}
-
-div.selectMood button[value="jubilant"] {
-  background-color: rgb(255, 204, 0);
 }

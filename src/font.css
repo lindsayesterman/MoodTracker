@@ -1,0 +1,5 @@
+@font-face {
+    font-family: 'PoetsenOne-Regular';
+    src: local('PoetsenOne-Regular'),
+         url('./fonts/PoetsenOne-Regular.ttf') format('woff'),
+}
