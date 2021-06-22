@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
-import App from './App'
+import MoodTracker from './MoodTracker'
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <MoodTracker />
   </BrowserRouter>,
   document.getElementById('root')
 );

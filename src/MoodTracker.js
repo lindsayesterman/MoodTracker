@@ -1,4 +1,4 @@
-import "./App.css";
+import "./MoodTracker.css";
 import SelectMood from "./SelectMood/SelectMood";
 import { Route } from "react-router-dom";
 import Graph from "./Graph/Graph";
@@ -57,7 +57,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="mood-tracker">
         <div className="c1"></div>
         <div className="c2"></div>
         <Route
