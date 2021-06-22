@@ -1,5 +1,5 @@
 import "./App.css";
-import MoodTracker from "./MoodTracker/MoodTracker";
+import SelectMood from "./SelectMood/SelectMood";
 import { Route } from "react-router-dom";
 import Graph from "./Graph/Graph";
 import MoodExp from "./MoodExp/MoodExp";
@@ -58,12 +58,14 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className="c1"></div>
+        <div className="c2"></div>
         <Route
           exact
           path="/"
           render={(routeProps) => {
             return (
-              <MoodTracker
+              <SelectMood
                 mood={this.state.mood}
                 getExp={this.getExp}
                 getTags={this.getTags}
