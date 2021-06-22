@@ -1,36 +1,79 @@
 .moodExp input.whyMood {
-    width:250px;
-    height:30px;
-    border:none;
-    border-radius:4px;
-    outline:none;
-    display: block;
-    margin:15px auto;
+  width: 250px;
+  height: 12px;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  outline: none;
+  display: block;
+  margin: 25px auto 0px auto;
 }
 
-.moodExp h2 {
-    font-size: 23px;
-    margin-top:10px;
+.moodExp div.btnTags {
+  margin: 0 auto;
+  width: 360px;
 }
 
-.moodExp button[type="submit"]{
-    width:140px;
-    height:30px;
-    border-radius: 4px;
-    border:none;
+.moodExp button[type="submit"] {
+  width: 140px;
+  height: 30px;
+  border-radius: 4px;
+  border: none;
 }
 
-img.cartoonFace{
-    width:80px;
-    height:80px;
-    display:block;
-    margin:15px auto;
+.moodExp button.tags {
+  margin: 10px 5px;
+  background-color: white;
+  border-radius: 15px;
+  padding: 3px 10px;
 }
 
-.moodExp button.tags{
-    margin:10px 5px;
+.moodExp button.tags[value="Work"] {
+  border: 1px solid red;
+  color: red;
 }
 
-.moodExp button.tags:active{
-    background-color: blue;
+.moodExp button.tags[value="Family"] {
+  border: 1px solid #f8e344;
+  color: #f8c144;
+}
+
+.moodExp button.tags[value="Relationship"] {
+  border: 1px solid rgb(66, 66, 252);
+  color: rgb(66, 66, 252);
+}
+
+.moodExp button.tags[value="Friends"] {
+  border: 1px solid rgb(72, 255, 0);
+  color: rgb(72, 255, 0);
+}
+
+.moodExp button.tags[value="Health"] {
+  border: 1px solid rgb(250, 180, 192);
+  color: rgb(252, 146, 163);
+}
+
+.moodExp button.tags[value="Exercise"] {
+  border: 1px solid rgb(167, 10, 167);
+  color: rgb(167, 10, 167);
+}
+
+.moodExp button.tags[value="Travel"] {
+  border: 1px solid #ff25b5;
+  color: #ff25b5;
+}
+
+.moodExp button.tags[value="Mindfulness"] {
+  border: 1px solid #14e3ff;
+  color: #14e3ff;
+}
+
+.moodExp button.tags[value="Food"] {
+  border: 1px solid #0185fe;
+  color: #0185fe;
+}
+
+.moodExp button.tags[value="Education"] {
+  border: 1px solid #fa9600;
+  color: #fa9600;
 }

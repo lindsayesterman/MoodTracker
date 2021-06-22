@@ -9,3 +9,7 @@ div.selectMood img {
   width: 70px;
   border-radius: 50%;
 }
+
+div.selectMood h1{
+  margin:30px auto;
+}
