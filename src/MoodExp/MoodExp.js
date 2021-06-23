@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./MoodExp.css";
 import Emoji from "../Emoji.js";
@@ -13,44 +13,34 @@ export default function MoodExp(props) {
       )}
       <div className="btnTags">
         <button onClick={props.getTags} className="tags" value="Work">
-          <Emoji symbol="📆" />
-          {" "}Work
+          <Emoji symbol="📆" /> Work
         </button>
         <button onClick={props.getTags} className="tags" value="Family">
-          <Emoji symbol="👨‍👨‍👧" />
-          {" "}Family
+          <Emoji symbol="👨‍👨‍👧" /> Family
         </button>
         <button onClick={props.getTags} className="tags" value="Relationship">
-          <Emoji symbol="👩‍❤️‍👩" />
-          {" "}Relationship
+          <Emoji symbol="👩‍❤️‍👩" /> Relationship
         </button>
         <button onClick={props.getTags} className="tags" value="Friends">
-          <Emoji symbol="👯‍♀️" />
-          {" "}Friends
+          <Emoji symbol="👯‍♀️" /> Friends
         </button>
         <button onClick={props.getTags} className="tags" value="Health">
-          <Emoji symbol="😷" />
-          {" "}Health
+          <Emoji symbol="😷" /> Health
         </button>
         <button onClick={props.getTags} className="tags" value="Exercise">
-          <Emoji symbol="🚴" />
-          {" "}Exercise
+          <Emoji symbol="🚴" /> Exercise
         </button>
         <button onClick={props.getTags} className="tags" value="Travel">
-          <Emoji symbol="🏝" />
-          {" "}Travel
+          <Emoji symbol="🏝" /> Travel
         </button>
         <button onClick={props.getTags} className="tags" value="Mindfulness">
-          <Emoji symbol="🧠" />
-          {" "}Mindfulness
+          <Emoji symbol="🧠" /> Mindfulness
         </button>
         <button onClick={props.getTags} className="tags" value="Food">
-          <Emoji symbol="🌮" />
-          {" "}Food
+          <Emoji symbol="🌮" /> Food
         </button>
         <button onClick={props.getTags} className="tags" value="Education">
-          <Emoji symbol="📚" />
-          {" "}Education
+          <Emoji symbol="📚" /> Education
         </button>
       </div>
       <input

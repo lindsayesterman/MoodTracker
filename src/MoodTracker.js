@@ -49,7 +49,6 @@ export default class MoodTracker extends Component {
     });
   };
 
-
   addToAllMoods = () => {
     this.setState({
       allMoods: this.state.allMoods.concat(this.state.mood),
@@ -60,10 +59,10 @@ export default class MoodTracker extends Component {
   render() {
     return (
       <div className="mood-tracker">
-        <img className="s1" src={star}></img>
-        <img className="s2" src={star}></img>
-        <img className="s3" src={star}></img>
-        <img className="s4" src={star}></img>
+        <img alt="star" className="s1" src={star}></img>
+        <img alt="star" className="s2" src={star}></img>
+        <img alt="star" className="s3" src={star}></img>
+        <img alt="star" className="s4" src={star}></img>
         <Route
           exact
           path="/"
