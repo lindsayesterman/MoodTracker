@@ -38,9 +38,7 @@
 }
 
 .btnClicked {
-  /* transform: scale(1.1); */
   font-weight: 600;
-  font-style: italic;
 }
 
 .moodExp button.tags[value="Work"] {

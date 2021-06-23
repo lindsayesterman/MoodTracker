@@ -101,7 +101,7 @@ export default class MoodTracker extends Component {
           }}
         />
         <Route
-          path="/exp"
+          path="/mind"
           render={(routeProps) => {
             return (
               <MoodExp

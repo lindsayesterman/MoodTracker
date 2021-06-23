@@ -11,7 +11,7 @@ export default function SelectMood(props) {
   return (
     <div className="selectMood">
       <h1 className="welcome">Welcome back Lindsay <br /> How are you feeling today?</h1>
-      <Link to="/exp">
+      <Link to="/mind">
         <img className="hvr-icon-pulse-grow" alt="sad face" id="sad" onClick={props.getButtonClicked} src={f1}></img>
         <img className="hvr-icon-pulse-grow" alt="not well face" id="not well" onClick={props.getButtonClicked} src={f2}></img>
         <img className="hvr-icon-pulse-grow" alt="neutral face" id="neutral" onClick={props.getButtonClicked} src={f3}></img>
