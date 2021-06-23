@@ -40,13 +40,26 @@ export default class MoodTracker extends Component {
     });
   };
 
-  getTags = (e) => {
+  removeTag = (e) => {
     this.setState({
       mood: {
         ...this.state.mood,
-        tags: this.state.mood.tags.concat(e.target.value),
+        tags: this.state.mood.tags.filter(function (t) {
+          return t !== e.target.value
+        })
       },
-    });
+    })
+  };
+
+  getTags = (e) => {
+    this.state.mood.tags.includes(e.target.value)
+      ? this.removeTag(e)
+      : this.setState({
+          mood: {
+            ...this.state.mood,
+            tags: this.state.mood.tags.concat(e.target.value),
+          },
+        });
   };
 
   addToAllMoods = () => {

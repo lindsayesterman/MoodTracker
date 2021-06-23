@@ -37,6 +37,10 @@
   color: red;
 }
 
+.btnClicked {
+  font-size:17px;
+}
+
 .moodExp button.tags[value="Family"] {
   border: 1px solid #f8e344;
   color: #f8c144;
