@@ -1,41 +1,56 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./MoodExp.css";
+import Emoji from "../Emoji.js";
 
 export default function MoodExp(props) {
   return (
     <div className="moodExp">
-      {props.mood.feeling === "happy" || props.mood.feeling === "jubilant" ? <h1>Awesome! What's on your mind?</h1> : <h1>Oh no, what's on your mind?</h1>} 
+      {props.mood.feeling === "happy" || props.mood.feeling === "jubilant" ? (
+        <h1>Awesome! What's on your mind?</h1>
+      ) : (
+        <h1>Oh no, what's on your mind?</h1>
+      )}
       <div className="btnTags">
         <button onClick={props.getTags} className="tags" value="Work">
-          Work
+          <Emoji symbol="📆" />
+          {" "}Work
         </button>
         <button onClick={props.getTags} className="tags" value="Family">
-          Family
+          <Emoji symbol="👨‍👨‍👧" />
+          {" "}Family
         </button>
         <button onClick={props.getTags} className="tags" value="Relationship">
-          Relationship
+          <Emoji symbol="👩‍❤️‍👩" />
+          {" "}Relationship
         </button>
         <button onClick={props.getTags} className="tags" value="Friends">
-          Friends
+          <Emoji symbol="👯‍♀️" />
+          {" "}Friends
         </button>
         <button onClick={props.getTags} className="tags" value="Health">
-          Health
+          <Emoji symbol="😷" />
+          {" "}Health
         </button>
         <button onClick={props.getTags} className="tags" value="Exercise">
-          Exercise
+          <Emoji symbol="🚴" />
+          {" "}Exercise
         </button>
         <button onClick={props.getTags} className="tags" value="Travel">
-          Travel
+          <Emoji symbol="🏝" />
+          {" "}Travel
         </button>
         <button onClick={props.getTags} className="tags" value="Mindfulness">
-          Mindfulness
+          <Emoji symbol="🧠" />
+          {" "}Mindfulness
         </button>
         <button onClick={props.getTags} className="tags" value="Food">
-          Food
+          <Emoji symbol="🌮" />
+          {" "}Food
         </button>
         <button onClick={props.getTags} className="tags" value="Education">
-          Education
+          <Emoji symbol="📚" />
+          {" "}Education
         </button>
       </div>
       <input
@@ -44,7 +59,7 @@ export default function MoodExp(props) {
         className="whyMood"
         name="whyMood"
       ></input>
-      <br/>
+      <br />
       <Link to="/graph">
         <button onClick={props.addToAllMoods} type="submit">
           Submit

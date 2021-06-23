@@ -7,11 +7,19 @@
   outline: none;
   display: block;
   margin: 25px auto 0px auto;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .moodExp div.btnTags {
   margin: 0 auto;
-  width: 330px;
+  width: 390px;
+}
+
+.moodExp button.tags {
+  margin: 10px 5px;
+  background-color: white;
+  border-radius: 15px;
+  padding: 3px 10px;
 }
 
 .moodExp button[type="submit"] {
@@ -20,14 +28,8 @@
   border-radius: 20px;
   border: none;
   background-color: white;
-  color: #F8C144;
-}
-
-.moodExp button.tags {
-  margin: 10px 5px;
-  background-color: white;
-  border-radius: 15px;
-  padding: 3px 10px;
+  color: #f8c144;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .moodExp button.tags[value="Work"] {
@@ -80,8 +82,24 @@
   color: #fa9600;
 }
 
-@media (max-width:400px){
+@media (max-width: 600px) {
   .moodExp div.btnTags {
     width: 100%;
+  }
+
+  .moodExp button.tags {
+    padding: 3px 7px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 415px) {
+  .moodExp div.btnTags {
+    width: 100%;
+  }
+
+  .moodExp button.tags {
+    padding: 3px 10px;
+    font-size: 9px;
   }
 }
