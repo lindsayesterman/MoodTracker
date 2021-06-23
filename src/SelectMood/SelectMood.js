@@ -12,11 +12,11 @@ export default function SelectMood(props) {
     <div className="selectMood">
       <h1 className="welcome">Welcome back Lindsay <br /> How are you feeling today?</h1>
       <Link to="/exp">
-        <img alt="sad face" id="sad" onClick={props.getButtonClicked} src={f1}></img>
-        <img alt="not well face" id="not well" onClick={props.getButtonClicked} src={f2}></img>
-        <img alt="neutral face" id="neutral" onClick={props.getButtonClicked} src={f3}></img>
-        <img alt="happy face" id="happy" onClick={props.getButtonClicked} src={f4}></img>
-        <img alt="jubilant face" id="jubilant" onClick={props.getButtonClicked} src={f5}></img>
+        <img className="hvr-icon-pulse-grow" alt="sad face" id="sad" onClick={props.getButtonClicked} src={f1}></img>
+        <img className="hvr-icon-pulse-grow" alt="not well face" id="not well" onClick={props.getButtonClicked} src={f2}></img>
+        <img className="hvr-icon-pulse-grow" alt="neutral face" id="neutral" onClick={props.getButtonClicked} src={f3}></img>
+        <img className="hvr-icon-pulse-grow" alt="happy face" id="happy" onClick={props.getButtonClicked} src={f4}></img>
+        <img className="hvr-icon-pulse-grow" alt="jubilant face" id="jubilant" onClick={props.getButtonClicked} src={f5}></img>
       </Link>
     </div>
   );

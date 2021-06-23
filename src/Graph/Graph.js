@@ -7,7 +7,7 @@ export default class Graph extends Component {
     console.log(this.props.mood);
     return (
       <div className="graph">
-       <h1>Your mood over time with Shimmer</h1>
+       <h1>Your mood over time with Shimmer:)</h1>
         <img alt="fake graph" src={fG}></img>
       </div>
     );

@@ -76,6 +76,8 @@ export default class MoodTracker extends Component {
         <img alt="star" className="s2" src={star}></img>
         <img alt="star" className="s3" src={star}></img>
         <img alt="star" className="s4" src={star}></img>
+        <img alt="star" className="s5" src={star}></img>
+        <img alt="star" className="s6" src={star}></img>
         <Route
           exact
           path="/"

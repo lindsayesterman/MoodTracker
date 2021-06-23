@@ -25,20 +25,34 @@
 }
 
 .s3{
-  bottom: 70px;
-  right:60px;
+  bottom: 80px;
+  right:47px;
   width:30px;
   animation-duration:2s;
 }
 
 .s4{
   bottom: 10px;
-  right: 80px;
+  right: 78px;
   width:30px;
   animation-duration:3s;
 }
 
-.s1, .s2, .s3, .s4{
+.s5{
+  top: 8px;
+  left: 69px;
+  width:30px;
+  animation-duration:6s;  
+}
+
+.s6{
+  top: 60px;
+  left: 59px;
+  width:20px;
+  animation-duration:6s;  
+}
+
+.s1, .s2, .s3, .s4, .s5, .s6{
   position: absolute;
   z-index: -1;
   animation-name: star;
@@ -56,7 +70,7 @@
 
 @keyframes star {
   0% {transform: scale(1.0); filter:brightness(1)}
-  25% {transform: scale(1.1);filter:brightness(1.25)}
+  25% {transform: scale(1.1);filter:brightness(1.45)}
   50% {transform: scale(1.0);filter:brightness(1.15)}
   75% {transform: scale(.9);filter:brightness(1)}
   100% {transform: scale(1);filter:brightness(1.05)}

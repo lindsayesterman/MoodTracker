@@ -2,6 +2,7 @@ import React, { useState, useStyles, Component } from "react";
 import { Link } from "react-router-dom";
 import "./MoodExp.css";
 import Emoji from "../Emoji.js";
+// import '../hover.css'
 
 export default function MoodExp(props) {
   const classes = `tags btnClicked`;
@@ -94,7 +95,11 @@ export default function MoodExp(props) {
       ></input>
       <br />
       <Link to="/graph">
-        <button onClick={props.addToAllMoods} type="submit">
+        <button
+          className="hvr-float-shadow"
+          onClick={props.addToAllMoods}
+          type="submit"
+        >
           Submit
         </button>
       </Link>
