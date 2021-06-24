@@ -23,7 +23,7 @@
 }
 
 /* Pop */
-@-webkit-keyframes hvr-pop {
+/* @-webkit-keyframes hvr-pop {
   50% {
     -webkit-transform: scale(1.2);
     transform: scale(1.2);
@@ -56,6 +56,10 @@
   animation-timing-function: linear;
   -webkit-animation-iteration-count: 1;
   animation-iteration-count: 1;
+} */
+
+.moodExp button.tags:hover{
+  font-weight: 600;
 }
 
 .moodExp button[type="submit"] {
@@ -63,19 +67,14 @@
   height: 40px;
   border-radius: 40px;
   border: none;
-  /* background-color: white;
-  color: #f8c144; */
   background-color: #f7c144;
   color: white;
   font-weight: 600;
   font-size: 15px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   display: inline-block;
   vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  overflow: hidden;
   -webkit-transition-duration: 0.6s;
   transition-duration: 0.6s;
   -webkit-transition-property: color, background-color;
@@ -83,14 +82,50 @@
 }
 
 .moodExp button[type="submit"]:hover,
-.moodExp button[type="submit"] :focus,
-.moodExp button[type="submit"] :active {
+.moodExp button[type="submit"]:focus,
+.moodExp button[type="submit"]:active {
   background-color: white;
   color: gray;
 }
 
-.btnClicked {
-  font-weight: 600;
+.workClicked {
+  background-color: rgb(255, 204, 204) !important;
+}
+
+.famClicked {
+  background-color: #fdfae3 !important;
+}
+
+.relClicked {
+  background-color: #cbf7fd !important;
+}
+
+.friClicked {
+  background-color: rgb(232, 255, 226) !important;
+}
+
+.healthClicked {
+  background-color: rgb(253, 238, 241) !important;
+}
+
+.exClicked {
+  background-color: rgb(246, 222, 252) !important;
+}
+
+.travClicked {
+  background-color: #f8d7ed !important;
+}
+
+.mindClicked {
+  background-color: #f3e7fd !important;
+}
+
+.foodClicked {
+  background-color: #c5e3ff !important;
+}
+
+.eduClicked {
+  background-color: #f8e4cf !important;
 }
 
 .moodExp button.tags[value="Work"] {
@@ -142,62 +177,6 @@
   border: 1px solid #d9730b;
   color: #d9730b;
 }
-
-/* .hvr-float-shadow {
-  display: inline-block;
-  vertical-align: middle;
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  position: relative;
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: transform;
-  transition-property: transform;
-}
-.hvr-float-shadow:before {
-  pointer-events: none;
-  position: absolute;
-  z-index: -1;
-  content: "";
-  top: 100%;
-  left: 5%;
-  height: 10px;
-  width: 90%;
-  opacity: 0;
-  background: -webkit-radial-gradient(
-    center,
-    ellipse,
-    rgba(0, 0, 0, 0.35) 0%,
-    rgba(0, 0, 0, 0) 80%
-  );
-  background: radial-gradient(
-    ellipse at center,
-    rgba(0, 0, 0, 0.35) 0%,
-    rgba(0, 0, 0, 0) 80%
-  ); 
-
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: transform, opacity;
-  transition-property: transform, opacity;
-}*/
-
-/* .hvr-float-shadow:hover,
-.hvr-float-shadow:focus,
-.hvr-float-shadow:active {
-  -webkit-transform: translateY(-5px);
-  transform: translateY(-5px);*/
-/* move the element up by 5px */
-/*}
-
-.hvr-float-shadow:hover:before,
-.hvr-float-shadow:focus:before,
-.hvr-float-shadow:active:before {
-  opacity: 1;
-  -webkit-transform: translateY(5px);
-  transform: translateY(10px);*/
-/* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) } */
 
 @media (max-width: 600px) {
   .moodExp div.btnTags {

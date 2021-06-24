@@ -4,7 +4,6 @@ import "./MoodExp.css";
 import Emoji from "../Emoji.js";
 
 export default function MoodExp(props) {
-  const classes = `tags btnClicked`;
   const tags = props.mood.tags;
 
   return (
@@ -17,70 +16,70 @@ export default function MoodExp(props) {
       <div className="btnTags">
         <button
           onClick={props.getTags}
-          className={tags.includes("Work") ? classes : "tags"}
+          className={tags.includes("Work") ? "tags workClicked" : "tags"}
           value="Work"
         >
           <Emoji symbol="📆" /> Work
         </button>
         <button
           onClick={props.getTags}
-          className={tags.includes("Family") ? classes : "tags"}
+          className={tags.includes("Family") ? "tags famClicked" : "tags"}
           value="Family"
         >
           <Emoji symbol="👨‍👨‍👧" /> Family
         </button>
         <button
           onClick={props.getTags}
-          className={tags.includes("Relationship") ? classes : "tags"}
+          className={tags.includes("Relationship") ? "tags relClicked" : "tags"}
           value="Relationship"
         >
           <Emoji symbol="👩‍❤️‍👩" /> Relationship
         </button>
         <button
           onClick={props.getTags}
-          className={tags.includes("Friends") ? classes : "tags"}
+          className={tags.includes("Friends") ? "tags friClicked" : "tags"}
           value="Friends"
         >
           <Emoji symbol="👯‍♀️" /> Friends
         </button>
         <button
           onClick={props.getTags}
-          className={tags.includes("Health") ? classes : "tags"}
+          className={tags.includes("Health") ? "tags healthClicked" : "tags"}
           value="Health"
         >
           <Emoji symbol="😷" /> Health
         </button>
         <button
           onClick={props.getTags}
-          className={tags.includes("Exercise") ? classes : "tags"}
+          className={tags.includes("Exercise") ? "tags exClicked" : "tags"}
           value="Exercise"
         >
           <Emoji symbol="🚴" /> Exercise
         </button>
         <button
           onClick={props.getTags}
-          className={tags.includes("Travel") ? classes : "tags"}
+          className={tags.includes("Travel") ? "tags travClicked" : "tags"}
           value="Travel"
         >
           <Emoji symbol="🏝" /> Travel
         </button>
         <button
           onClick={props.getTags}
-          className={tags.includes("Mindfulness") ? classes : "tags"}
+          className={tags.includes("Mindfulness") ? "tags mindClicked" : "tags"}
           value="Mindfulness"
         >
           <Emoji symbol="🧠" /> Mindfulness
         </button>
         <button
           onClick={props.getTags}
-          className={tags.includes("Food") ? classes : "tags"}
+          className={tags.includes("Food") ? "tags foodClicked" : "tags"}
           value="Food"
         >
           <Emoji symbol="🌮" /> Food
         </button>
         <button
           onClick={props.getTags}
-          className={tags.includes("Education") ? classes : "tags"}
+          className={tags.includes("Education") ? "tags eduClicked" : "tags"}
           value="Education"
         >
           <Emoji symbol="📚" /> Education

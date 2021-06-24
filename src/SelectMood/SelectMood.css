@@ -37,37 +37,27 @@ div.selectMood h1 {
 }
 
 .sad {
-  animation-name: sad;
-  animation-duration: 0.3s;
+  animation: sad 0.3s;
 }
 
 .nw {
-  animation-name: nw;
-  animation-duration: 0.3s;
-  animation-delay: .2s;
+  animation: nw 0.3s 0.2s;
 }
 
 .neutral {
-  animation-name: neutral;
-  animation-duration: 0.3s;
-  animation-delay: .4s;
+  animation: neutral 0.3s 0.4s;
 }
 
 .happy {
-  animation-name: happy;
-  animation-duration: 0.3s;
-  animation-delay: .6s;
+  animation: happy 0.3s 0.6s;
 }
 
 .jub {
-  animation-name: jub;
-  animation-duration: 0.3s;
-  animation-delay: .8s;
+  animation: jub 0.3s 0.8s;
 }
 
 @keyframes sad {
   from {
-    -webkit-transform: translateY(0px);
   }
   to {
     -webkit-transform: translateY(-8px);
@@ -77,7 +67,6 @@ div.selectMood h1 {
 
 @keyframes nw {
   from {
-    -webkit-transform: translateY(0px);
   }
   to {
     -webkit-transform: translateY(-8px);
@@ -87,7 +76,6 @@ div.selectMood h1 {
 
 @keyframes neutral {
   from {
-    -webkit-transform: translateY(0px);
   }
   to {
     -webkit-transform: translateY(-8px);
@@ -97,7 +85,6 @@ div.selectMood h1 {
 
 @keyframes happy {
   from {
-    -webkit-transform: translateY(0px);
   }
   to {
     -webkit-transform: translateY(-8px);
@@ -107,7 +94,6 @@ div.selectMood h1 {
 
 @keyframes jub {
   from {
-    -webkit-transform: translateY(0px);
   }
   to {
     -webkit-transform: translateY(-8px);
