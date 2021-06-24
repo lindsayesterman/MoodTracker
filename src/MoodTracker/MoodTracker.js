@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import "./MoodTracker.css";
-import SelectMood from "./SelectMood/SelectMood";
+import SelectMood from "../SelectMood/SelectMood";
 import { Route } from "react-router-dom";
-import Graph from "./Graph/Graph";
-import MoodExp from "./MoodExp/MoodExp";
-import star from "./img/shimmerStar.svg";
+import Graph from "../Graph/Graph";
+import MoodExp from "../MoodExp/MoodExp";
+import star from "../img/shimmerStar.svg";
 
 export default class MoodTracker extends Component {
   constructor(props) {
@@ -15,6 +15,7 @@ export default class MoodTracker extends Component {
         explanation: "",
         tags: [],
         key: "",
+        date:""
       },
       allMoods: [], //array of mood objects
     };

@@ -10,7 +10,6 @@ div.selectMood img {
   border-radius: 50%;
 }
 
-
 /* Float */
 div.selectMood img {
   display: inline-block;
@@ -35,6 +34,85 @@ div.selectMood img:active {
 
 div.selectMood h1 {
   margin: 30px auto;
+}
+
+.sad {
+  animation-name: sad;
+  animation-duration: 0.3s;
+}
+
+.nw {
+  animation-name: nw;
+  animation-duration: 0.3s;
+  animation-delay: .2s;
+}
+
+.neutral {
+  animation-name: neutral;
+  animation-duration: 0.3s;
+  animation-delay: .4s;
+}
+
+.happy {
+  animation-name: happy;
+  animation-duration: 0.3s;
+  animation-delay: .6s;
+}
+
+.jub {
+  animation-name: jub;
+  animation-duration: 0.3s;
+  animation-delay: .8s;
+}
+
+@keyframes sad {
+  from {
+    -webkit-transform: translateY(0px);
+  }
+  to {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes nw {
+  from {
+    -webkit-transform: translateY(0px);
+  }
+  to {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes neutral {
+  from {
+    -webkit-transform: translateY(0px);
+  }
+  to {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes happy {
+  from {
+    -webkit-transform: translateY(0px);
+  }
+  to {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes jub {
+  from {
+    -webkit-transform: translateY(0px);
+  }
+  to {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
 }
 
 @media (max-width: 630px) {
