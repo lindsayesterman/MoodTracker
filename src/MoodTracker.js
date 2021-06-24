@@ -26,6 +26,7 @@ export default class MoodTracker extends Component {
         ...this.state.mood,
         feeling: e.target.id,
         key: Date.now(),
+        date: Date().toLocaleString(),
       },
     });
     console.log(e.target.id);
@@ -45,10 +46,10 @@ export default class MoodTracker extends Component {
       mood: {
         ...this.state.mood,
         tags: this.state.mood.tags.filter(function (t) {
-          return t !== e.target.value
-        })
+          return t !== e.target.value;
+        }),
       },
-    })
+    });
   };
 
   getTags = (e) => {
@@ -95,12 +96,6 @@ export default class MoodTracker extends Component {
           }}
         />
         <Route
-          path="/graph"
-          render={(routeProps) => {
-            return <Graph mood={this.state.mood} {...routeProps} />;
-          }}
-        />
-        <Route
           path="/mind"
           render={(routeProps) => {
             return (
@@ -112,6 +107,12 @@ export default class MoodTracker extends Component {
                 {...routeProps}
               />
             );
+          }}
+        />
+        <Route
+          path="/analytics"
+          render={(routeProps) => {
+            return <Graph mood={this.state.mood} {...routeProps} />;
           }}
         />
       </div>

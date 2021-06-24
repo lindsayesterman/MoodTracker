@@ -22,6 +22,42 @@
   padding: 3px 10px;
 }
 
+/* Pop */
+@-webkit-keyframes hvr-pop {
+  50% {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+}
+
+@keyframes hvr-pop {
+  50% {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+}
+
+.moodExp button.tags {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+
+.moodExp button.tags:hover,
+.moodExp button.tags:focus,
+.moodExp button.tags:active {
+  -webkit-animation-name: hvr-pop;
+  animation-name: hvr-pop;
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+}
+
 .moodExp button[type="submit"] {
   width: 200px;
   height: 30px;
@@ -31,10 +67,6 @@
   color: #f8c144;
   font-weight: 600;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.moodExp button.tags:hover {
-  transform: scale(1.05);
 }
 
 .btnClicked {
@@ -48,17 +80,17 @@
 
 .moodExp button.tags[value="Family"] {
   border: 1px solid #f8e344;
-  color: #f8c144;
+  color: #e4ca03;
 }
 
 .moodExp button.tags[value="Relationship"] {
-  border: 1px solid rgb(66, 66, 252);
-  color: rgb(66, 66, 252);
+  border: 1px solid #1be2fc;
+  color: #04d5f0;
 }
 
 .moodExp button.tags[value="Friends"] {
-  border: 1px solid rgb(72, 255, 0);
-  color: rgb(72, 255, 0);
+  border: 1px solid rgb(73, 245, 5);
+  color: rgb(66, 230, 1);
 }
 
 .moodExp button.tags[value="Health"] {
@@ -77,8 +109,8 @@
 }
 
 .moodExp button.tags[value="Mindfulness"] {
-  border: 1px solid #14e3ff;
-  color: #14e3ff;
+  border: 1px solid #b76cfd;
+  color: #b76cfd;
 }
 
 .moodExp button.tags[value="Food"] {
@@ -87,8 +119,8 @@
 }
 
 .moodExp button.tags[value="Education"] {
-  border: 1px solid #fa9600;
-  color: #fa9600;
+  border: 1px solid #d9730b;
+  color: #d9730b;
 }
 
 .hvr-float-shadow {
@@ -107,27 +139,40 @@
   pointer-events: none;
   position: absolute;
   z-index: -1;
-  content: '';
+  content: "";
   top: 100%;
   left: 5%;
   height: 10px;
   width: 90%;
   opacity: 0;
-  background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  background: -webkit-radial-gradient(
+    center,
+    ellipse,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0) 80%
+  );
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0) 80%
+  );
   /* W3C */
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
   -webkit-transition-property: transform, opacity;
   transition-property: transform, opacity;
 }
-.hvr-float-shadow:hover, .hvr-float-shadow:focus, .hvr-float-shadow:active {
+.hvr-float-shadow:hover,
+.hvr-float-shadow:focus,
+.hvr-float-shadow:active {
   -webkit-transform: translateY(-5px);
   transform: translateY(-5px);
   /* move the element up by 5px */
 }
 
-.hvr-float-shadow:hover:before, .hvr-float-shadow:focus:before, .hvr-float-shadow:active:before {
+.hvr-float-shadow:hover:before,
+.hvr-float-shadow:focus:before,
+.hvr-float-shadow:active:before {
   opacity: 1;
   -webkit-transform: translateY(5px);
   transform: translateY(10px);

@@ -92,9 +92,10 @@ export default function MoodExp(props) {
         placeholder="Add any notes you'd like!"
         className="whyMood"
         name="whyMood"
+        autoComplete="off"
       ></input>
       <br />
-      <Link to="/graph">
+      <Link to="/analytics">
         <button
           className="hvr-float-shadow"
           onClick={props.addToAllMoods}
