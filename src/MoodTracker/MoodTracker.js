@@ -7,13 +7,23 @@ import star from "../img/shimmerStar.svg";
 import { Route, Switch } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
-const pageTransition = {
+const pageVariants = {
   in: {
     opacity: 1,
+    x: 0,
   },
   out: {
     opacity: 0,
+    x: "-100vw",
   },
+  outFade: {
+    opacity: 0,
+  },
+};
+
+const pageTransition = {
+  type: "spring",
+  stiffness: 100,
 };
 
 export default class MoodTracker extends Component {
@@ -103,7 +113,6 @@ export default class MoodTracker extends Component {
                     getTags={this.getTags}
                     addToAllMoods={this.addToAllMoods}
                     getButtonClicked={this.getButtonClicked}
-                    pageTransition={pageTransition}
                     {...routeProps}
                   />
                 );
@@ -119,6 +128,7 @@ export default class MoodTracker extends Component {
                     getTags={this.getTags}
                     addToAllMoods={this.addToAllMoods}
                     pageTransition={pageTransition}
+                    pageVariants={pageVariants}
                     {...routeProps}
                   />
                 );
@@ -130,6 +140,7 @@ export default class MoodTracker extends Component {
                 return (
                   <Graph
                     pageTransition={pageTransition}
+                    pageVariants={pageVariants}
                     mood={this.state.mood}
                     {...routeProps}
                   />

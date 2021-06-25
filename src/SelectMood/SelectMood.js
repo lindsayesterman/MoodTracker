@@ -6,17 +6,10 @@ import f2 from "../img/faceTwo.svg";
 import f3 from "../img/faceThree.svg";
 import f4 from "../img/faceFour.svg";
 import f5 from "../img/faceFive.svg";
-import { motion } from "framer-motion";
 
 export default function SelectMood(props) {
   return (
-    <motion.div
-      className="selectMood"
-      initial="out"
-      animate="in"
-      exit="out"
-      variants={props.pageTransition}
-    >
+    <div className="selectMood">
       <h1 className="welcome">
         Welcome back Lindsay <br /> How are you feeling today?
       </h1>
@@ -57,6 +50,6 @@ export default function SelectMood(props) {
           src={f5}
         ></img>
       </Link>
-    </motion.div>
+    </div>
   );
 }

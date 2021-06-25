@@ -12,8 +12,9 @@ export default function MoodExp(props) {
       className="moodExp"
       initial="out"
       animate="in"
-      exit="out"
-      variants={props.pageTransition}
+      exit="outFade"
+      transition={props.pageTransition}
+      variants={props.pageVariants}
     >
       {props.mood.feeling === "happy" || props.mood.feeling === "jubilant" ? (
         <h1>Awesome! What's on your mind?</h1>

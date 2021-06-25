@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Graph.css";
-import fG from "../img/fakeGraph.png";
+import fG from "../img/tempGraph.png";
 import { motion } from "framer-motion";
 
 export default class Graph extends Component {
@@ -9,10 +9,12 @@ export default class Graph extends Component {
     return (
       <motion.div
         className="graph"
-        initial="out"
+        initial="outFade"
         animate="in"
-        exit="out"
-        variants={this.props.pageTransition}
+        exit="outFade"
+        transition={this.props.pageTransition}
+        variants={this.props.pageVariants}
+
       >
         <h1>Your mood over time with Shimmer:)</h1>
         <img alt="fake graph" src={fG}></img>
