@@ -57,45 +57,35 @@ div.selectMood h1 {
 }
 
 @keyframes sad {
-  from {
-  }
-  to {
+  100% {
     -webkit-transform: translateY(-8px);
     transform: translateY(-8px);
   }
 }
 
 @keyframes nw {
-  from {
-  }
-  to {
+  100% {
     -webkit-transform: translateY(-8px);
     transform: translateY(-8px);
   }
 }
 
 @keyframes neutral {
-  from {
-  }
-  to {
+  100% {
     -webkit-transform: translateY(-8px);
     transform: translateY(-8px);
   }
 }
 
 @keyframes happy {
-  from {
-  }
-  to {
+  100% {
     -webkit-transform: translateY(-8px);
     transform: translateY(-8px);
   }
 }
 
 @keyframes jub {
-  from {
-  }
-  to {
+  100% {
     -webkit-transform: translateY(-8px);
     transform: translateY(-8px);
   }

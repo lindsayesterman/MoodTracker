@@ -1,23 +1,62 @@
 import React from "react";
 import "./SelectMood.css";
 import { Link } from "react-router-dom";
-import f1 from '../img/faceOne.svg'
-import f2 from '../img/faceTwo.svg'
-import f3 from '../img/faceThree.svg'
-import f4 from '../img/faceFour.svg'
-import f5 from '../img/faceFive.svg'
+import f1 from "../img/faceOne.svg";
+import f2 from "../img/faceTwo.svg";
+import f3 from "../img/faceThree.svg";
+import f4 from "../img/faceFour.svg";
+import f5 from "../img/faceFive.svg";
+import { motion } from "framer-motion";
 
 export default function SelectMood(props) {
   return (
-    <div className="selectMood">
-      <h1 className="welcome">Welcome back Lindsay <br /> How are you feeling today?</h1>
+    <motion.div
+      className="selectMood"
+      initial="out"
+      animate="in"
+      exit="out"
+      variants={props.pageTransition}
+    >
+      <h1 className="welcome">
+        Welcome back Lindsay <br /> How are you feeling today?
+      </h1>
       <Link to="/mind">
-        <img className="sad" alt="sad face" id="sad" onClick={props.getButtonClicked} src={f1}></img>
-        <img className="nw" alt="not well face" id="not well" onClick={props.getButtonClicked} src={f2}></img>
-        <img className="neutral" alt="neutral face" id="neutral" onClick={props.getButtonClicked} src={f3}></img>
-        <img className="happy" alt="happy face" id="happy" onClick={props.getButtonClicked} src={f4}></img>
-        <img className="jub" alt="jubilant face" id="jubilant" onClick={props.getButtonClicked} src={f5}></img>
+        <img
+          className="sad"
+          alt="sad face"
+          id="sad"
+          onClick={props.getButtonClicked}
+          src={f1}
+        ></img>
+        <img
+          className="nw"
+          alt="not well face"
+          id="not well"
+          onClick={props.getButtonClicked}
+          src={f2}
+        ></img>
+        <img
+          className="neutral"
+          alt="neutral face"
+          id="neutral"
+          onClick={props.getButtonClicked}
+          src={f3}
+        ></img>
+        <img
+          className="happy"
+          alt="happy face"
+          id="happy"
+          onClick={props.getButtonClicked}
+          src={f4}
+        ></img>
+        <img
+          className="jub"
+          alt="jubilant face"
+          id="jubilant"
+          onClick={props.getButtonClicked}
+          src={f5}
+        ></img>
       </Link>
-    </div>
+    </motion.div>
   );
 }

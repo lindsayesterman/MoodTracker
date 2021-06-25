@@ -1,10 +1,20 @@
 import React, { Component } from "react";
 import "./MoodTracker.css";
 import SelectMood from "../SelectMood/SelectMood";
-import { Route } from "react-router-dom";
 import Graph from "../Graph/Graph";
 import MoodExp from "../MoodExp/MoodExp";
 import star from "../img/shimmerStar.svg";
+import { Route, Switch } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+
+const pageTransition = {
+  in: {
+    opacity: 1,
+  },
+  out: {
+    opacity: 0,
+  },
+};
 
 export default class MoodTracker extends Component {
   constructor(props) {
@@ -15,7 +25,7 @@ export default class MoodTracker extends Component {
         explanation: "",
         tags: [],
         key: "",
-        date:""
+        date: "",
       },
       allMoods: [], //array of mood objects
     };
@@ -80,42 +90,54 @@ export default class MoodTracker extends Component {
         <img alt="star" className="s4" src={star}></img>
         <img alt="star" className="s5" src={star}></img>
         <img alt="star" className="s6" src={star}></img>
-        <Route
-          exact
-          path="/"
-          render={(routeProps) => {
-            return (
-              <SelectMood
-                mood={this.state.mood}
-                getExp={this.getExp}
-                getTags={this.getTags}
-                addToAllMoods={this.addToAllMoods}
-                getButtonClicked={this.getButtonClicked}
-                {...routeProps}
-              />
-            );
-          }}
-        />
-        <Route
-          path="/mind"
-          render={(routeProps) => {
-            return (
-              <MoodExp
-                mood={this.state.mood}
-                getExp={this.getExp}
-                getTags={this.getTags}
-                addToAllMoods={this.addToAllMoods}
-                {...routeProps}
-              />
-            );
-          }}
-        />
-        <Route
-          path="/analytics"
-          render={(routeProps) => {
-            return <Graph mood={this.state.mood} {...routeProps} />;
-          }}
-        />
+        <AnimatePresence>
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={(routeProps) => {
+                return (
+                  <SelectMood
+                    mood={this.state.mood}
+                    getExp={this.getExp}
+                    getTags={this.getTags}
+                    addToAllMoods={this.addToAllMoods}
+                    getButtonClicked={this.getButtonClicked}
+                    pageTransition={pageTransition}
+                    {...routeProps}
+                  />
+                );
+              }}
+            />
+            <Route
+              path="/mind"
+              render={(routeProps) => {
+                return (
+                  <MoodExp
+                    mood={this.state.mood}
+                    getExp={this.getExp}
+                    getTags={this.getTags}
+                    addToAllMoods={this.addToAllMoods}
+                    pageTransition={pageTransition}
+                    {...routeProps}
+                  />
+                );
+              }}
+            />
+            <Route
+              path="/analytics"
+              render={(routeProps) => {
+                return (
+                  <Graph
+                    pageTransition={pageTransition}
+                    mood={this.state.mood}
+                    {...routeProps}
+                  />
+                );
+              }}
+            />
+          </Switch>
+        </AnimatePresence>
       </div>
     );
   }
