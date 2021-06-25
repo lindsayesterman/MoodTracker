@@ -16,14 +16,16 @@ const pageVariants = {
     opacity: 0,
     x: "-100vw",
   },
-  outFade: {
+  outRight: {
     opacity: 0,
-  },
+    x: "100vw",
+  }
 };
 
 const pageTransition = {
-  type: "spring",
-  stiffness: 100,
+  // type: "spring",
+  // stiffness: 120,
+  transition:"linear"
 };
 
 export default class MoodTracker extends Component {

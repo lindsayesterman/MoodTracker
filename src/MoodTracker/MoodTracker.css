@@ -2,7 +2,7 @@
   background-color: #C9ECFF;
   width: 80%;
   height: 100%;
-  padding: 58px;
+  padding: 30px;
   text-align: center;
   display: block;
   margin: 20px auto;
@@ -63,7 +63,7 @@
 .mood-tracker h1 {
   font-style: normal;
   font-weight: normal;
-  font-size: 27px;
+  font-size: 24px;
   line-height: 46px;
   margin-top: 30px;
   font-family: PoetsenOne-Regular;
@@ -81,6 +81,21 @@
   .mood-tracker{
     width:70%;
   }
+}
+
+@media (max-width:700px){
+  .s1, .s2, .s3, .s4, .s5, .s6{
+    width:25px;
+  }  
+
+  .s6{
+    left:10px;
+  }
+
+  .s3{
+    right:10px;
+  }
+
 }
 
 @media (max-width:400px){
