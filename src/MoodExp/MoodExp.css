@@ -10,6 +10,11 @@
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
+.moodExp h1 {
+  margin-top: 50px;
+  font-size: 19px;
+}
+
 .moodExp div.btnTags {
   margin: 0 auto;
   width: 390px;
@@ -22,7 +27,7 @@
   padding: 3px 10px;
 }
 
-.moodExp button.tags:hover{
+.moodExp button.tags:hover {
   font-weight: 600;
 }
 
@@ -151,6 +156,10 @@
     padding: 3px 7px;
     font-size: 10px;
   }
+
+  .moodExp button[type="submit"] {
+    transform: scale(.9);
+  }
 }
 
 @media (max-width: 415px) {
@@ -161,5 +170,10 @@
   .moodExp button.tags {
     padding: 3px 10px;
     font-size: 9px;
+  }
+
+  .moodExp h1 {
+    margin-top: 50px;
+    font-size: 22px;
   }
 }

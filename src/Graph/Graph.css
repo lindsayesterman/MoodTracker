@@ -71,7 +71,7 @@ button.year:focus {
 }
 
 .graph img {
-  margin-top: 170px;
+  margin-top: 120px;
   width: 90%;
 }
 
@@ -96,7 +96,14 @@ button.year:focus {
     font-size: 11px;
     transform: scale(0.9);
   }
+
+  .graph img {
+    margin-top: 200px;
+    width: 100%;
+  }
+  
 }
+
 
 @media (max-width: 570px) {
   .graph .statContainer h1 {
@@ -132,7 +139,7 @@ button.year:focus {
   }
 
   .graph .statContainer h1 {
-    margin: 100px auto 20px auto;
+    margin: 70px auto 20px auto;
     font-size: 18px;
   }
 

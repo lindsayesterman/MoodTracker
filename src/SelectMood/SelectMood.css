@@ -94,12 +94,11 @@ div.selectMood h1 {
 
 @media (max-width: 700px) {
   div.selectMood img {
-    width: 50px;
+    width: 53px;
   }
 
   div.selectMood h1 {
     font-size: 24px;
-    margin: 25px auto 10px auto;
   }
 }
 
@@ -110,6 +109,6 @@ div.selectMood h1 {
 
   div.selectMood h1 {
     font-size: 24px;
-    margin: 50px auto 10px auto;
+    margin: 80px auto 10px auto;
   }
 }
