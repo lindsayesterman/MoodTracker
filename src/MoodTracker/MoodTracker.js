@@ -3,7 +3,6 @@ import "./MoodTracker.css";
 import SelectMood from "../SelectMood/SelectMood";
 import Graph from "../Graph/Graph";
 import MoodExp from "../MoodExp/MoodExp";
-import star from "../img/shimmerStar.svg";
 import { Route, Switch } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
@@ -96,12 +95,6 @@ export default class MoodTracker extends Component {
   render() {
     return (
       <div className="mood-tracker">
-        <img alt="star" className="s1" src={star}></img>
-        <img alt="star" className="s2" src={star}></img>
-        <img alt="star" className="s3" src={star}></img>
-        <img alt="star" className="s4" src={star}></img>
-        <img alt="star" className="s5" src={star}></img>
-        <img alt="star" className="s6" src={star}></img>
         <AnimatePresence>
           <Switch>
             <Route
