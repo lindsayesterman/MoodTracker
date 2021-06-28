@@ -1,7 +1,7 @@
 .statContainer {
   width: 99%;
   position: absolute;
-  top: 50px;
+  top: 55px;
   left: 0px;
   height: 110px;
   display: flex;
@@ -75,7 +75,6 @@ button.year:focus {
   width: 90%;
 }
 
-
 @media (max-width: 715px) {
   .graph .statContainer h1 {
     font-size: 13px;
@@ -83,6 +82,10 @@ button.year:focus {
 
   .statBox h3 {
     font-size: 9px;
+  }
+
+  .statContainer {
+    margin-top: 50px;
   }
 
   .boxInsideStatBox {
@@ -101,9 +104,7 @@ button.year:focus {
     margin-top: 200px;
     width: 100%;
   }
-  
 }
-
 
 @media (max-width: 570px) {
   .graph .statContainer h1 {

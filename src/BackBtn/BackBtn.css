@@ -1,6 +1,16 @@
 .backBtn{
-    width:20px;
+    width:40px;
     position: absolute;
-    top:0;
-    left:0;
+    top:15px;
+    left:15px;
+}
+
+.backBtn:hover{
+    transform: scale(1.07);
+}
+
+@media(max-width:700px){
+    .backBtn{
+        width:30px;
+    }
 }

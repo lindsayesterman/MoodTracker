@@ -4,6 +4,7 @@ import "./MoodExp.css";
 import Emoji from "../Emoji.js";
 import { motion } from "framer-motion";
 import Stars from "../Stars/Stars";
+import BackBtn from '../BackBtn/BackBtn'
 
 export default function MoodExp(props) {
   const tags = props.mood.tags;
@@ -11,6 +12,7 @@ export default function MoodExp(props) {
   return (
     <>
       <Stars></Stars>
+      <BackBtn></BackBtn>
       <motion.div
         className="moodExp"
         initial="out"
