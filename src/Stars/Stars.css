@@ -1,49 +1,49 @@
-.s1 {
-  top: 0px;
-  left: 12px;
+.bottomLeftLarge {
+  bottom: 0px;
+  left: 7px;
   animation-duration: 6s;
 }
 
-.s2 {
-  bottom: 0px;
-  right: 8px;
+.topRightLarge {
+  top: 0px;
+  right: 6px;
   animation-duration: 5s;
 }
 
-.s3 {
-  bottom: 76px;
-  right: 45px;
+.topRightBottom {
+  top: 70px;
+  right: 50px;
   width: 30px;
   animation-duration: 2s;
 }
 
-.s4 {
-  bottom: 10px;
-  right: 74px;
+.topRightTop {
+  top: 2px;
+  right: 70px;
   width: 30px;
   animation-duration: 3s;
 }
 
-.s5 {
-  top: 8px;
-  left: 69px;
-  width: 30px;
+.bottomLeftBottom {
+  bottom: 2px;
+  left: 65px;
+  width: 25px;
   animation-duration: 4s;
 }
 
-.s6 {
-  top: 60px;
-  left: 59px;
+.bottomLeftTop {
+  bottom: 85px;
+  left: 50px;
   width: 20px;
   animation-duration: 2s;
 }
 
-.s1,
-.s2,
-.s3,
-.s4,
-.s5,
-.s6 {
+.bottomLeftLarge,
+.topRightLarge,
+.topRightBottom,
+.topRightTop,
+.bottomLeftBottom,
+.bottomLeftTop {
   position: absolute;
   z-index: -1;
   animation-name: star;
@@ -74,20 +74,23 @@
 }
 
 @media (max-width: 700px) {
-  .s1,
-  .s2,
-  .s3,
-  .s4,
-  .s5,
-  .s6 {
-    width: 25px;
+  .topRightBottom,
+  .topRightTop,
+  .bottomLeftBottom,
+  .bottomLeftTop {
+    width: 20px;
   }
 
-  .s6 {
-    left: 10px;
+  .bottomLeftTop {
+    left: 5px;
   }
 
-  .s3 {
+  .topRightBottom {
     right: 10px;
+    top:90px;
+  }
+
+  .topRightTop{
+    right:70px;
   }
 }

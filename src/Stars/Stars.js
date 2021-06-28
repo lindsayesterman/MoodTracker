@@ -5,12 +5,12 @@ import "./Stars.css"
 export default function Stars() {
   return (
     <div>
-      <img alt="star" className="s1" src={star}></img>
-      <img alt="star" className="s2" src={star}></img>
-      <img alt="star" className="s3" src={star}></img>
-      <img alt="star" className="s4" src={star}></img>
-      <img alt="star" className="s5" src={star}></img>
-      <img alt="star" className="s6" src={star}></img>
+      <img alt="star" className="bottomLeftLarge" src={star}></img>
+      <img alt="star" className="topRightLarge" src={star}></img>
+      <img alt="star" className="topRightBottom" src={star}></img>
+      <img alt="star" className="topRightTop" src={star}></img>
+      <img alt="star" className="bottomLeftBottom" src={star}></img>
+      <img alt="star" className="bottomLeftTop" src={star}></img>
     </div>
   );
 }
