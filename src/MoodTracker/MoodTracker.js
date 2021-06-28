@@ -5,6 +5,7 @@ import Graph from "../Graph/Graph";
 import MoodExp from "../MoodExp/MoodExp";
 import { Route, Switch } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+// import "../fonts/font.css"
 
 const pageVariants = {
   in: {
