@@ -70,9 +70,37 @@ button.year:focus {
   border: none;
 }
 
-.graph .chartedData {
-  margin-top: 175px;
+.graphColOfFaces {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 225px;
+  left: 28px;
 }
+
+.graphColOfFaces img {
+  width: 20px;
+  margin: 2px 0px;
+}
+
+.graphHolder{
+  width:530px;
+  margin:0 auto;
+}
+
+.graphHolder{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top:150px;
+}
+
+/* .oneGraphContainer{
+  border: 1px solid black;
+  height: 150px;
+  margin:10px;
+} */
 
 @media (max-width: 715px) {
   .graph .statContainer h1 {
@@ -102,6 +130,11 @@ button.year:focus {
   .graph .chartedData {
     margin-top: 200px;
     width: 100%;
+  }
+
+  .graphHolder{
+    width:370px;
+    margin:0 auto;
   }
 }
 

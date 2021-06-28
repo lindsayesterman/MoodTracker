@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import "./Graph.css";
 import { motion } from "framer-motion";
 import BackBtn from "../BackBtn/BackBtn";
-import { Bar, Line, Pie } from "react-chartjs-2";
+import { Bar, Line, Pie, Bubble,  Scatter } from "react-chartjs-2";
+import f1 from "../img/faceOne.svg";
+import f2 from "../img/faceTwo.svg";
+import f3 from "../img/faceThree.svg";
+import f4 from "../img/faceFour.svg";
+import f5 from "../img/faceFive.svg";
 
 export default class Graph extends Component {
   constructor(props) {
@@ -99,21 +104,30 @@ export default class Graph extends Component {
               </button>
             </div>
           </div>
-          <Line
-            className="chartedData"
-            data={this.state.graphData}
-            options={{
-              title: {
-                display: true,
-                text: "Mood over time with Shimmer",
-                fontSize: 25,
-              },
-              legend: {
-                display: true,
-                position: "right",
-              },
-            }}
-          ></Line>
+          {/* <div className="graphColOfFaces">
+            <img alt="cartoon face" src={f5}></img>
+            <img alt="cartoon face" src={f4}></img>
+            <img alt="cartoon face" src={f3}></img>
+            <img alt="cartoon face" src={f2}></img>
+            <img alt="cartoon face" src={f1}></img>
+          </div> */}
+          <div className="graphHolder">
+              <Line
+                className="chartedData"
+                data={this.state.graphData}
+                options={{
+                  title: {
+                    display: true,
+                    text: "Mood over time with Shimmer",
+                    fontSize: 25,
+                  },
+                  legend: {
+                    display: true,
+                    position: "right",
+                  },
+                }}
+              ></Line>
+          </div>
         </div>
       </>
     );
