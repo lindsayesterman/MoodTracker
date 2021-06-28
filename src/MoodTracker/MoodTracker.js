@@ -20,6 +20,9 @@ const pageVariants = {
     opacity: 0,
     x: "100vw",
   },
+  outFade: {
+    opacity: 0,
+  },
 };
 
 const pageTransition = {
