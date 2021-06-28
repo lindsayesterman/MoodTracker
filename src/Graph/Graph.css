@@ -72,7 +72,6 @@ button.year:focus {
 
 .graph .chartedData {
   margin-top: 175px;
-  transform: scale(.9);
 }
 
 @media (max-width: 715px) {

@@ -60,14 +60,7 @@ export default class Graph extends Component {
     return (
       <>
         <BackBtn></BackBtn>
-        <motion.div
-          initial="outFade"
-          animate="in"
-          exit="outFade"
-          transition={this.props.pageTransition}
-          variants={this.props.pageVariants}
-          className="graph"
-        >
+        <div className="graph">
           <div className="statContainer">
             <h1>Your mood over time with Shimmer:)</h1>
             <div className="statBox">
@@ -106,8 +99,22 @@ export default class Graph extends Component {
               </button>
             </div>
           </div>
-          <Line className="chartedData" data={this.state.graphData}></Line>
-        </motion.div>
+          <Line
+            className="chartedData"
+            data={this.state.graphData}
+            options={{
+              title: {
+                display: true,
+                text: "Mood over time with Shimmer",
+                fontSize: 25,
+              },
+              legend: {
+                display: true,
+                position: "right",
+              },
+            }}
+          ></Line>
+        </div>
       </>
     );
   }
