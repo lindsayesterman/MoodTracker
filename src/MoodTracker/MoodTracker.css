@@ -1,8 +1,9 @@
 .mood-tracker {
   background-color: #c9ecff;
   width: 80%;
-  height: 400px;
-  padding: 30px;
+  /* height: 400px; */
+  height:100%;
+  padding: 30px 30px 120px 30px;
   text-align: center;
   display: block;
   margin: 20px auto;
@@ -30,7 +31,6 @@
 
 @media (max-width: 400px) {
   .mood-tracker {
-    width: 60%;
-    height: 550px;
+    width: 70%;
   }
 }
