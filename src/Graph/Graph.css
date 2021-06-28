@@ -1,16 +1,16 @@
 .statContainer {
-  width: 100%;
+  width: 99%;
   position: absolute;
   top: 5px;
-  left: 0;
+  left: 0px;
   height: 110px;
   display: flex;
   justify-content: space-between;
 }
 
 .graph .statContainer h1 {
-  font-size: 15px;
-  margin: 40px 0px 40px 30px;
+  font-size: 16px;
+  margin: 37px 40px 0px;
   line-height: 25px;
 }
 
@@ -109,6 +109,10 @@ button.year:focus {
 
   .boxInsideStatBox {
     font-size: 8px;
+  }
+
+  .graph .statContainer .statBox {
+    transform: scale(0.75);
   }
 
   button.week,

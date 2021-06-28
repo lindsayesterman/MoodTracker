@@ -18,13 +18,13 @@ const pageVariants = {
   outRight: {
     opacity: 0,
     x: "100vw",
-  }
+  },
 };
 
 const pageTransition = {
   // type: "spring",
   // stiffness: 120,
-  transition:"linear"
+  transition: "linear",
 };
 
 export default class MoodTracker extends Component {
@@ -114,7 +114,7 @@ export default class MoodTracker extends Component {
               }}
             />
             <Route
-              path="/mind"
+              path="/explain"
               render={(routeProps) => {
                 return (
                   <MoodExp

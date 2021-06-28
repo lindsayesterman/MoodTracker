@@ -16,7 +16,7 @@ export default function SelectMood(props) {
         <h1 className="welcome">
           Welcome back Lindsay <br /> How are you feeling today?
         </h1>
-        <Link to="/mind">
+        <Link to="/explain">
           <img
             className="sad"
             alt="sad face"
