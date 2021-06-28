@@ -28,7 +28,7 @@
 }
 
 .moodExp button.tags:hover {
-  font-weight: 600;
+  transform: scale(1.02);
 }
 
 .moodExp button[type="submit"] {
