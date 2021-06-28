@@ -8,7 +8,7 @@ export default class Graph extends Component {
     console.log(this.props.mood);
     return (
       <div className="graph">
-        <div className="whiteBox">
+        <div className="statContainer">
           <h1>Your mood over time with Shimmer:)</h1>
           <div className="statBox">
             <h3>Your most common stats</h3>
@@ -23,9 +23,7 @@ export default class Graph extends Component {
             </div>
           </div>
           <div className="buttonContainer">
-            <button type="checked" className="week">
-              Week
-            </button>
+            <button className="week">Week</button>
             <button className="month">Month</button>
             <button className="year">Year</button>
           </div>
