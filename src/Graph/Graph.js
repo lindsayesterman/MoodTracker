@@ -8,6 +8,7 @@ import f2 from "../img/faceTwo.svg";
 import f3 from "../img/faceThree.svg";
 import f4 from "../img/faceFour.svg";
 import f5 from "../img/faceFive.svg";
+import whiteArrow from "../img/whiteArrow.png";
 
 export default class Graph extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ export default class Graph extends Component {
     this.state = {
       graphData: {},
       timeRange: "week",
+      arrowClicked: false,
     };
   }
 
@@ -83,6 +85,10 @@ export default class Graph extends Component {
       };
       return { data };
     }
+  };
+
+  removeLineAddBar = () => {
+    this.setState({ arrowClicked: !this.state.arrowClicked });
   };
 
   getGraphData = () => {
@@ -194,7 +200,7 @@ export default class Graph extends Component {
               </button>
             </div>
           </motion.div>
-          <div className="graphHolder">
+          <div className={this.state.arrowClicked ? "hidden" : "graphHolder"}>
             <div className="graphColOfFaces">
               <img alt="cartoon face" src={f5}></img>
               <img alt="cartoon face" src={f4}></img>
@@ -208,6 +214,26 @@ export default class Graph extends Component {
               options={this.state.graphData.options}
             />
           </div>
+          <div className={this.state.arrowClicked ? "graphHolder" : "hidden"}>
+            <div className="graphColOfFaces">
+              <img alt="cartoon face" src={f5}></img>
+              <img alt="cartoon face" src={f4}></img>
+              <img alt="cartoon face" src={f3}></img>
+              <img alt="cartoon face" src={f2}></img>
+              <img alt="cartoon face" src={f1}></img>
+            </div>
+            <Bar
+              id="lineChart"
+              data={this.state.graphData.data}
+              options={this.state.graphData.options}
+            />
+          </div>
+          <img
+            onClick={this.removeLineAddBar}
+            alt="white arrow"
+            className={this.state.arrowClicked ? "whiteArrowRotated" : "whiteArrow"}
+            src={whiteArrow}
+          ></img>
         </div>
       </>
     );

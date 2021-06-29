@@ -98,6 +98,28 @@ button.year:focus {
   margin: 5px 0px;
 }
 
+.whiteArrow {
+  position: absolute;
+  top: 93.5%;
+  left: 93%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+}
+
+.whiteArrowRotated {
+  position: absolute;
+  top: 91%;
+  left: 91.5%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  transform: rotate(180deg);
+}
+
+.hidden {
+  display: none;
+}
+
+
 @media (max-width: 900px) {
   .graph .statContainer h1 {
     font-size: 17px;
@@ -145,7 +167,7 @@ button.year:focus {
   }
 
   .graph .statContainer .statBox {
-    margin: 5px 20px;
+    margin: 10px 20px;
     transform: scale(1.1);
   }
 
@@ -157,17 +179,17 @@ button.year:focus {
 
   .graphHolder {
     margin-top: 250px;
-    padding:35px;
+    padding: 35px;
   }
 
   .graphColOfFaces {
     left: 5px;
-    top:25px;
+    top: 25px;
   }
 
   .graphColOfFaces img {
     width: 30px;
-    margin:6px 0px;
+    margin: 6px 0px;
   }
 }
 
@@ -175,17 +197,17 @@ button.year:focus {
   .graphHolder {
     width: 290px;
     margin-top: 250px;
-    padding:40px 0px;
+    padding: 40px 0px;
     background-color: transparent;
   }
 
   .graphColOfFaces {
     left: -20px;
-    top:38px;
+    top: 38px;
   }
 
   .graphColOfFaces img {
     width: 17px;
-    margin:4px 0px;
+    margin: 4px 0px;
   }
 }
