@@ -85,18 +85,18 @@ button.year:focus {
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 4px;
-  left: -30px;
+  top: 1px;
+  left: -40px;
 }
 
 .graphColOfFaces img {
-  width: 42px;
+  width: 50px;
   margin: 2px 0px;
 }
 
-@media (max-width: 835px) {
+@media (max-width: 900px) {
   .graph .statContainer h1 {
-    font-size: 16px;
+    font-size: 17px;
   }
 
   .statBox h3 {
@@ -121,7 +121,7 @@ button.year:focus {
 
   .graphHolder {
     width: 450px;
-    margin-top:150px;
+    margin-top:170px;
   }
 
   .graphColOfFaces {
