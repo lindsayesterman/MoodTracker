@@ -11,9 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-/* 
+
 @font-face {
-  font-family: 'PoetsenOne-Regular';
-  src: local('PoetsenOne-Regular'),
-       url('./fonts/PoetsenOne-Regular.ttf') format('woff'),
-} */
+  font-family: 'Poetsen One';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Poetsen One'), url('https://fonts.cdnfonts.com/s/31868/PoetsenOne-Regular.woff') format('woff');
+}
