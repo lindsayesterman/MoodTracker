@@ -62,7 +62,7 @@ export default class Graph extends Component {
           21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
         ],
         datasets: {
-          data: [1, 3, 3, 2, 3, 2, 4, 5, 3, 5, 3, 4, 5, 3, 4,4,5,3,4,5,4,5,4,1,5,4],
+          data: [1,4,5,1,2,3,2,3,4,4,3,2,4,5,4,5,4,2,3,2,3,5,3,2,5,3,3,3,4,5,5,5],
         }
       };
       return { data };
@@ -83,7 +83,7 @@ export default class Graph extends Component {
           "Dec",
         ],
         datasets: {
-          data: [1, 3, 3, 2, 3, 2, 4, 5, 3, 5, 3, 4],
+          data: [2.7, 3, 3.2, 3, 3.6, 4, 3.5, 4, 4.5, 3.9, 4, 3.8],
         }
       };
       return { data };
