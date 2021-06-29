@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "./Graph.css";
+import "../Graph/Graph.css";
 import { motion } from "framer-motion";
 import BackBtn from "../BackBtn/BackBtn";
-import { Bar, Line, Pie, Bubble,  Scatter } from "react-chartjs-2";
+import { Bar, Line, Pie, Bubble, Scatter } from "react-chartjs-2";
 import f1 from "../img/faceOne.svg";
 import f2 from "../img/faceTwo.svg";
 import f3 from "../img/faceThree.svg";
@@ -13,13 +13,13 @@ export default class Graph extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      graphData: {},
+      chartData: {},
       timeRange: "",
     };
   }
 
   componentDidMount() {
-    this.getGraphData();
+    this.getChartData();
   }
 
   handleTimeRangeClicked = (e) => {
@@ -29,34 +29,69 @@ export default class Graph extends Component {
     console.log(e.target.value);
   };
 
-  getGraphData = () => {
-    //ajax call here
-    let weekLabels = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    let numData = [1, 3, 3, 4, 5, 5, 2, 1, 3, 5, 3, 4, 2, 3, 4];
-    this.setState({
-      graphData: {
-        labels: weekLabels,
-        datasets: [
-          {
-            label: "Mood",
-            data: numData,
-            backgroundColor: [
-              "#7FBEF9",
-              "#BBDDFB",
-              "#FFE457",
-              "#FFD954",
-              "#F8C144",
-            ],
+  getChartData = () => {
+    // const myImage = new Image();
+    // myImage.src = { f1 };
+    var ctx = document.getElementById("lineChart").getContext("2d");
+    var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, "rgba(255, 241, 169, .8)");
+    gradient.addColorStop(1, "rgba(255, 241, 169, 0) 0)");
+
+    const data = {
+      labels: [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
+      datasets: [
+        {
+          label: "# of Votes",
+          data: [1, 3, 3, 4, 3, 5, 4, 5, 3, 5, 3, 4, 2, 3, 4],
+          fill: true,
+          backgroundColor: gradient,
+          borderColor: "black",
+          borderWidth: 1,
+          pointBackgroundColor: "#7FBEF9",
+          pointBorderColor: "#7FBEF9",
+          pointRadius: 5,
+        },
+      ],
+    };
+
+    const options = {
+      plugins: { legend: { display: false } },
+      layout: { padding: { bottom: 10 } },
+      scales: {
+        y: {
+          ticks: {
+            display: false,
           },
-        ],
+          grid: {
+            display: false,
+          },
+        },
+        x: {
+          ticks: {
+            color: "black",
+            font: {
+              size: 11,
+            },
+          },
+          grid: {
+            display: false,
+          },
+        },
+      },
+    };
+
+    this.setState({
+      chartData: {
+        data: data,
+        options: options,
       },
     });
   };
@@ -66,7 +101,14 @@ export default class Graph extends Component {
       <>
         <BackBtn></BackBtn>
         <div className="graph">
-          <div className="statContainer">
+          <motion.div
+            className="statContainer"
+            initial="outRight"
+            animate="in"
+            exit="outRight"
+            transition={this.props.pageTransition}
+            variants={this.props.pageVariants}
+          >
             <h1>Your mood over time with Shimmer:)</h1>
             <div className="statBox">
               <h3>Your most common stats</h3>
@@ -103,30 +145,20 @@ export default class Graph extends Component {
                 Year
               </button>
             </div>
-          </div>
-          {/* <div className="graphColOfFaces">
-            <img alt="cartoon face" src={f5}></img>
-            <img alt="cartoon face" src={f4}></img>
-            <img alt="cartoon face" src={f3}></img>
-            <img alt="cartoon face" src={f2}></img>
-            <img alt="cartoon face" src={f1}></img>
-          </div> */}
+          </motion.div>
           <div className="graphHolder">
-              <Line
-                className="chartedData"
-                data={this.state.graphData}
-                options={{
-                  title: {
-                    display: true,
-                    text: "Mood over time with Shimmer",
-                    fontSize: 25,
-                  },
-                  legend: {
-                    display: true,
-                    position: "right",
-                  },
-                }}
-              ></Line>
+            <div className="graphColOfFaces">
+              <img alt="cartoon face" src={f5}></img>
+              <img alt="cartoon face" src={f4}></img>
+              <img alt="cartoon face" src={f3}></img>
+              <img alt="cartoon face" src={f2}></img>
+              <img alt="cartoon face" src={f1}></img>
+            </div>
+            <Line
+              id="lineChart"
+              data={this.state.chartData.data}
+              options={this.state.chartData.options}
+            />
           </div>
         </div>
       </>

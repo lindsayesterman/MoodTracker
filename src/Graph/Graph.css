@@ -1,5 +1,5 @@
 .statContainer {
-  width: 99%;
+  width:100%;
   position: absolute;
   top: 55px;
   left: 0px;
@@ -9,7 +9,7 @@
 }
 
 .graph .statContainer h1 {
-  font-size: 16px;
+  font-size: 20px;
   margin: 37px 40px 0px;
   line-height: 25px;
 }
@@ -70,41 +70,33 @@ button.year:focus {
   border: none;
 }
 
-.graphColOfFaces {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 225px;
-  left: 28px;
-}
-
-.graphColOfFaces img {
-  width: 20px;
-  margin: 2px 0px;
-}
-
-.graphHolder{
-  width:530px;
-  margin:0 auto;
-}
-
-.graphHolder{
+.graphHolder {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top:150px;
+  position: relative;
+  z-index: -1;
+  width: 620px;
+  margin: 170px auto 0px;
 }
 
-/* .oneGraphContainer{
-  border: 1px solid black;
-  height: 150px;
-  margin:10px;
-} */
+.graphColOfFaces {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 4px;
+  left: -30px;
+}
 
-@media (max-width: 715px) {
+.graphColOfFaces img {
+  width: 42px;
+  margin: 2px 0px;
+}
+
+@media (max-width: 835px) {
   .graph .statContainer h1 {
-    font-size: 13px;
+    font-size: 16px;
   }
 
   .statBox h3 {
@@ -112,7 +104,7 @@ button.year:focus {
   }
 
   .statContainer {
-    margin-top: 50px;
+    margin-top: 0px;
   }
 
   .boxInsideStatBox {
@@ -127,14 +119,17 @@ button.year:focus {
     transform: scale(0.9);
   }
 
-  .graph .chartedData {
-    margin-top: 200px;
-    width: 100%;
+  .graphHolder {
+    width: 450px;
+    margin-top:150px;
   }
 
-  .graphHolder{
-    width:370px;
-    margin:0 auto;
+  .graphColOfFaces {
+    left: -15px;
+  }
+  
+  .graphColOfFaces img {
+    width: 32px;
   }
 }
 
@@ -154,8 +149,33 @@ button.year:focus {
     margin: 20px;
   }
 
-  .graph .chartedData {
-    margin-top: 300px;
-    height: 100px;
+  .graphHolder {
+    width: 370px;
+    margin-top:250px;
+  }
+
+  .graphColOfFaces {
+    left: 5px;
+  }
+  
+  .graphColOfFaces img {
+    width: 22px;
+  }
+
+}
+
+@media (max-width:450px){
+
+  .graphHolder {
+    width: 280px;
+    margin-top:250px;
+  }
+
+  .graphColOfFaces {
+    left: 15px;
+  }
+  
+  .graphColOfFaces img {
+    width: 12px;
   }
 }

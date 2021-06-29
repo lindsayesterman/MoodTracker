@@ -23,11 +23,6 @@
   font-family: PoetsenOne-Regular;
 }
 
-@media (max-width: 800px) {
-  .mood-tracker {
-    width: 70%;
-  }
-}
 
 @media (max-width: 400px) {
   .mood-tracker {
