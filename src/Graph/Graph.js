@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../Graph/Graph.css";
 import { motion } from "framer-motion";
 import BackBtn from "../BackBtn/BackBtn";
-import { Bar, Line, Pie, Bubble, Scatter } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 import f1 from "../img/faceOne.svg";
 import f2 from "../img/faceTwo.svg";
 import f3 from "../img/faceThree.svg";
@@ -26,38 +26,22 @@ export default class Graph extends Component {
     this.setState({
       timeRange: e.target.value,
     });
-    this.setState({ timeRange: e.target.value}, this.getGraphData);
-
-    // this.setState({
-    //   timeRange: {
-    //     ...this.state.timeRange,
-    //     timeRange: e.target.value,
-    //   },
-    // });
-    console.log(this.state.timeRange)
-    // this.getGraphData();
+    this.setState({ timeRange: e.target.value }, this.getGraphData);
+    console.log(this.state.timeRange);
   };
 
   addGraphGradient = () => {
     var ctx = document.getElementById("lineChart").getContext("2d");
     var gradient = ctx.createLinearGradient(0, 0, 0, 400);
     gradient.addColorStop(0, "rgba(255, 240, 164, 1)");
-    gradient.addColorStop(1, "rgba(201, 236, 255, 0) 0)");
+    gradient.addColorStop(1, "rgba(255, 255, 255, 0) 0)");
     return gradient;
   };
 
   whichData = () => {
     if (this.state.timeRange === "week") {
       const data = {
-        labels: [
-          "Sunday",
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-        ],
+        labels: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"],
         datasets: {
           data: [1, 3, 3, 4, 3, 5, 4],
         },
@@ -110,9 +94,9 @@ export default class Graph extends Component {
         legend: {
           display: false,
         },
-        tooltip:{
-          enabled:true
-        }
+        tooltip: {
+          enabled: true,
+        },
       },
       scales: {
         y: {
@@ -147,7 +131,7 @@ export default class Graph extends Component {
               data: numericalData,
               fill: true,
               backgroundColor: this.addGraphGradient(),
-              borderColor: "black",
+              borderColor: "#ccc",
               borderWidth: 1,
               pointBackgroundColor: "#7FBEF9",
               pointBorderColor: "#7FBEF9",
