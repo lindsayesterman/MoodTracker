@@ -13,4 +13,3 @@ var firebaseConfig = firebase.initializeApp({
 
 // Initialize Firebase
 export default firebaseConfig;
-// firebase.analytics();
