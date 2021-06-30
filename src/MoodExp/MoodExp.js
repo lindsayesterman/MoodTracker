@@ -4,7 +4,8 @@ import "./MoodExp.css";
 import Emoji from "../Emoji.js";
 import { motion } from "framer-motion";
 import Stars from "../Stars/Stars";
-import BackBtn from '../BackBtn/BackBtn'
+import BackBtn from "../BackBtn/BackBtn";
+import workIcon from "../img/workIcon.svg";
 
 export default function MoodExp(props) {
   const tags = props.mood.tags;
@@ -32,6 +33,7 @@ export default function MoodExp(props) {
             className={tags.includes("Work") ? "tags workClicked" : "tags"}
             value="Work"
           >
+            {/* <img className="icon" src={workIcon} alt="work icon"></img> */}
             <Emoji symbol="📆" /> Work
           </button>
           <button

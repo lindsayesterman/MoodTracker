@@ -92,16 +92,6 @@ div.selectMood h1 {
   }
 }
 
-@media (max-width: 700px) {
-  div.selectMood img {
-    width: 53px;
-  }
-
-  div.selectMood h1 {
-    font-size: 24px;
-  }
-}
-
 @media (max-width: 400px) {
   div.selectMood img {
     width: 60px;
