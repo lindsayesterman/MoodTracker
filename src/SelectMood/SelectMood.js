@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./SelectMood.css";
 import { Link } from "react-router-dom";
 import f1 from "../img/faceOne.svg";
@@ -7,14 +7,18 @@ import f3 from "../img/faceThree.svg";
 import f4 from "../img/faceFour.svg";
 import f5 from "../img/faceFive.svg";
 import Stars from "../Stars/Stars";
+import { AuthContext } from "../Auth/Auth";
 
 export default function SelectMood(props) {
+  const { currentUser } = useContext(AuthContext);
+  const email = currentUser.email;
+  const currentUserName = email.substring(0, email.lastIndexOf("@"));
   return (
     <>
       <Stars></Stars>
       <div className="selectMood">
         <h1 className="welcome">
-          Welcome back Lindsay <br /> How are you feeling today?
+          Welcome back {currentUserName} <br /> How are you feeling today?
         </h1>
         <Link to="/explain">
           <img

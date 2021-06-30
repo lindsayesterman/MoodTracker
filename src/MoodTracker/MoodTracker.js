@@ -3,9 +3,12 @@ import "./MoodTracker.css";
 import SelectMood from "../SelectMood/SelectMood";
 import Graph from "../Graph/Graph";
 import MoodExp from "../MoodExp/MoodExp";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-// import "../fonts/font.css"
+import Home from "../Auth/Home";
+import LogIn from "../Auth/LogIn";
+import SignUp from "../Auth/SignUp";
+import { AuthProvider } from "../Auth/Auth";
 
 const pageVariants = {
   in: {
@@ -100,53 +103,60 @@ export default class MoodTracker extends Component {
     return (
       <div className="mood-tracker">
         <AnimatePresence>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={(routeProps) => {
-                return (
-                  <SelectMood
-                    mood={this.state.mood}
-                    getExp={this.getExp}
-                    getTags={this.getTags}
-                    addToAllMoods={this.addToAllMoods}
-                    getButtonClicked={this.getButtonClicked}
-                    {...routeProps}
-                  />
-                );
-              }}
-            />
-            <Route
-              path="/explain"
-              render={(routeProps) => {
-                return (
-                  <MoodExp
-                    mood={this.state.mood}
-                    getExp={this.getExp}
-                    getTags={this.getTags}
-                    addToAllMoods={this.addToAllMoods}
-                    pageTransition={pageTransition}
-                    pageVariants={pageVariants}
-                    {...routeProps}
-                  />
-                );
-              }}
-            />
-            <Route
-              path="/analytics"
-              render={(routeProps) => {
-                return (
-                  <Graph
-                    pageTransition={pageTransition}
-                    pageVariants={pageVariants}
-                    mood={this.state.mood}
-                    {...routeProps}
-                  />
-                );
-              }}
-            />
-          </Switch>
+          <AuthProvider>
+            <Router>
+              <Switch>
+                <Route
+                  exact
+                  path="/select"
+                  render={(routeProps) => {
+                    return (
+                      <SelectMood
+                        mood={this.state.mood}
+                        getExp={this.getExp}
+                        getTags={this.getTags}
+                        addToAllMoods={this.addToAllMoods}
+                        getButtonClicked={this.getButtonClicked}
+                        {...routeProps}
+                      />
+                    );
+                  }}
+                />
+                <Route
+                  path="/explain"
+                  render={(routeProps) => {
+                    return (
+                      <MoodExp
+                        mood={this.state.mood}
+                        getExp={this.getExp}
+                        getTags={this.getTags}
+                        addToAllMoods={this.addToAllMoods}
+                        pageTransition={pageTransition}
+                        pageVariants={pageVariants}
+                        {...routeProps}
+                      />
+                    );
+                  }}
+                />
+                <Route
+                  path="/analytics"
+                  render={(routeProps) => {
+                    return (
+                      <Graph
+                        pageTransition={pageTransition}
+                        pageVariants={pageVariants}
+                        mood={this.state.mood}
+                        {...routeProps}
+                      />
+                    );
+                  }}
+                />
+                <Route exact path="/" component={Home} />
+                <Route exact path="/login" component={LogIn} />
+                <Route exact path="/signup" component={SignUp} />
+              </Switch>
+            </Router>
+          </AuthProvider>
         </AnimatePresence>
       </div>
     );
