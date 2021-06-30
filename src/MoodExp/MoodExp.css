@@ -160,7 +160,7 @@
 
 @media (max-width: 630px) {
   .moodExp div.btnTags {
-    width: 88%;
+    width: 100%;
   }
 
   .moodExp button.tags {
