@@ -158,6 +158,21 @@
   color: #d9730b;
 }
 
+@media (max-width: 630px) {
+  .moodExp div.btnTags {
+    width: 88%;
+  }
+
+  .moodExp button.tags {
+    padding: 3px 7px;
+    font-size: 15px;
+  }
+
+  .moodExp button[type="submit"] {
+    transform: scale(.9);
+  }
+}
+
 @media (max-width: 415px) {
   .moodExp div.btnTags {
     width: 100%;

@@ -92,6 +92,13 @@ div.selectMood h1 {
   }
 }
 
+
+@media (max-width: 700px) {
+  div.selectMood img {
+    width: 64px;
+  }
+
+}
 @media (max-width: 400px) {
   div.selectMood img {
     width: 60px;
