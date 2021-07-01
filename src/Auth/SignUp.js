@@ -12,10 +12,10 @@ const SignUp = (props) => {
         .auth()
         .createUserWithEmailAndPassword(email.value, password.value);
       setCurrentUser(true);
+      props.addUser();
     } catch (error) {
       alert(error);
     }
-    props.addUser();
   };
   if (currentUser) {
     return <Redirect to="/" />;
