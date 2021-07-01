@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import firebaseConfig from "../firebase.js";
 
-const SignUp = () => {
+const SignUp = (props) => {
   const [currentUser, setCurrentUser] = useState(null);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,6 +15,7 @@ const SignUp = () => {
     } catch (error) {
       alert(error);
     }
+    props.addUser();
   };
   if (currentUser) {
     return <Redirect to="/" />;
@@ -24,7 +25,14 @@ const SignUp = () => {
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
-        <input type="email" name="email" placeholder="Email" />
+        <input
+          onChange={props.getUserEmail}
+          id="email"
+          value={props.email}
+          type="email"
+          name="email"
+          placeholder="Email"
+        />
         <label htmlFor="password">Password</label>
         <input type="password" name="password" placeholder="Password" />
         <button type="submit">Submit</button>

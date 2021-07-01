@@ -9,6 +9,7 @@ import Home from "../Auth/Home";
 import LogIn from "../Auth/LogIn";
 import SignUp from "../Auth/SignUp";
 import { AuthProvider } from "../Auth/Auth";
+import firebase from "../firebase";
 
 const pageVariants = {
   in: {
@@ -46,8 +47,16 @@ export default class MoodTracker extends Component {
         date: "",
       },
       allMoods: [], //array of mood objects
+      email: "",
+      password: "",
     };
   }
+
+  getUserEmail = (e) => {
+    this.setState({
+      email: e.target.value,
+    });
+  };
 
   getButtonClicked = (e) => {
     this.setState({
@@ -97,6 +106,19 @@ export default class MoodTracker extends Component {
       allMoods: this.state.allMoods.concat(this.state.mood),
     });
     console.log(this.state.allMoods);
+  };
+
+  addUser = (e) => {
+    const db = firebase.firestore();
+    db.settings({
+      timestampsInSnapshots: true,
+    });
+    const userRef = db.collection("users").add({
+      email: this.state.email,
+    });
+    this.setState({
+      email: "",
+    });
   };
 
   render() {
@@ -153,7 +175,19 @@ export default class MoodTracker extends Component {
                 />
                 <Route exact path="/" component={Home} />
                 <Route exact path="/login" component={LogIn} />
-                <Route exact path="/signup" component={SignUp} />
+                <Route
+                  exact
+                  path="/signup"
+                  render={(routeProps) => {
+                    return (
+                      <SignUp
+                        getUserEmail={this.getUserEmail}
+                        addUser={this.addUser}
+                        {...routeProps}
+                      />
+                    );
+                  }}
+                />
               </Switch>
             </Router>
           </AuthProvider>
