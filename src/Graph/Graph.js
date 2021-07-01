@@ -37,6 +37,7 @@ export default class Graph extends Component {
     var gradient = ctx.createLinearGradient(0, 0, 0, 400);
     gradient.addColorStop(0, "rgba(255, 240, 164, 1)");
     gradient.addColorStop(1, "rgba(255, 255, 255, 0) 0)");
+    console.log(gradient)
     return gradient;
   };
 
@@ -137,7 +138,7 @@ export default class Graph extends Component {
               data: numericalData,
               fill: true,
               backgroundColor: this.addGraphGradient(),
-              borderColor: "#ccc",
+              borderColor: "#ddd",
               borderWidth: 1,
               pointBackgroundColor: "#7FBEF9",
               pointBorderColor: "#7FBEF9",

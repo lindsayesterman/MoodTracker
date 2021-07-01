@@ -11,14 +11,12 @@ import { AuthContext } from "../Auth/Auth";
 
 export default function SelectMood(props) {
   const { currentUser } = useContext(AuthContext);
-  const email = currentUser.email;
-  const currentUserName = email.substring(0, email.lastIndexOf("@"));
   return (
     <>
       <Stars></Stars>
       <div className="selectMood">
         <h1 className="welcome">
-          Welcome back {currentUserName} <br /> How are you feeling today?
+          Welcome back {(currentUser) ? currentUser.email.substring(0, currentUser.email.lastIndexOf("@")) : "!"} <br /> How are you feeling today?
         </h1>
         <Link to="/explain">
           <img

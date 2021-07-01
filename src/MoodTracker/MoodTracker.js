@@ -130,7 +130,7 @@ export default class MoodTracker extends Component {
               <Switch>
                 <Route
                   exact
-                  path="/select"
+                  path="/"
                   render={(routeProps) => {
                     return (
                       <SelectMood
@@ -173,7 +173,7 @@ export default class MoodTracker extends Component {
                     );
                   }}
                 />
-                <Route exact path="/" component={Home} />
+                <Route exact path="/home" component={Home} />
                 <Route exact path="/login" component={LogIn} />
                 <Route
                   exact
