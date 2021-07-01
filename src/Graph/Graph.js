@@ -127,14 +127,12 @@ export default class Graph extends Component {
       },
       scales: {
         y: {
+          display: false,
           min: 1,
           max: 5.1,
           ticks: {
             display: false,
             stepSize: 1,
-          },
-          grid: {
-            display: false,
           },
         },
         x: {
@@ -161,11 +159,11 @@ export default class Graph extends Component {
               data: numericalData,
               fill: true,
               backgroundColor: this.addGraphGradient(),
-              borderColor: "#ddd",
+              borderColor: "#ededed",
               borderWidth: 1,
               pointBackgroundColor: this.addPointBackgroundColors(),
               pointBorderColor: "transparent",
-              pointRadius: 5,
+              pointRadius: 4,
             },
           ],
         },
