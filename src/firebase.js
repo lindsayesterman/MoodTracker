@@ -1,13 +1,14 @@
 import firebase from "firebase";
+import config from './config'
 
 var firebaseConfig = firebase.initializeApp({
-  apiKey: "AIzaSyBiKFyl668YCSTzRy9NaMLTg4nKYu6siWw",
-  authDomain: "shimmer-mood-tracker-900b2.firebaseapp.com",
-  projectId: "shimmer-mood-tracker-900b2",
-  storageBucket: "shimmer-mood-tracker-900b2.appspot.com",
-  messagingSenderId: "747982194591",
-  appId: "1:747982194591:web:92fbda0e644e1ccf005faa",
-  measurementId: "G-FM28QHTM1W",
+  apiKey: config.API_KEY,
+  authDomain: config.AUTH_DOMAIN,
+  projectId: config.PROJECT_ID,
+  storageBucket: config.STORAGE_BUCKET,
+  messagingSenderId: config.MESSAGING_SENDER_ID,
+  appId: config.APP_ID,
+  measurementId: config.MEASUREMENT_ID,
 });
 
 export default firebaseConfig;
