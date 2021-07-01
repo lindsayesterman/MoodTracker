@@ -8,7 +8,8 @@ import f2 from "../img/faceTwo.svg";
 import f3 from "../img/faceThree.svg";
 import f4 from "../img/faceFour.svg";
 import f5 from "../img/faceFive.svg";
-import whiteArrow from "../img/whiteArrow.png";
+import lg from "../img/lineGraphBtn.svg";
+import bg from "../img/barGraphBtn.svg";
 
 export default class Graph extends Component {
   constructor(props) {
@@ -172,7 +173,7 @@ export default class Graph extends Component {
               data: numericalData,
               fill: true,
               backgroundColor: this.addPointBackgroundColors(),
-              border:false,
+              border: false,
             },
           ],
         },
@@ -263,12 +264,15 @@ export default class Graph extends Component {
           </div>
           <img
             onClick={this.removeLineAddBar}
-            alt="white arrow"
-            className={
-              this.state.arrowClicked ? "whiteArrowRotated" : "whiteArrow"
-            }
-            src={whiteArrow}
+            alt="switch graph btn"
+            className="switchGraph"
+            src={this.state.arrowClicked ? `${lg}` : `${bg}`}
           ></img>
+          {/* <button onClick={this.removeLineAddBar} className="lineOrBar">
+            Switch to{" "}
+            {this.state.arrowClicked ? "Line" : "Bar"}{" "}
+            Graph?
+          </button> */}
         </div>
       </>
     );
