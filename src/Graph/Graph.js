@@ -127,7 +127,7 @@ export default class Graph extends Component {
         y: {
           display: false,
           min: 1,
-          max: 5.1,
+          max: 5.2,
           ticks: {
             display: false,
             stepSize: 1,
@@ -161,7 +161,7 @@ export default class Graph extends Component {
               borderWidth: 1,
               pointBackgroundColor: this.addPointBackgroundColors(),
               pointBorderColor: "transparent",
-              pointRadius: 4,
+              pointRadius: 7,
             },
           ],
         },
