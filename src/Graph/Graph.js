@@ -32,40 +32,59 @@ export default class Graph extends Component {
     console.log(this.state.timeRange);
   };
 
+  addPointBackgroundColors = () => {
+    var pointBackgroundColors = [];
+    var data = this.whichData().data.datasets.data;
+    var ctx = document.getElementById("lineChart").getContext("2d");
+    for (let i = 0; i < data.length; i++) {
+      if (data[i] > 0 && data[i] < 1.5) {
+        pointBackgroundColors.push("#7FBEF9");
+      } else if (data[i] >= 1.5 && data[i] < 2.5) {
+        pointBackgroundColors.push("#BBDDFB");
+      } else if (data[i] >= 2.5 && data[i] < 3.5) {
+        pointBackgroundColors.push("#FFE457");
+      } else if (data[i] >= 3.5 && data[i] < 4.5) {
+        pointBackgroundColors.push("#FFD954");
+      } else if (data[i] >= 4.5 && data[i] < 6) {
+        pointBackgroundColors.push("#F8C144");
+      }
+    }
+    return pointBackgroundColors;
+  };
+
   addGraphGradient = () => {
     var ctx = document.getElementById("lineChart").getContext("2d");
     var gradient = ctx.createLinearGradient(0, 0, 0, 400);
     gradient.addColorStop(0, "rgba(255, 240, 164, 1)");
     gradient.addColorStop(1, "rgba(255, 255, 255, 0) 0)");
-    console.log(gradient)
+    console.log(gradient);
     return gradient;
   };
 
   whichData = () => {
+    let data;
     if (this.state.timeRange === "week") {
-      const data = {
+      data = {
         labels: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"],
         datasets: {
-          data: [1, 3, 3, 4, 3, 5, 4],
+          data: [2, 3, 2, 4, 3, 5, 4],
         },
       };
-      return { data };
     } else if (this.state.timeRange === "month") {
-      const data = {
+      data = {
         labels: [
           1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
           21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
         ],
         datasets: {
           data: [
-            1, 4, 5, 1, 2, 3, 2, 3, 4, 4, 3, 2, 4, 5, 4, 5, 4, 2, 3, 2, 3, 5, 3,
-            2, 5, 3, 3, 3, 4, 5, 5, 5,
+            1, 2, 4, 5, 1, 2, 3, 2, 3, 4, 4, 3, 2, 4, 5, 4, 5, 4, 2, 3, 2, 3, 5,
+            3, 2, 5, 3, 3, 3, 4, 5, 5, 5,
           ],
         },
       };
-      return { data };
     } else if (this.state.timeRange === "year") {
-      const data = {
+      data = {
         labels: [
           "Jan",
           "Feb",
@@ -81,11 +100,11 @@ export default class Graph extends Component {
           "Dec",
         ],
         datasets: {
-          data: [2.7, 3, 3.2, 3, 3.6, 4, 3.5, 4, 4.5, 3.9, 4, 3.8],
+          data: [1.4, 1.7, 2.6, 3.2, 3, 3.6, 4, 2.9, 4, 4.5, 3.9, 4, 3.8],
         },
       };
-      return { data };
     }
+    return { data };
   };
 
   removeLineAddBar = () => {
@@ -97,6 +116,7 @@ export default class Graph extends Component {
     const numericalData = this.whichData().data.datasets.data;
 
     const options = {
+      showTooltips: true,
       plugins: {
         legend: {
           display: false,
@@ -107,8 +127,11 @@ export default class Graph extends Component {
       },
       scales: {
         y: {
+          min: 1,
+          max: 5.1,
           ticks: {
             display: false,
+            stepSize: 1,
           },
           grid: {
             display: false,
@@ -140,8 +163,8 @@ export default class Graph extends Component {
               backgroundColor: this.addGraphGradient(),
               borderColor: "#ddd",
               borderWidth: 1,
-              pointBackgroundColor: "#7FBEF9",
-              pointBorderColor: "#7FBEF9",
+              pointBackgroundColor: this.addPointBackgroundColors(),
+              pointBorderColor: "transparent",
               pointRadius: 5,
             },
           ],
@@ -232,7 +255,9 @@ export default class Graph extends Component {
           <img
             onClick={this.removeLineAddBar}
             alt="white arrow"
-            className={this.state.arrowClicked ? "whiteArrowRotated" : "whiteArrow"}
+            className={
+              this.state.arrowClicked ? "whiteArrowRotated" : "whiteArrow"
+            }
             src={whiteArrow}
           ></img>
         </div>
