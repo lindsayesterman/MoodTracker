@@ -16,7 +16,7 @@ export default function SelectMood(props) {
       <Stars></Stars>
       <div className="selectMood">
         <h1 className="welcome">
-          Welcome back {(currentUser) ? currentUser.email.substring(0, currentUser.email.lastIndexOf("@")) : "!"} <br /> How are you feeling today?
+          Welcome back {(currentUser) ? currentUser.email.substring(0, currentUser.email.lastIndexOf("@")) : ":)"} <br /> How are you feeling today?
         </h1>
         <Link to="/explain">
           <img
