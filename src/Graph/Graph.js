@@ -35,7 +35,6 @@ export default class Graph extends Component {
   addPointBackgroundColors = () => {
     var pointBackgroundColors = [];
     var data = this.whichData().data.datasets.data;
-    var ctx = document.getElementById("lineChart").getContext("2d");
     for (let i = 0; i < data.length; i++) {
       if (data[i] > 0 && data[i] < 1.5) {
         pointBackgroundColors.push("#7FBEF9");
@@ -57,7 +56,6 @@ export default class Graph extends Component {
     var gradient = ctx.createLinearGradient(0, 0, 0, 400);
     gradient.addColorStop(0, "rgba(255, 240, 164, 1)");
     gradient.addColorStop(1, "rgba(255, 255, 255, 0) 0)");
-    console.log(gradient);
     return gradient;
   };
 
@@ -116,7 +114,6 @@ export default class Graph extends Component {
     const numericalData = this.whichData().data.datasets.data;
 
     const options = {
-      showTooltips: true,
       plugins: {
         legend: {
           display: false,
@@ -164,6 +161,18 @@ export default class Graph extends Component {
               pointBackgroundColor: this.addPointBackgroundColors(),
               pointBorderColor: "transparent",
               pointRadius: 4,
+            },
+          ],
+        },
+        barData: {
+          labels: dataLabels,
+          datasets: [
+            {
+              label: "# of Times Mood Was Selected",
+              data: numericalData,
+              fill: true,
+              backgroundColor: this.addPointBackgroundColors(),
+              border:false,
             },
           ],
         },
@@ -231,6 +240,7 @@ export default class Graph extends Component {
               <img alt="cartoon face" src={f1}></img>
             </div>
             <Line
+              className="graphs"
               id="lineChart"
               data={this.state.graphData.data}
               options={this.state.graphData.options}
@@ -245,8 +255,9 @@ export default class Graph extends Component {
               <img alt="cartoon face" src={f1}></img>
             </div>
             <Bar
-              id="lineChart"
-              data={this.state.graphData.data}
+              id="barChart"
+              className="graphs"
+              data={this.state.graphData.barData}
               options={this.state.graphData.options}
             />
           </div>
