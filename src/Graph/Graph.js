@@ -17,7 +17,8 @@ export default class Graph extends Component {
     this.state = {
       graphData: {},
       timeRange: "week",
-      arrowClicked: false,
+      lineClicked:true,
+      barClicked:false,
     };
   }
 
@@ -107,8 +108,18 @@ export default class Graph extends Component {
   };
 
   removeLineAddBar = () => {
-    this.setState({ arrowClicked: !this.state.arrowClicked });
-  };
+    this.setState({
+      barClicked: true,
+      lineClicked:false
+    })
+  }
+
+  removeBarAddLine = () => {
+    this.setState({
+      barClicked: false,
+      lineClicked:true
+    })
+  }
 
   getGraphData = () => {
     const dataLabels = this.whichData().data.labels;
@@ -232,7 +243,7 @@ export default class Graph extends Component {
               </button>
             </div>
           </motion.div>
-          <div className={this.state.arrowClicked ? "hidden" : "graphHolder"}>
+          <div className={this.state.lineClicked ? "graphHolder" : "hidden"}>
             <div className="graphColOfFaces">
               <img alt="cartoon face" src={f5}></img>
               <img alt="cartoon face" src={f4}></img>
@@ -247,7 +258,7 @@ export default class Graph extends Component {
               options={this.state.graphData.options}
             />
           </div>
-          <div className={this.state.arrowClicked ? "graphHolder" : "hidden"}>
+          <div className={this.state.barClicked ? "graphHolder" : "hidden"}>
             <div className="graphColOfFaces">
               <img alt="cartoon face" src={f5}></img>
               <img alt="cartoon face" src={f4}></img>
@@ -265,14 +276,15 @@ export default class Graph extends Component {
           <img
             onClick={this.removeLineAddBar}
             alt="switch graph btn"
-            className="switchGraph"
-            src={this.state.arrowClicked ? `${lg}` : `${bg}`}
+            className="switchGraphLine"
+            src={bg}
           ></img>
-          {/* <button onClick={this.removeLineAddBar} className="lineOrBar">
-            Switch to{" "}
-            {this.state.arrowClicked ? "Line" : "Bar"}{" "}
-            Graph?
-          </button> */}
+          <img
+            onClick={this.removeBarAddLine}
+            alt="switch graph btn"
+            className="switchGraphBar"
+            src={lg}
+          ></img>
         </div>
       </>
     );
