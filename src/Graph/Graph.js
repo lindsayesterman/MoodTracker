@@ -10,6 +10,7 @@ import f4 from "../img/faceFour.svg";
 import f5 from "../img/faceFive.svg";
 import lg from "../img/lineGraphBtn.svg";
 import bg from "../img/barGraphBtn.svg";
+import { findMostCommonMood } from "../helpers";
 
 export default class Graph extends Component {
   constructor(props) {
@@ -137,8 +138,8 @@ export default class Graph extends Component {
       scales: {
         y: {
           display: false,
-          min:.8,
-          max: 5.2,
+          min: 0.8,
+          max: 5.23,
           ticks: {
             display: false,
             stepSize: 1,
@@ -191,6 +192,7 @@ export default class Graph extends Component {
   };
 
   render() {
+    console.log();
     return (
       <>
         <BackBtn></BackBtn>
@@ -208,7 +210,7 @@ export default class Graph extends Component {
               <h3>Your most common stats</h3>
               <div className="boxInsideStatBox">
                 <p>
-                  <b>Mood: </b> Happy
+                  <b>Mood: </b> {findMostCommonMood(this.props.allMoods) || "Happy"}
                 </p>
                 <br />
                 <p>

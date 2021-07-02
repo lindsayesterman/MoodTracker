@@ -21,7 +21,8 @@ export default function MoodExp(props) {
         transition={props.pageTransition}
         variants={props.pageVariants}
       >
-        {props.mood.feeling === "happy" || props.mood.feeling === "jubilant" ? (
+        {parseFloat(props.mood.feeling) === 4 ||
+        parseFloat(props.mood.feeling) === 5 ? (
           <h1>Awesome! What's on your mind?</h1>
         ) : (
           <h1>Oh no, what's on your mind?</h1>

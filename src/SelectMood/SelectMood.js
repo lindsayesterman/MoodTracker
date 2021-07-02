@@ -22,36 +22,36 @@ export default function SelectMood(props) {
           <img
             className="sad"
             alt="sad face"
-            id="sad"
-            onClick={props.getButtonClicked}
+            id={1}
+            onClick={props.getMoodClicked}
             src={f1}
           ></img>
           <img
             className="nw"
             alt="not well face"
-            id="not well"
-            onClick={props.getButtonClicked}
+            id={2}
+            onClick={props.getMoodClicked}
             src={f2}
           ></img>
           <img
             className="neutral"
             alt="neutral face"
-            id="neutral"
-            onClick={props.getButtonClicked}
+            id={3}
+            onClick={props.getMoodClicked}
             src={f3}
           ></img>
           <img
             className="happy"
             alt="happy face"
-            id="happy"
-            onClick={props.getButtonClicked}
+            id={4}
+            onClick={props.getMoodClicked}
             src={f4}
           ></img>
           <img
             className="jub"
             alt="jubilant face"
-            id="jubilant"
-            onClick={props.getButtonClicked}
+            id={5}
+            onClick={props.getMoodClicked}
             src={f5}
           ></img>
         </Link>

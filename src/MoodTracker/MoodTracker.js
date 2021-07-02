@@ -58,7 +58,7 @@ export default class MoodTracker extends Component {
     });
   };
 
-  getButtonClicked = (e) => {
+  getMoodClicked = (e) => {
     this.setState({
       mood: {
         ...this.state.mood,
@@ -138,7 +138,7 @@ export default class MoodTracker extends Component {
                         getExp={this.getExp}
                         getTags={this.getTags}
                         addToAllMoods={this.addToAllMoods}
-                        getButtonClicked={this.getButtonClicked}
+                        getMoodClicked={this.getMoodClicked}
                         {...routeProps}
                       />
                     );
@@ -165,6 +165,7 @@ export default class MoodTracker extends Component {
                   render={(routeProps) => {
                     return (
                       <Graph
+                        allMoods={this.state.allMoods}
                         pageTransition={pageTransition}
                         pageVariants={pageVariants}
                         mood={this.state.mood}

@@ -200,17 +200,22 @@ button.year:focus {
   .graphHolder {
     margin-top: 250px;
     padding: 35px 10px 35px 50px;
-    width: 310px;
+    width: 340px;
   }
 
   .graphColOfFaces {
-    left: 10px;
-    top: 26px;
+    left: 14px;
+    top: 28px;
   }
 
   .graphColOfFaces img {
-    width: 27px;
+    width: 25px;
     margin: 3px 0px;
+  }
+
+  .switchGraphBar{
+    bottom:20px;
+    right:80px;
   }
 }
 
@@ -240,10 +245,5 @@ button.year:focus {
   .graphColOfFaces img {
     width: 17px;
     margin: 4px 0px;
-  }
-
-  .switchGraphBar{
-    bottom:20px;
-    right:80px;
   }
 }
