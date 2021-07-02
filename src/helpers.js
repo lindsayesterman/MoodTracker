@@ -1,21 +1,21 @@
-export const findMostCommonMood = (moods) => {
-  for (let i = 0; i < moods.length; i++) {
-    moods.sort((x, y) => x - y);
+export const findMostCommonMood = (allMoods) => {
+  for (let i = 0; i < allMoods.length; i++) {
+    allMoods.sort((x, y) => x - y);
 
     var bestStreak = 1;
-    var bestElem = moods[0];
+    var bestElem = allMoods[0];
     var currentStreak = 1;
-    var currentElem = moods[0];
+    var currentElem = allMoods[0];
 
-    for (let i = 1; i < moods.length; i++) {
-      if (moods[i - 1].feeling !== moods[i].feeling) {
+    for (let i = 1; i < allMoods.length; i++) {
+      if (allMoods[i - 1].feeling !== allMoods[i].feeling) {
         if (currentStreak > bestStreak) {
           bestStreak = currentStreak;
           bestElem = currentElem;
         }
 
         currentStreak = 0;
-        currentElem = moods[i];
+        currentElem = allMoods[i];
       }
 
       currentStreak++;

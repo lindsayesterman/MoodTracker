@@ -33,6 +33,7 @@ const pageTransition = {
   // type: "spring",
   // stiffness: 120,
   transition: "linear",
+  duration:.3
 };
 
 export default class MoodTracker extends Component {
