@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../Graph/Graph.css";
+import "./GraphPage.css";
 import { motion } from "framer-motion";
 import BackBtn from "../BackBtn/BackBtn";
 import { Bar, Line } from "react-chartjs-2";
@@ -10,9 +10,9 @@ import f4 from "../img/faceFour.svg";
 import f5 from "../img/faceFive.svg";
 import lg from "../img/lineGraphBtn.svg";
 import bg from "../img/barGraphBtn.svg";
-import { findMostCommonMood } from "../helpers";
+import StatBox from "../StatBox/StatBox";
 
-export default class Graph extends Component {
+export default class GraphPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,7 +32,6 @@ export default class Graph extends Component {
       timeRange: e.target.value,
     });
     this.setState({ timeRange: e.target.value }, this.getGraphData);
-    console.log(this.state.timeRange);
   };
 
   removeLineAddBar = () => {
@@ -100,7 +99,7 @@ export default class Graph extends Component {
         labels: this.getDaysInMonth(),
         datasets: {
           data: [
-            1, 2, 4, 5, 1, 2, 3, 2, 3, 4, 4, 3, 2, 4, 5, 4, 5, 4, 2, 3, 2, 3, 5,
+            1, 2, 4, 3, 1, 2, 3, 2, 3, 4, 4, 3, 2, 4, 5, 4, 5, 4, 2, 3, 2, 3, 5,
             3, 2, 5, 3, 3, 3, 4, 5, 5, 5,
           ],
         },
@@ -199,7 +198,6 @@ export default class Graph extends Component {
   };
 
   render() {
-    console.log();
     return (
       <>
         <BackBtn></BackBtn>
@@ -213,21 +211,7 @@ export default class Graph extends Component {
             variants={this.props.pageVariants}
           >
             <h1>Your mood over time with Shimmer:)</h1>
-            <div className="statBox">
-              <h3>Your most common stats</h3>
-              <div className="boxInsideStatBox">
-                <p>
-                  <b>Mood: </b>{" "}
-                  {this.props.allMoods > 0
-                    ? findMostCommonMood(this.props.allMoods)
-                    : "Happy"}
-                </p>
-                <br />
-                <p>
-                  <b>Tags: </b> School, Work, Food
-                </p>
-              </div>
-            </div>
+            <StatBox allMoods={this.props.allMoods}></StatBox>
             <div className="buttonContainer">
               <button
                 value="week"
@@ -252,53 +236,43 @@ export default class Graph extends Component {
               </button>
             </div>
           </motion.div>
-          {this.state.lineClicked ? (
-            <motion.div
-              className="graphHolder"
-              initial="out"
-              animate="in"
-              exit="outFade"
-              transition={this.props.pageTransition}
-              variants={this.props.pageVariants}
-            >
-              <div className="graphColOfFaces">
-                <img alt="cartoon face" src={f5}></img>
-                <img alt="cartoon face" src={f4}></img>
-                <img alt="cartoon face" src={f3}></img>
-                <img alt="cartoon face" src={f2}></img>
-                <img alt="cartoon face" src={f1}></img>
-              </div>
-              <Line
-                className="graphs"
-                id="lineChart"
-                data={this.state.graphData.data}
-                options={this.state.graphData.options}
-              />
-            </motion.div>
-          ) : (
-            <motion.div
-              className="graphHolder"
-              initial="outRight"
-              animate="in"
-              exit="outRight"
-              transition={this.props.pageTransition}
-              variants={this.props.pageVariants}
-            >
-              <div className="graphColOfFaces">
-                <img alt="cartoon face" src={f5}></img>
-                <img alt="cartoon face" src={f4}></img>
-                <img alt="cartoon face" src={f3}></img>
-                <img alt="cartoon face" src={f2}></img>
-                <img alt="cartoon face" src={f1}></img>
-              </div>
-              <Bar
-                id="barChart"
-                className="graphs"
-                data={this.state.graphData.barData}
-                options={this.state.graphData.options}
-              />
-            </motion.div>
-          )}
+          <motion.div
+            className={this.state.lineClicked ? "graphHolder" : "hidden"}
+            initial="out"
+            animate="in"
+            exit="outFade"
+            transition={this.props.pageTransition}
+            variants={this.props.pageVariants}
+          >
+            <div className="graphColOfFaces">
+              <img alt="cartoon face" src={f5}></img>
+              <img alt="cartoon face" src={f4}></img>
+              <img alt="cartoon face" src={f3}></img>
+              <img alt="cartoon face" src={f2}></img>
+              <img alt="cartoon face" src={f1}></img>
+            </div>
+            <Line
+              className="graphs"
+              id="lineChart"
+              data={this.state.graphData.data}
+              options={this.state.graphData.options}
+            />
+          </motion.div>
+          <div className={this.state.barClicked ? "graphHolder" : "hidden"}>
+            <div className="graphColOfFaces">
+              <img alt="cartoon face" src={f5}></img>
+              <img alt="cartoon face" src={f4}></img>
+              <img alt="cartoon face" src={f3}></img>
+              <img alt="cartoon face" src={f2}></img>
+              <img alt="cartoon face" src={f1}></img>
+            </div>
+            <Bar
+              id="barChart"
+              className="graphs"
+              data={this.state.graphData.barData}
+              options={this.state.graphData.options}
+            />
+          </div>
           <img
             onClick={this.removeLineAddBar}
             alt="switch graph btn"

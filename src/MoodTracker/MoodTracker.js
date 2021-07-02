@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./MoodTracker.css";
 import SelectMood from "../SelectMood/SelectMood";
-import Graph from "../Graph/Graph";
+import GraphPage from "../GraphPage/GraphPage";
 import MoodExp from "../MoodExp/MoodExp";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
@@ -68,7 +68,6 @@ export default class MoodTracker extends Component {
         date: Date().toLocaleString(),
       },
     });
-    console.log(e.target.id);
   };
 
   getExp = (e) => {
@@ -106,7 +105,6 @@ export default class MoodTracker extends Component {
     this.setState({
       allMoods: this.state.allMoods.concat(this.state.mood),
     });
-    console.log(this.state.allMoods);
   };
 
   addUser = (e) => {
@@ -165,7 +163,7 @@ export default class MoodTracker extends Component {
                   path="/analytics"
                   render={(routeProps) => {
                     return (
-                      <Graph
+                      <GraphPage
                         allMoods={this.state.allMoods}
                         pageTransition={pageTransition}
                         pageVariants={pageVariants}

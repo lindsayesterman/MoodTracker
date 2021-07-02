@@ -14,31 +14,6 @@
   line-height: 25px;
 }
 
-.graph .statContainer .statBox {
-  background-color: #fff1a9;
-  border-radius: 10px;
-  padding: 8px;
-  width: 170px;
-  font-size: 10px;
-  margin: 5px 25px 5px auto;
-  line-height: 1px;
-  transform: scale(1.1);
-}
-
-.boxInsideStatBox {
-  background-color: white;
-  border-radius: 10px;
-  height: 40px;
-  padding: 4px;
-  font-size: 10px;
-  text-align: left;
-}
-
-.statBox h3 {
-  font-family: Poetsen One;
-  font-weight: 400;
-}
-
 .buttonContainer {
   display: flex;
   flex-direction: column;
@@ -116,7 +91,8 @@ button.year:focus {
   filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.25));
 }
 
-.switchGraphBar:hover, .switchGraphLine:hover{
+.switchGraphBar:hover,
+.switchGraphLine:hover {
   transform: scale(1.05);
 }
 
@@ -141,17 +117,8 @@ button.year:focus {
     font-size: 17px;
   }
 
-  .statBox h3 {
-    font-size: 10px;
-  }
-
   .statContainer {
     margin-top: 0px;
-  }
-
-  .boxInsideStatBox {
-    font-size: 9px;
-    margin-top: 15px;
   }
 
   button.week,
@@ -182,13 +149,8 @@ button.year:focus {
     justify-content: center;
   }
 
-  .graph .statContainer .statBox {
-    margin:20px 25px;
-    transform: scale(1.1);
-  }
-
-  .buttonContainer{
-    margin:20px 30px;
+  .buttonContainer {
+    margin: 20px 30px;
   }
 
   .graph .statContainer h1 {
@@ -213,9 +175,9 @@ button.year:focus {
     margin: 3px 0px;
   }
 
-  .switchGraphBar{
-    bottom:20px;
-    right:80px;
+  .switchGraphBar {
+    bottom: 20px;
+    right: 80px;
   }
 }
 
@@ -228,13 +190,8 @@ button.year:focus {
     box-shadow: none;
   }
 
-  .graph .statContainer .statBox {
-    margin: 10px 0px;
-    transform: scale(.9);
-  }
-
-  .buttonContainer{
-    margin-right:10px;
+  .buttonContainer {
+    margin-right: 10px;
   }
 
   .graphColOfFaces {
