@@ -17,8 +17,8 @@ export default class Graph extends Component {
     this.state = {
       graphData: {},
       timeRange: "week",
-      lineClicked:true,
-      barClicked:false,
+      lineClicked: true,
+      barClicked: false,
     };
   }
 
@@ -34,23 +34,23 @@ export default class Graph extends Component {
     console.log(this.state.timeRange);
   };
 
-  addPointBackgroundColors = () => {
-    var pointBackgroundColors = [];
+  addDynamicGraphColoring = () => {
+    var backgroundColors = [];
     var data = this.whichData().data.datasets.data;
     for (let i = 0; i < data.length; i++) {
       if (data[i] > 0 && data[i] < 1.5) {
-        pointBackgroundColors.push("#7FBEF9");
+        backgroundColors.push("#7FBEF9");
       } else if (data[i] >= 1.5 && data[i] < 2.5) {
-        pointBackgroundColors.push("#BBDDFB");
+        backgroundColors.push("#BBDDFB");
       } else if (data[i] >= 2.5 && data[i] < 3.5) {
-        pointBackgroundColors.push("#FFE457");
+        backgroundColors.push("#FFE457");
       } else if (data[i] >= 3.5 && data[i] < 4.5) {
-        pointBackgroundColors.push("#FFD954");
+        backgroundColors.push("#FFD954");
       } else if (data[i] >= 4.5 && data[i] < 6) {
-        pointBackgroundColors.push("#F8C144");
+        backgroundColors.push("#F8C144");
       }
     }
-    return pointBackgroundColors;
+    return backgroundColors;
   };
 
   addGraphGradient = () => {
@@ -67,7 +67,7 @@ export default class Graph extends Component {
       data = {
         labels: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"],
         datasets: {
-          data: [2, 3, 2, 4, 3, 5, 4],
+          data: [2, 3, 1, 4, 3, 5, 4],
         },
       };
     } else if (this.state.timeRange === "month") {
@@ -110,16 +110,16 @@ export default class Graph extends Component {
   removeLineAddBar = () => {
     this.setState({
       barClicked: true,
-      lineClicked:false
-    })
-  }
+      lineClicked: false,
+    });
+  };
 
   removeBarAddLine = () => {
     this.setState({
       barClicked: false,
-      lineClicked:true
-    })
-  }
+      lineClicked: true,
+    });
+  };
 
   getGraphData = () => {
     const dataLabels = this.whichData().data.labels;
@@ -137,7 +137,7 @@ export default class Graph extends Component {
       scales: {
         y: {
           display: false,
-          min: 1,
+          min:.8,
           max: 5.2,
           ticks: {
             display: false,
@@ -164,13 +164,12 @@ export default class Graph extends Component {
           labels: dataLabels,
           datasets: [
             {
-              label: "# of Times Mood Was Selected",
               data: numericalData,
               fill: true,
               backgroundColor: this.addGraphGradient(),
               borderColor: "#ededed",
               borderWidth: 1,
-              pointBackgroundColor: this.addPointBackgroundColors(),
+              pointBackgroundColor: this.addDynamicGraphColoring(),
               pointBorderColor: "transparent",
               pointRadius: 7,
             },
@@ -180,10 +179,8 @@ export default class Graph extends Component {
           labels: dataLabels,
           datasets: [
             {
-              label: "# of Times Mood Was Selected",
               data: numericalData,
-              fill: true,
-              backgroundColor: this.addPointBackgroundColors(),
+              backgroundColor: this.addDynamicGraphColoring(),
               border: false,
             },
           ],

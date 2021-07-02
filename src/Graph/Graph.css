@@ -83,7 +83,7 @@ button.year:focus {
   background-color: white;
   padding: 50px 20px 50px 70px;
   border-radius: 20px;
-  box-shadow: rgba(22, 31, 39, 0.42) 0px 60px 123px -25px,
+  box-shadow: rgba(22, 31, 39, 0.42) 0px 60px 120px -25px,
     rgba(19, 26, 32, 0.08) 0px 35px 75px -35px;
 }
 
@@ -199,13 +199,13 @@ button.year:focus {
 
   .graphHolder {
     margin-top: 250px;
-    padding: 35px 25px 35px 50px;
-    width: 340px;
+    padding: 35px 10px 35px 50px;
+    width: 310px;
   }
 
   .graphColOfFaces {
-    left: 8px;
-    top: 28px;
+    left: 10px;
+    top: 26px;
   }
 
   .graphColOfFaces img {
