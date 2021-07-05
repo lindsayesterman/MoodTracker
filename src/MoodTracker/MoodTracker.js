@@ -33,7 +33,7 @@ const pageTransition = {
   // type: "spring",
   // stiffness: 120,
   transition: "linear",
-  duration:.3
+  duration: 0.3,
 };
 
 export default class MoodTracker extends Component {
@@ -109,10 +109,7 @@ export default class MoodTracker extends Component {
 
   addUser = (e) => {
     const db = firebase.firestore();
-    db.settings({
-      timestampsInSnapshots: true,
-    });
-    const userRef = db.collection("users").add({
+    db.collection("users").add({
       email: this.state.email,
     });
     this.setState({
@@ -121,6 +118,7 @@ export default class MoodTracker extends Component {
   };
 
   render() {
+    const db = firebase.firestore();
     return (
       <div className="mood-tracker">
         <AnimatePresence>
@@ -138,6 +136,7 @@ export default class MoodTracker extends Component {
                         getTags={this.getTags}
                         addToAllMoods={this.addToAllMoods}
                         getMoodClicked={this.getMoodClicked}
+                        db={db}
                         {...routeProps}
                       />
                     );
