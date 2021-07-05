@@ -12,6 +12,31 @@ import lg from "../img/lineGraphBtn.svg";
 import bg from "../img/barGraphBtn.svg";
 import StatBox from "../StatBox/StatBox";
 
+const testdata = {
+  labels: ['1', '2', '3', '4', '5', '6'],
+  datasets: [
+    {
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      fill: false,
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgba(255, 99, 132, 0.2)',
+    },
+  ],
+};
+
+const testoptions = {
+  scales: {
+    yAxes: [
+      {
+        ticks: {
+          beginAtZero: true,
+        },
+      },
+    ],
+  },
+};
+
 export default class GraphPage extends Component {
   constructor(props) {
     super(props);
@@ -273,6 +298,7 @@ export default class GraphPage extends Component {
               options={this.state.graphData.options}
             />
           </div>
+
           <img
             onClick={this.removeLineAddBar}
             alt="switch graph btn"
