@@ -55,6 +55,21 @@ export default class MoodTracker extends Component {
     };
   }
 
+  async componentDidMount() {
+    const citiesRef = db.collection("moodTracker");
+    const snapshot = await citiesRef.get();
+    if (snapshot.empty) {
+      console.log("No matching documents.");
+      return;
+    }
+    snapshot.forEach((doc) => {
+      this.setState({
+        allMoods: this.state.allMoods.concat(doc.data()),
+      });
+    });
+    console.log(this.state.allMoods);
+  }
+
   getUserEmail = (e) => {
     this.setState({
       email: e.target.value,
@@ -117,7 +132,7 @@ export default class MoodTracker extends Component {
   };
 
   addUser = (e) => {
-    db.collection("users").add({
+    db.collection("users").set({
       email: this.state.email,
     });
     this.setState({

@@ -33,8 +33,6 @@ const findMostCommon = (allMoods, item) => {
 };
 
 export default function StatBox(props) {
-  console.log(findMostCommon(props.allMoods));
-  console.log(props.allMoods)
   return (
     <div className="statBox">
       <h3>Your most common stats</h3>
