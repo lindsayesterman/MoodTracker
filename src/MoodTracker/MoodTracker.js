@@ -36,12 +36,14 @@ const pageTransition = {
   duration: 0.3,
 };
 
+const db = firebase.firestore();
+
 export default class MoodTracker extends Component {
   constructor(props) {
     super(props);
     this.state = {
       mood: {
-        feeling: "",
+        feeling: 0,
         explanation: "",
         tags: [],
         key: "",
@@ -63,7 +65,7 @@ export default class MoodTracker extends Component {
     this.setState({
       mood: {
         ...this.state.mood,
-        feeling: e.target.id,
+        feeling: parseFloat(e.target.id),
         key: Date.now(),
         date: Date().toLocaleString(),
       },
@@ -101,14 +103,20 @@ export default class MoodTracker extends Component {
         });
   };
 
-  addToAllMoods = () => {
+  addToAllMoodsAndPushToDb = () => {
     this.setState({
       allMoods: this.state.allMoods.concat(this.state.mood),
+    });
+    db.collection("moodTracker").add({
+      feeling: this.state.mood.feeling,
+      notes: this.state.mood.explanation,
+      setMoodForToday: true,
+      tags: this.state.mood.tags,
+      date: this.state.mood.date,
     });
   };
 
   addUser = (e) => {
-    const db = firebase.firestore();
     db.collection("users").add({
       email: this.state.email,
     });
@@ -118,7 +126,6 @@ export default class MoodTracker extends Component {
   };
 
   render() {
-    const db = firebase.firestore();
     return (
       <div className="mood-tracker">
         <AnimatePresence>
@@ -134,9 +141,8 @@ export default class MoodTracker extends Component {
                         mood={this.state.mood}
                         getExp={this.getExp}
                         getTags={this.getTags}
-                        addToAllMoods={this.addToAllMoods}
+                        addToAllMoodsAndPushToDb={this.addToAllMoodsAndPushToDb}
                         getMoodClicked={this.getMoodClicked}
-                        db={db}
                         {...routeProps}
                       />
                     );
@@ -150,7 +156,7 @@ export default class MoodTracker extends Component {
                         mood={this.state.mood}
                         getExp={this.getExp}
                         getTags={this.getTags}
-                        addToAllMoods={this.addToAllMoods}
+                        addToAllMoodsAndPushToDb={this.addToAllMoodsAndPushToDb}
                         pageTransition={pageTransition}
                         pageVariants={pageVariants}
                         {...routeProps}
