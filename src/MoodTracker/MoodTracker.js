@@ -8,7 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import Home from "../Auth/Home";
 import LogIn from "../Auth/LogIn";
 import SignUp from "../Auth/SignUp";
-import { AuthProvider } from "../Auth/Auth";
+import { AuthProvider, AuthContext } from "../Auth/Auth";
 import firebase from "../firebase";
 
 const pageVariants = {
@@ -55,6 +55,8 @@ export default class MoodTracker extends Component {
     };
   }
 
+  static contextType = AuthContext;
+
   async componentDidMount() {
     const moodTrackerRef = db.collection("moodTracker");
     const snapshot = await moodTrackerRef.get();
@@ -63,7 +65,7 @@ export default class MoodTracker extends Component {
       return;
     }
     snapshot.forEach((doc) => {
-      this.addToAllMoods(doc.data())
+      this.addToAllMoods(doc.data());
     });
     console.log(this.state.allMoods);
   }
@@ -120,20 +122,23 @@ export default class MoodTracker extends Component {
     this.setState({
       allMoods: this.state.allMoods.concat(mood),
     });
-  }
-
-  pushToDb = () => {
-    this.addToAllMoods(this.state.mood)
-    db.collection("moodTracker").add({
-      feeling: this.state.mood.feeling,
-      notes: this.state.mood.explanation,
-      setMoodForToday: true,
-      tags: this.state.mood.tags,
-      date: this.state.mood.date,
-    });
   };
 
-  addUser = (e) => {
+  pushToDb = () => {
+    this.addToAllMoods(this.state.mood);
+    db.collection("moodTracker").doc("user.uid").set(
+      {
+        feeling: this.state.mood.feeling,
+        notes: this.state.mood.explanation,
+        setMoodForToday: true,
+        tags: this.state.mood.tags,
+        date: this.state.mood.date,
+      },
+      { merge: true }
+    );
+  };
+
+  addUser = () => {
     db.collection("users").add({
       email: this.state.email,
     });
@@ -143,6 +148,7 @@ export default class MoodTracker extends Component {
   };
 
   render() {
+    console.log();
     return (
       <div className="mood-tracker">
         <AnimatePresence>

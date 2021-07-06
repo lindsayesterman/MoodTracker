@@ -17,9 +17,12 @@ const SignUp = (props) => {
       alert(error);
     }
   };
+
   if (currentUser) {
+    const uid = currentUser.uid;
     return <Redirect to="/" />;
   }
+  
   return (
     <>
       <h1>Sign Up</h1>

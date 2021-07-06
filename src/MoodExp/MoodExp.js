@@ -113,7 +113,7 @@ export default function MoodExp(props) {
         <Link to="/analytics">
           <button
             className="hvr-float-shadow"
-            onClick={props.addToAllMoodsAndPushToDb}
+            onClick={props.pushToDb}
             type="submit"
           >
             Submit
