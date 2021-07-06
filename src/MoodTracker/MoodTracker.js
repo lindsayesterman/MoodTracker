@@ -63,9 +63,7 @@ export default class MoodTracker extends Component {
       return;
     }
     snapshot.forEach((doc) => {
-      this.setState({
-        allMoods: this.state.allMoods.concat(doc.data()),
-      });
+      this.addToAllMoods(doc.data())
     });
     console.log(this.state.allMoods);
   }
@@ -118,10 +116,14 @@ export default class MoodTracker extends Component {
         });
   };
 
-  addToAllMoodsAndPushToDb = () => {
+  addToAllMoods = (mood) => {
     this.setState({
-      allMoods: this.state.allMoods.concat(this.state.mood),
+      allMoods: this.state.allMoods.concat(mood),
     });
+  }
+
+  pushToDb = () => {
+    this.addToAllMoods(this.state.mood)
     db.collection("moodTracker").add({
       feeling: this.state.mood.feeling,
       notes: this.state.mood.explanation,
@@ -156,7 +158,7 @@ export default class MoodTracker extends Component {
                         mood={this.state.mood}
                         getExp={this.getExp}
                         getTags={this.getTags}
-                        addToAllMoodsAndPushToDb={this.addToAllMoodsAndPushToDb}
+                        pushToDb={this.pushToDb}
                         getMoodClicked={this.getMoodClicked}
                         {...routeProps}
                       />
@@ -171,7 +173,7 @@ export default class MoodTracker extends Component {
                         mood={this.state.mood}
                         getExp={this.getExp}
                         getTags={this.getTags}
-                        addToAllMoodsAndPushToDb={this.addToAllMoodsAndPushToDb}
+                        pushToDb={this.pushToDb}
                         pageTransition={pageTransition}
                         pageVariants={pageVariants}
                         {...routeProps}
