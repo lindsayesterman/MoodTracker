@@ -56,8 +56,8 @@ export default class MoodTracker extends Component {
   }
 
   async componentDidMount() {
-    const citiesRef = db.collection("moodTracker");
-    const snapshot = await citiesRef.get();
+    const moodTrackerRef = db.collection("moodTracker");
+    const snapshot = await moodTrackerRef.get();
     if (snapshot.empty) {
       console.log("No matching documents.");
       return;
@@ -132,7 +132,7 @@ export default class MoodTracker extends Component {
   };
 
   addUser = (e) => {
-    db.collection("users").set({
+    db.collection("users").add({
       email: this.state.email,
     });
     this.setState({
