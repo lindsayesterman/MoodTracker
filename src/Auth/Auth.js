@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import firebaseConfig from "../firebase.js";
+import firebase from "../firebase.js";
 
 export const AuthContext = React.createContext();
 
@@ -12,6 +13,9 @@ export const AuthProvider = ({ children }) => {
       if (user) {
         const uid = user.uid;
         console.log(uid)
+        firebase.firestore().collection("users").doc(uid).set({
+          email: user.email,
+        });
       }
       setCurrentUser(user);
     setLoading(false);

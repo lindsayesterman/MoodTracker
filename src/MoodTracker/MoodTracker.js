@@ -124,15 +124,6 @@ export default class MoodTracker extends Component {
     });
   };
 
-  addUser = () => {
-    db.collection("users").add({
-      email: this.state.email,
-    });
-    this.setState({
-      email: "",
-    });
-  };
-
   render() {
     return (
       <div className="mood-tracker">
@@ -195,7 +186,8 @@ export default class MoodTracker extends Component {
                     return (
                       <SignUp
                         getUserEmail={this.getUserEmail}
-                        addUser={this.addUser}
+                        db={db}
+                        email={this.state.email}
                         {...routeProps}
                       />
                     );

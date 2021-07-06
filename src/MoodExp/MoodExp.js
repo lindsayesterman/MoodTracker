@@ -12,16 +12,19 @@ export default function MoodExp(props) {
 
   function pushMoodToDb() {
     props.addToAllMoods(props.mood);
-    props.db.collection("moodTracker").doc(currentUser.uid).set(
-      {
-        feeling: props.mood.feeling,
-        notes: props.mood.explanation,
-        setMoodForToday: true,
-        tags: props.mood.tags,
-        date: props.mood.date,
-      },
-      { merge: true }
-    );
+    props.db
+      .collection("moodTracker")
+      .doc(currentUser.uid)
+      .set(
+        {
+          feeling: props.mood.feeling,
+          explanation: props.mood.explanation,
+          setMoodForToday: true,
+          tags: props.mood.tags,
+          date: props.mood.date,
+        },
+        { merge: true }
+      );
   }
 
   const tags = props.mood.tags;
