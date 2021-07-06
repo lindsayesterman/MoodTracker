@@ -124,20 +124,6 @@ export default class MoodTracker extends Component {
     });
   };
 
-  pushToDb = () => {
-    this.addToAllMoods(this.state.mood);
-    db.collection("moodTracker").doc("user.uid").set(
-      {
-        feeling: this.state.mood.feeling,
-        notes: this.state.mood.explanation,
-        setMoodForToday: true,
-        tags: this.state.mood.tags,
-        date: this.state.mood.date,
-      },
-      { merge: true }
-    );
-  };
-
   addUser = () => {
     db.collection("users").add({
       email: this.state.email,
@@ -148,7 +134,6 @@ export default class MoodTracker extends Component {
   };
 
   render() {
-    console.log();
     return (
       <div className="mood-tracker">
         <AnimatePresence>
@@ -164,7 +149,6 @@ export default class MoodTracker extends Component {
                         mood={this.state.mood}
                         getExp={this.getExp}
                         getTags={this.getTags}
-                        pushToDb={this.pushToDb}
                         getMoodClicked={this.getMoodClicked}
                         {...routeProps}
                       />
@@ -179,9 +163,10 @@ export default class MoodTracker extends Component {
                         mood={this.state.mood}
                         getExp={this.getExp}
                         getTags={this.getTags}
-                        pushToDb={this.pushToDb}
                         pageTransition={pageTransition}
                         pageVariants={pageVariants}
+                        addToAllMoods={this.addToAllMoods}
+                        db={db}
                         {...routeProps}
                       />
                     );

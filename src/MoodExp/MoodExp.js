@@ -1,14 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./MoodExp.css";
 import Emoji from "../Emoji.js";
 import { motion } from "framer-motion";
 import Stars from "../Stars/Stars";
 import BackBtn from "../BackBtn/BackBtn";
+import { AuthContext } from "../Auth/Auth";
 
 export default function MoodExp(props) {
-  const tags = props.mood.tags;
+  const { currentUser } = useContext(AuthContext);
 
+  function pushMoodToDb() {
+    props.addToAllMoods(props.mood);
+    props.db.collection("moodTracker").doc(currentUser.uid).set(
+      {
+        feeling: props.mood.feeling,
+        notes: props.mood.explanation,
+        setMoodForToday: true,
+        tags: props.mood.tags,
+        date: props.mood.date,
+      },
+      { merge: true }
+    );
+  }
+
+  const tags = props.mood.tags;
   return (
     <>
       <Stars></Stars>
@@ -113,7 +129,7 @@ export default function MoodExp(props) {
         <Link to="/analytics">
           <button
             className="hvr-float-shadow"
-            onClick={props.pushToDb}
+            onClick={pushMoodToDb}
             type="submit"
           >
             Submit
