@@ -104,39 +104,6 @@ export default class GraphPage extends Component {
     return weekData;
   };
 
-  // getMonthData = () => {
-  // var date = new Date();
-  // var month = date.getMonth() + 1;
-  // date.setDate(1);
-  // var all_days = [];
-  // var monthData = [];
-  // const { allMoods } = this.props;
-  // for (let i = 1; i < allMoods.length; i++) {
-  //   if (date.getMonth() + 1 === month) {
-  //     var d =
-  //       date.getFullYear() +
-  //       "-" +
-  //       (date.getMonth() + 1).toString().padStart(2, "0") +
-  //       "-" +
-  //       date.getDate().toString().padStart(2, "0");
-  //     all_days.push(d);
-  // for (let i = 1; i < allMoods.length; i++) {
-  //   if (allMoods[i].date === d) {
-  //     monthData.push(allMoods[i].feeling);
-  //     console.log(i, allMoods[i])
-  //   } else {
-  //     monthData.push(0);
-  //   }
-  // }
-  //     date.setDate(date.getDate() + 1);
-  //   }
-  // }
-  // console.log(all_days);
-  // console.log(allMoods);
-  // console.log("monthData", monthData);
-  // return monthData;
-  // };
-
   getMonthData = () => {
     var month = new Date().getMonth();
     var year = new Date().getFullYear();
