@@ -91,13 +91,17 @@ export default class GraphPage extends Component {
     let weekData = [];
     let week = [];
     const { allMoods } = this.props;
-    for (let i = 1; i <= 7; i++) {
+    for (let i = 0; i < 7; i++) {
       let first = curr.getDate() - curr.getDay() + i;
       let day = new Date(curr.setDate(first)).toISOString().slice(0, 10);
       week.push(day);
-      for (let j = 0; j < allMoods.length; j++) {
-        if (allMoods[j].date === day) {
-          weekData.push(allMoods[j].feeling);
+    }
+    for (let i = 0; i < allMoods.length; i++) {
+      for (let j = 0; j < week.length; j++) {
+        if (allMoods[i].date === week[j]) {
+          weekData.push(allMoods[i].feeling);
+        } else {
+          weekData.push(0);
         }
       }
     }
