@@ -24,6 +24,7 @@ export default class GraphPage extends Component {
   }
 
   componentDidMount() {
+    console.log(this.state.timeRange);
     this.getGraphData();
   }
 
@@ -103,27 +104,62 @@ export default class GraphPage extends Component {
     return weekData;
   };
 
+  // getMonthData = () => {
+  // var date = new Date();
+  // var month = date.getMonth() + 1;
+  // date.setDate(1);
+  // var all_days = [];
+  // var monthData = [];
+  // const { allMoods } = this.props;
+  // for (let i = 1; i < allMoods.length; i++) {
+  //   if (date.getMonth() + 1 === month) {
+  //     var d =
+  //       date.getFullYear() +
+  //       "-" +
+  //       (date.getMonth() + 1).toString().padStart(2, "0") +
+  //       "-" +
+  //       date.getDate().toString().padStart(2, "0");
+  //     all_days.push(d);
+  // for (let i = 1; i < allMoods.length; i++) {
+  //   if (allMoods[i].date === d) {
+  //     monthData.push(allMoods[i].feeling);
+  //     console.log(i, allMoods[i])
+  //   } else {
+  //     monthData.push(0);
+  //   }
+  // }
+  //     date.setDate(date.getDate() + 1);
+  //   }
+  // }
+  // console.log(all_days);
+  // console.log(allMoods);
+  // console.log("monthData", monthData);
+  // return monthData;
+  // };
+
   getMonthData = () => {
-    var date = new Date();
-    var month = date.getMonth() + 1;
-    date.setDate(1);
-    var all_days = [];
+    var month = new Date().getMonth();
+    var year = new Date().getFullYear();
+    var date = new Date(year, month, 1);
+    var days = [];
     var monthData = [];
-    while (date.getMonth() + 1 == month) {
-      var d =
-        date.getFullYear() +
-        "-" +
-        (date.getMonth() + 1).toString().padStart(2, "0") +
-        "-" +
-        date.getDate().toString().padStart(2, "0");
-      all_days.push(d);
-      for (let i = 0; i < this.props.allMoods.length; i++) {
-        if (this.props.allMoods[i].date == d) {
-          monthData.push(this.props.allMoods[i].feeling);
-        }
-      }
+
+    while (date.getMonth() === month) {
+      days.push(date.toISOString().slice(0, 10));
       date.setDate(date.getDate() + 1);
     }
+
+    const { allMoods } = this.props;
+    for (let i = 0; i < allMoods.length; i++) {
+      for (let j = 0; j < days.length; j++) {
+        if (allMoods[i].date === days[j]) {
+          monthData.push(allMoods[i].feeling);
+        } else {
+          monthData.push(0);
+        }
+      }
+    }
+
     return monthData;
   };
 
@@ -238,8 +274,6 @@ export default class GraphPage extends Component {
   };
 
   render() {
-    this.getWeekData();
-    this.getMonthData();
     return (
       <>
         <BackBtn></BackBtn>

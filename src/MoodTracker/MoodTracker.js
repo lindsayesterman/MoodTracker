@@ -8,7 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import Home from "../Auth/Home";
 import LogIn from "../Auth/LogIn";
 import SignUp from "../Auth/SignUp";
-import { AuthProvider } from "../Auth/Auth";
+import { AuthProvider, AuthContext } from "../Auth/Auth";
 import firebase from "../firebase";
 
 const pageVariants = {
@@ -53,6 +53,62 @@ export default class MoodTracker extends Component {
       email: "",
       password: "",
     };
+  }
+
+  async yes() {
+    // console.log()
+    // const moodTrackerRef = db
+    //   .collection("moodTracker")
+    //   // .doc(currentUser.uid)
+    //   // .collection("date");
+    // const snapshot = await moodTrackerRef.get();
+    // if (snapshot.empty) {
+    //   console.log("No matching documents.");
+    //   return;
+    // }
+    // snapshot.forEach((doc) => {
+    //   this.addToAllMoods(doc.data());
+    // });
+    // console.log(this.state.allMoods);
+    var moodTrackerRef;
+    if (true) {
+      moodTrackerRef = db.collection("moodTracker");
+      // .doc(currentUser.uid)
+      // .collection("date");
+    } else {
+      moodTrackerRef = null;
+    }
+    if (moodTrackerRef) {
+      const snapshot = await moodTrackerRef.get();
+      if (snapshot.empty) {
+        console.log("No matching documents.");
+        return;
+      }
+    }
+    console.log(this.state.allMoods);
+  }
+
+  async componentDidMount() {
+    var moodTrackerRef;
+    if (true) {
+      moodTrackerRef = db
+        .collection("moodTracker")
+        .doc("86KUJuMfQKb6QENZMTdDiSxCohn2")
+        .collection("date");
+    } else {
+      moodTrackerRef = null;
+    }
+    if (true) {
+      const snapshot = await moodTrackerRef.get();
+      if (snapshot.empty) {
+        console.log("No matching documents.");
+        return;
+      }
+      snapshot.forEach((doc) => {
+        this.addToAllMoods(doc.data());
+      });
+    }
+    console.log(this.state.allMoods);
   }
 
   getUserEmail = (e) => {

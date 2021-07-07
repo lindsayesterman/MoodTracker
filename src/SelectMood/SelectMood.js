@@ -13,33 +13,33 @@ export default function SelectMood(props) {
   
   const { currentUser } = useContext(AuthContext);
 
-  useEffect(() => {
-    var moodTrackerRef;
-    if (currentUser) {
-      moodTrackerRef = props.db
-        .collection("moodTracker")
-        .doc(currentUser.uid)
-        .collection("date");
-    } else {
-      moodTrackerRef = null
-    }
-    async function fetchData() {
-      if(moodTrackerRef){
-      const snapshot = await moodTrackerRef.get();
-      if (snapshot.empty) {
-        console.log("No matching documents.");
-        return;
-      }
-      snapshot.forEach((doc) => {
-        props.addToAllMoods(doc.data());
-      });
-    }
-    }
+  // useEffect(() => {
+  //   var moodTrackerRef;
+  //   if (currentUser) {
+  //     moodTrackerRef = props.db
+  //       .collection("moodTracker")
+  //       .doc(currentUser.uid)
+  //       .collection("date");
+  //   } else {
+  //     moodTrackerRef = null
+  //   }
+  //   async function fetchData() {
+  //     if(moodTrackerRef){
+  //     const snapshot = await moodTrackerRef.get();
+  //     if (snapshot.empty) {
+  //       console.log("No matching documents.");
+  //       return;
+  //     }
+  //     snapshot.forEach((doc) => {
+  //       props.addToAllMoods(doc.data());
+  //     });
+  //   }
+  //   }
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
-  console.log(props.allMoods);
+  // console.log(props.allMoods);
 
   return (
     <>
