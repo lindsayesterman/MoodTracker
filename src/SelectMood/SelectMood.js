@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useEffectAsync } from "react";
+import React, { useContext, useEffect } from "react";
 import "./SelectMood.css";
 import { Link } from "react-router-dom";
 import f1 from "../img/faceOne.svg";
@@ -12,13 +12,18 @@ import { AuthContext } from "../Auth/Auth";
 export default function SelectMood(props) {
   const { currentUser } = useContext(AuthContext);
 
-  const moodTrackerRef = props.db
-    .collection("moodTracker")
-    .doc(currentUser.uid)
-    .collection("date");
-
   useEffect(() => {
+    var moodTrackerRef;
+    if (currentUser) {
+      moodTrackerRef = props.db
+        .collection("moodTracker")
+        .doc(currentUser.uid)
+        .collection("date");
+    } else {
+      moodTrackerRef = null
+    }
     async function fetchData() {
+      if(moodTrackerRef){
       const snapshot = await moodTrackerRef.get();
       if (snapshot.empty) {
         console.log("No matching documents.");
@@ -28,6 +33,8 @@ export default function SelectMood(props) {
         props.addToAllMoods(doc.data());
       });
     }
+    }
+
     fetchData();
   }, []);
 
