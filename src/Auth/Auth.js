@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import firebaseConfig from "../firebase.js";
 import firebase from "../firebase.js";
-import MoodTracker from "../MoodTracker/MoodTracker";
 
 export const AuthContext = React.createContext();
 

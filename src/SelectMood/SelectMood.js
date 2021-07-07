@@ -10,6 +10,7 @@ import Stars from "../Stars/Stars";
 import { AuthContext } from "../Auth/Auth";
 
 export default function SelectMood(props) {
+  
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {

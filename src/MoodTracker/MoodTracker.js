@@ -1,4 +1,4 @@
-import React, { Component, useContext } from "react";
+import React, { Component } from "react";
 import "./MoodTracker.css";
 import SelectMood from "../SelectMood/SelectMood";
 import GraphPage from "../GraphPage/GraphPage";
@@ -67,7 +67,7 @@ export default class MoodTracker extends Component {
         ...this.state.mood,
         feeling: parseFloat(e.target.id),
         key: Date.now(),
-        date: Date().toLocaleString(),
+        date: new Date().toISOString().slice(0, 10),
       },
     });
   };

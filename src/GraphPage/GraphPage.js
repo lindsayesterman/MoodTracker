@@ -50,7 +50,7 @@ export default class GraphPage extends Component {
 
   addDynamicGraphColoring = () => {
     var backgroundColors = [];
-    var data = this.whichData().data.datasets.data;
+    var data = this.getLabelsAndDataForTimeRange().data.datasets.data;
     for (let i = 0; i < data.length; i++) {
       if (data[i] > 0 && data[i] < 1.5) {
         backgroundColors.push("#7FBEF9");
@@ -85,23 +85,62 @@ export default class GraphPage extends Component {
     return arrayOfDays;
   };
 
-  whichData = () => {
+  getWeekData = () => {
+    let curr = new Date();
+    let weekData = [];
+    let week = [];
+    const { allMoods } = this.props;
+    for (let i = 1; i <= 7; i++) {
+      let first = curr.getDate() - curr.getDay() + i;
+      let day = new Date(curr.setDate(first)).toISOString().slice(0, 10);
+      week.push(day);
+      for (let j = 0; j < allMoods.length; j++) {
+        if (allMoods[j].date === day) {
+          weekData.push(allMoods[j].feeling);
+        }
+      }
+    }
+    return weekData;
+  };
+
+  getMonthData = () => {
+    var date = new Date();
+    var month = date.getMonth() + 1;
+    date.setDate(1);
+    var all_days = [];
+    var monthData = [];
+    while (date.getMonth() + 1 == month) {
+      var d =
+        date.getFullYear() +
+        "-" +
+        (date.getMonth() + 1).toString().padStart(2, "0") +
+        "-" +
+        date.getDate().toString().padStart(2, "0");
+      all_days.push(d);
+      for (let i = 0; i < this.props.allMoods.length; i++) {
+        if (this.props.allMoods[i].date == d) {
+          monthData.push(this.props.allMoods[i].feeling);
+        }
+      }
+      date.setDate(date.getDate() + 1);
+    }
+    return monthData;
+  };
+
+  getLabelsAndDataForTimeRange = () => {
     let data;
     if (this.state.timeRange === "week") {
       data = {
         labels: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"],
         datasets: {
-          data: [2, 3, 1, 4, 3, 5, 4],
+          data: this.getWeekData(),
         },
       };
     } else if (this.state.timeRange === "month") {
       data = {
         labels: this.getDaysInMonth(),
         datasets: {
-          data: [
-            1, 2, 4, 3, 1, 2, 3, 2, 3, 4, 4, 3, 2, 4, 5, 4, 5, 4, 2, 3, 2, 3, 5,
-            3, 2, 5, 3, 3, 3, 4, 5, 5, 5,
-          ],
+          data: this.getMonthData(),
         },
       };
     } else if (this.state.timeRange === "year") {
@@ -129,8 +168,9 @@ export default class GraphPage extends Component {
   };
 
   getGraphData = () => {
-    const dataLabels = this.whichData().data.labels;
-    const numericalData = this.whichData().data.datasets.data;
+    const dataLabels = this.getLabelsAndDataForTimeRange().data.labels;
+    const numericalData =
+      this.getLabelsAndDataForTimeRange().data.datasets.data;
 
     const options = {
       plugins: {
@@ -198,6 +238,8 @@ export default class GraphPage extends Component {
   };
 
   render() {
+    this.getWeekData();
+    this.getMonthData();
     return (
       <>
         <BackBtn></BackBtn>
