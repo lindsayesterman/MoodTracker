@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import "./MoodTracker.css";
 import SelectMood from "../SelectMood/SelectMood";
 import GraphPage from "../GraphPage/GraphPage";
@@ -8,7 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import Home from "../Auth/Home";
 import LogIn from "../Auth/LogIn";
 import SignUp from "../Auth/SignUp";
-import { AuthProvider, AuthContext } from "../Auth/Auth";
+import { AuthProvider } from "../Auth/Auth";
 import firebase from "../firebase";
 
 const pageVariants = {
@@ -53,21 +53,6 @@ export default class MoodTracker extends Component {
       email: "",
       password: "",
     };
-  }
-
-  static contextType = AuthContext;
-
-  async componentDidMount() {
-    const moodTrackerRef = db.collection("moodTracker");
-    const snapshot = await moodTrackerRef.get();
-    if (snapshot.empty) {
-      console.log("No matching documents.");
-      return;
-    }
-    snapshot.forEach((doc) => {
-      this.addToAllMoods(doc.data());
-    });
-    console.log(this.state.allMoods);
   }
 
   getUserEmail = (e) => {
@@ -141,6 +126,9 @@ export default class MoodTracker extends Component {
                         getExp={this.getExp}
                         getTags={this.getTags}
                         getMoodClicked={this.getMoodClicked}
+                        addToAllMoods={this.addToAllMoods}
+                        db={db}
+                        allMoods={this.state.allMoods}
                         {...routeProps}
                       />
                     );

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useEffectAsync } from "react";
 import "./SelectMood.css";
 import { Link } from "react-router-dom";
 import f1 from "../img/faceOne.svg";
@@ -11,12 +11,38 @@ import { AuthContext } from "../Auth/Auth";
 
 export default function SelectMood(props) {
   const { currentUser } = useContext(AuthContext);
+
+  const moodTrackerRef = props.db
+    .collection("moodTracker")
+    .doc(currentUser.uid)
+    .collection("date");
+
+  useEffect(() => {
+    async function fetchData() {
+      const snapshot = await moodTrackerRef.get();
+      if (snapshot.empty) {
+        console.log("No matching documents.");
+        return;
+      }
+      snapshot.forEach((doc) => {
+        props.addToAllMoods(doc.data());
+      });
+    }
+    fetchData();
+  }, []);
+
+  console.log(props.allMoods);
+
   return (
     <>
       <Stars></Stars>
       <div className="selectMood">
         <h1 className="welcome">
-          Welcome back {(currentUser) ? currentUser.email.substring(0, currentUser.email.lastIndexOf("@")) : ":)"} <br /> How are you feeling today?
+          Welcome back{" "}
+          {currentUser
+            ? currentUser.email.substring(0, currentUser.email.lastIndexOf("@"))
+            : ":)"}{" "}
+          <br /> How are you feeling today?
         </h1>
         <Link to="/explain">
           <img

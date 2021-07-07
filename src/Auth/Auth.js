@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import firebaseConfig from "../firebase.js";
 import firebase from "../firebase.js";
+import MoodTracker from "../MoodTracker/MoodTracker";
 
 export const AuthContext = React.createContext();
-
 
 export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
@@ -12,22 +12,23 @@ export const AuthProvider = ({ children }) => {
     firebaseConfig.auth().onAuthStateChanged((user) => {
       if (user) {
         const uid = user.uid;
-        console.log(uid)
+        console.log(uid);
         firebase.firestore().collection("users").doc(uid).set({
           email: user.email,
         });
       }
       setCurrentUser(user);
-    setLoading(false);
+      setLoading(false);
     });
   }, []);
+
   if (loading) {
     return <p>Loading...</p>;
   }
+
   return (
     <AuthContext.Provider value={{ currentUser }}>
       {children}
     </AuthContext.Provider>
   );
 };
-

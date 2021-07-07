@@ -15,7 +15,8 @@ export default function MoodExp(props) {
     props.db
       .collection("moodTracker")
       .doc(currentUser.uid)
-      .set(
+      .collection("date")
+      .add(
         {
           feeling: props.mood.feeling,
           explanation: props.mood.explanation,
