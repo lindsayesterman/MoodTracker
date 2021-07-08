@@ -11,6 +11,8 @@ import f5 from "../img/faceFive.svg";
 import lg from "../img/lineGraphBtn.svg";
 import bg from "../img/barGraphBtn.svg";
 import StatBox from "../StatBox/StatBox";
+import { getQueriesForElement } from "@testing-library/react";
+import { convertNumToEmotion } from "../helper.js";
 
 export default class GraphPage extends Component {
   constructor(props) {
@@ -243,7 +245,14 @@ export default class GraphPage extends Component {
           display: false,
         },
         tooltip: {
-          enabled: true,
+          callbacks: {
+            title: function (item, everything) {
+              return "Mood: " + convertNumToEmotion(item[0].raw);
+            },
+            label: function (item, everything) {
+              return; 
+            },
+          },
         },
       },
       scales: {
