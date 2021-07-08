@@ -151,6 +151,50 @@ export default class GraphPage extends Component {
     return monthData;
   };
 
+  getYearlyAverages = () => {
+    var year = new Date().getFullYear();
+    var date = new Date(year, 0, 1);
+    var days = [];
+    var yearData = [];
+    var indexes = [];
+    while (date.getYear() + 1900 === year) {
+      days.push(date.toISOString().slice(0, 10));
+      date.setDate(date.getDate() + 1);
+      yearData.push(0);
+    }
+    const { allMoods } = this.props;
+    for (let i = 0; i < allMoods.length; i++) {
+      for (let j = 0; j < days.length; j++) {
+        if (allMoods[i].date === days[j]) {
+          indexes.push(j);
+        }
+      }
+    }
+    for (let i = 0; i < indexes.length; i++) {
+      for (let j = 0; j < days.length; j++) {
+        if (indexes[i] === j) {
+          yearData.splice(j, 1, allMoods[i].feeling);
+        }
+      }
+    }
+    var yearAverages = [];
+    var month = 0;
+    var total = 0;
+    var count = 0;
+    while (date.getMonth() === month) {
+      total += yearData[count];
+      count++;
+      date.setDate(date.getDate() + 1);
+      if (date.getMonth() !== month){
+        month++;
+        yearAverages.push(total / this.getDaysInMonth().length);
+        total=0;
+      }
+    }
+    console.log(yearAverages);
+    return yearAverages;
+  };
+
   getLabelsAndDataForTimeRange = () => {
     let data;
     if (this.state.timeRange === "week") {
@@ -184,7 +228,8 @@ export default class GraphPage extends Component {
           "Dec",
         ],
         datasets: {
-          data: [1.4, 1.7, 2.6, 3.2, 3, 3.6, 4, 2.9, 4, 4.5, 3.9, 4, 3.8],
+          // data: [1.4, 1.7, 2.6, 3.2, 3, 3.6, 4, 2.9, 4, 4.5, 3.9, 4, 3.8],
+          data: this.getYearlyAverages(),
         },
       };
     }
