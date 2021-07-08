@@ -1,6 +1,6 @@
 import React from "react";
 import "./StatBox.css";
-import { convertNumToEmotion } from '../helper.js'
+import { convertNumToEmotion } from '../helpers.js'
 
 const findMostCommon = (allMoods, item) => {
   if (allMoods.length > 0) {

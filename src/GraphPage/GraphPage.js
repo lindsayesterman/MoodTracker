@@ -11,8 +11,7 @@ import f5 from "../img/faceFive.svg";
 import lg from "../img/lineGraphBtn.svg";
 import bg from "../img/barGraphBtn.svg";
 import StatBox from "../StatBox/StatBox";
-import { getQueriesForElement } from "@testing-library/react";
-import { convertNumToEmotion } from "../helper.js";
+import { convertNumToEmotion, getDaysInMonth, getWeekData, getMonthData, getYearlyAverages } from "../helpers.js";
 
 export default class GraphPage extends Component {
   constructor(props) {
@@ -78,120 +77,6 @@ export default class GraphPage extends Component {
     return gradient;
   };
 
-  getDaysInMonth = () => {
-    var now = new Date();
-    var days = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-    var arrayOfDays = [];
-    for (let i = 1; i <= days; i++) {
-      arrayOfDays.push(i);
-    }
-    return arrayOfDays;
-  };
-
-  getWeekData = () => {
-    let curr = new Date();
-    let weekData = [];
-    let week = [];
-    let indexes = [];
-    const { allMoods } = this.props;
-
-    for (let i = 0; i < 7; i++) {
-      let first = curr.getDate() - curr.getDay() + i;
-      let day = new Date(curr.setDate(first)).toISOString().slice(0, 10);
-      week.push(day);
-      weekData.push(null);
-    }
-    for (let i = 0; i < allMoods.length; i++) {
-      for (let j = 0; j < week.length; j++) {
-        if (allMoods[i].date === week[j]) {
-          indexes.push(j);
-        }
-      }
-    }
-    for (let i = 0; i < indexes.length; i++) {
-      for (let j = 0; j < week.length; j++) {
-        if (indexes[i] === j) {
-          weekData.splice(j, 1, allMoods[i].feeling);
-        }
-      }
-    }
-    return weekData;
-  };
-
-  getMonthData = () => {
-    var month = new Date().getMonth();
-    var year = new Date().getFullYear();
-    var date = new Date(year, month, 1);
-    var days = [];
-    let indexes = [];
-    var monthData = [];
-
-    while (date.getMonth() === month) {
-      days.push(date.toISOString().slice(0, 10));
-      date.setDate(date.getDate() + 1);
-      monthData.push(null);
-    }
-
-    const { allMoods } = this.props;
-    for (let i = 0; i < allMoods.length; i++) {
-      for (let j = 0; j < days.length; j++) {
-        if (allMoods[i].date === days[j]) {
-          indexes.push(j);
-        }
-      }
-    }
-    for (let i = 0; i < indexes.length; i++) {
-      for (let j = 0; j < days.length; j++) {
-        if (indexes[i] === j) {
-          monthData.splice(j, 1, allMoods[i].feeling);
-        }
-      }
-    }
-    return monthData;
-  };
-
-  getYearlyAverages = () => {
-    var year = new Date().getFullYear();
-    var date = new Date(year, 0, 1);
-    var days = [];
-    var yearData = [];
-    var indexes = [];
-    while (date.getYear() + 1900 === year) {
-      days.push(date.toISOString().slice(0, 10));
-      date.setDate(date.getDate() + 1);
-      yearData.push(null);
-    }
-    const { allMoods } = this.props;
-    for (let i = 0; i < allMoods.length; i++) {
-      for (let j = 0; j < days.length; j++) {
-        if (allMoods[i].date === days[j]) {
-          indexes.push(j);
-        }
-      }
-    }
-    for (let i = 0; i < indexes.length; i++) {
-      for (let j = 0; j < days.length; j++) {
-        if (indexes[i] === j) {
-          yearData.splice(j, 1, allMoods[i].feeling);
-        }
-      }
-    }
-    var yearAverages = [];
-    var month = 0;
-    var total = 0;
-    var count = 0;
-    while (date.getMonth() === month) {
-      total += yearData[count];
-      count++;
-      date.setDate(date.getDate() + 1);
-      if (date.getMonth() !== month) {
-        month++;
-        yearAverages.push(total / this.getDaysInMonth().length);
-        total = 0;
-      }
-    }
-    return yearAverages;
-  };
 
   getLabelsAndDataForTimeRange = () => {
     let data;
@@ -199,14 +84,14 @@ export default class GraphPage extends Component {
       data = {
         labels: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"],
         datasets: {
-          data: this.getWeekData(),
+          data: getWeekData(this.props.allMoods),
         },
       };
     } else if (this.state.timeRange === "month") {
       data = {
-        labels: this.getDaysInMonth(),
+        labels: getDaysInMonth(),
         datasets: {
-          data: this.getMonthData(),
+          data: getMonthData(this.props.allMoods),
         },
       };
     } else if (this.state.timeRange === "year") {
@@ -227,7 +112,7 @@ export default class GraphPage extends Component {
         ],
         datasets: {
           // data: [1.4, 1.7, 2.6, 3.2, 3, 3.6, 4, 2.9, 4, 4.5, 3.9, 4, 3.8],
-          data: this.getYearlyAverages(),
+          data: getYearlyAverages(this.props.allMoods),
         },
       };
     }
@@ -312,18 +197,6 @@ export default class GraphPage extends Component {
   };
 
   render() {
-    const testO = {
-      scales: {
-        yAxes: [
-          {
-            ticks: {
-              beginAtZero: true,
-            },
-          },
-        ],
-      },
-    };
-
     return (
       <>
         <BackBtn></BackBtn>
