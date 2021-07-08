@@ -52,7 +52,6 @@ button.year:focus {
   flex-wrap: wrap;
   justify-content: center;
   position: relative;
-  z-index: -1;
   width: 620px;
   margin: 170px auto 0px;
   background-color: white;

@@ -28,9 +28,6 @@ export default class GraphPage extends Component {
   }
 
   handleTimeRangeClicked = (e) => {
-    this.setState({
-      timeRange: e.target.value,
-    });
     this.setState({ timeRange: e.target.value }, this.getGraphData);
   };
 
@@ -185,13 +182,12 @@ export default class GraphPage extends Component {
       total += yearData[count];
       count++;
       date.setDate(date.getDate() + 1);
-      if (date.getMonth() !== month){
+      if (date.getMonth() !== month) {
         month++;
         yearAverages.push(total / this.getDaysInMonth().length);
-        total=0;
+        total = 0;
       }
     }
-    console.log(yearAverages);
     return yearAverages;
   };
 
@@ -307,6 +303,18 @@ export default class GraphPage extends Component {
   };
 
   render() {
+    const testO = {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          },
+        ],
+      },
+    };
+
     return (
       <>
         <BackBtn></BackBtn>
@@ -382,7 +390,6 @@ export default class GraphPage extends Component {
               options={this.state.graphData.options}
             />
           </div>
-
           <img
             onClick={this.removeLineAddBar}
             alt="switch graph btn"
