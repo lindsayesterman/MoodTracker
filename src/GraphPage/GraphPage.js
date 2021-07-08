@@ -100,7 +100,7 @@ export default class GraphPage extends Component {
       let first = curr.getDate() - curr.getDay() + i;
       let day = new Date(curr.setDate(first)).toISOString().slice(0, 10);
       week.push(day);
-      weekData.push(0);
+      weekData.push(null);
     }
     for (let i = 0; i < allMoods.length; i++) {
       for (let j = 0; j < week.length; j++) {
@@ -130,7 +130,7 @@ export default class GraphPage extends Component {
     while (date.getMonth() === month) {
       days.push(date.toISOString().slice(0, 10));
       date.setDate(date.getDate() + 1);
-      monthData.push(0);
+      monthData.push(null);
     }
 
     const { allMoods } = this.props;
@@ -160,7 +160,7 @@ export default class GraphPage extends Component {
     while (date.getYear() + 1900 === year) {
       days.push(date.toISOString().slice(0, 10));
       date.setDate(date.getDate() + 1);
-      yearData.push(0);
+      yearData.push(null);
     }
     const { allMoods } = this.props;
     for (let i = 0; i < allMoods.length; i++) {
