@@ -24,7 +24,6 @@ export default class GraphPage extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state.timeRange);
     this.getGraphData();
   }
 
@@ -65,7 +64,11 @@ export default class GraphPage extends Component {
         backgroundColors.push("#F8C144");
       }
     }
-    return backgroundColors;
+    if (this.state.timeRange === "week") {
+      return backgroundColors.reverse();
+    } else {
+      return backgroundColors;
+    }
   };
 
   addGraphGradient = () => {
@@ -90,18 +93,26 @@ export default class GraphPage extends Component {
     let curr = new Date();
     let weekData = [];
     let week = [];
+    let indexes = [];
     const { allMoods } = this.props;
+
     for (let i = 0; i < 7; i++) {
       let first = curr.getDate() - curr.getDay() + i;
       let day = new Date(curr.setDate(first)).toISOString().slice(0, 10);
       week.push(day);
+      weekData.push(0);
     }
     for (let i = 0; i < allMoods.length; i++) {
       for (let j = 0; j < week.length; j++) {
         if (allMoods[i].date === week[j]) {
-          weekData.push(allMoods[i].feeling);
-        } else {
-          weekData.push(0);
+          indexes.push(j);
+        }
+      }
+    }
+    for (let i = 0; i < indexes.length; i++) {
+      for (let j = 0; j < week.length; j++) {
+        if (indexes[i] === j) {
+          weekData.splice(j, 1, allMoods[i].feeling);
         }
       }
     }
@@ -113,24 +124,30 @@ export default class GraphPage extends Component {
     var year = new Date().getFullYear();
     var date = new Date(year, month, 1);
     var days = [];
+    let indexes = [];
     var monthData = [];
 
     while (date.getMonth() === month) {
       days.push(date.toISOString().slice(0, 10));
       date.setDate(date.getDate() + 1);
+      monthData.push(0);
     }
 
     const { allMoods } = this.props;
     for (let i = 0; i < allMoods.length; i++) {
       for (let j = 0; j < days.length; j++) {
         if (allMoods[i].date === days[j]) {
-          monthData.push(allMoods[i].feeling);
-        } else {
-          monthData.push(0);
+          indexes.push(j);
         }
       }
     }
-
+    for (let i = 0; i < indexes.length; i++) {
+      for (let j = 0; j < days.length; j++) {
+        if (indexes[i] === j) {
+          monthData.splice(j, 1, allMoods[i].feeling);
+        }
+      }
+    }
     return monthData;
   };
 

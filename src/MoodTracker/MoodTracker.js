@@ -39,6 +39,8 @@ const pageTransition = {
 const db = firebase.firestore();
 
 export default class MoodTracker extends Component {
+  static contextType = AuthContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -55,41 +57,10 @@ export default class MoodTracker extends Component {
     };
   }
 
-  async yes() {
-    // console.log()
-    // const moodTrackerRef = db
-    //   .collection("moodTracker")
-    //   // .doc(currentUser.uid)
-    //   // .collection("date");
-    // const snapshot = await moodTrackerRef.get();
-    // if (snapshot.empty) {
-    //   console.log("No matching documents.");
-    //   return;
-    // }
-    // snapshot.forEach((doc) => {
-    //   this.addToAllMoods(doc.data());
-    // });
-    // console.log(this.state.allMoods);
-    var moodTrackerRef;
-    if (true) {
-      moodTrackerRef = db.collection("moodTracker");
-      // .doc(currentUser.uid)
-      // .collection("date");
-    } else {
-      moodTrackerRef = null;
-    }
-    if (moodTrackerRef) {
-      const snapshot = await moodTrackerRef.get();
-      if (snapshot.empty) {
-        console.log("No matching documents.");
-        return;
-      }
-    }
-    console.log(this.state.allMoods);
-  }
-
   async componentDidMount() {
+    console.log(this.context);
     var moodTrackerRef;
+    //if (currentUsers){
     if (true) {
       moodTrackerRef = db
         .collection("moodTracker")
@@ -98,6 +69,7 @@ export default class MoodTracker extends Component {
     } else {
       moodTrackerRef = null;
     }
+    //if (moodTrackerRef){
     if (true) {
       const snapshot = await moodTrackerRef.get();
       if (snapshot.empty) {
