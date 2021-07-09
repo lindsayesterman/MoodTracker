@@ -30,7 +30,8 @@ export default class GraphPage extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    await this.props.fetchData()
     this.getGraphData();
   }
 
@@ -112,7 +113,6 @@ export default class GraphPage extends Component {
           "Dec",
         ],
         datasets: {
-          // data: [1.4, 1.7, 2.6, 3.2, 3, 3.6, 4, 2.9, 4, 4.5, 3.9, 4, 3.8],
           data: getYearlyAverages(this.props.allMoods),
         },
       };
@@ -124,7 +124,6 @@ export default class GraphPage extends Component {
     const dataLabels = this.getLabelsAndDataForTimeRange().data.labels;
     const numericalData =
       this.getLabelsAndDataForTimeRange().data.datasets.data;
-
     const options = {
       plugins: {
         legend: {
@@ -164,7 +163,6 @@ export default class GraphPage extends Component {
         },
       },
     };
-
     this.setState({
       graphData: {
         data: {
@@ -179,6 +177,7 @@ export default class GraphPage extends Component {
               pointBackgroundColor: this.addDynamicGraphColoring(),
               pointBorderColor: "transparent",
               pointRadius: 7,
+              pointHoverRadius: 5
             },
           ],
         },

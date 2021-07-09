@@ -1,7 +1,7 @@
 export const convertNumToEmotion = (num) => {
   num = parseFloat(num);
   if (num === 1) {
-    return "Extremely sad";
+    return "Extremely Sad";
   } else if (num === 2) {
     return "Sad";
   } else if (num === 3) {
@@ -9,7 +9,7 @@ export const convertNumToEmotion = (num) => {
   } else if (num === 4) {
     return "Happy";
   } else if (num === 5) {
-    return "Extremely happy";
+    return "Extremely Happy";
   }
 };
 
@@ -35,6 +35,7 @@ export const getWeekData = (allMoods) => {
     week.push(day);
     weekData.push(null);
   }
+
   for (let i = 0; i < allMoods.length; i++) {
     for (let j = 0; j < week.length; j++) {
       if (allMoods[i].date === week[j]) {
@@ -42,13 +43,17 @@ export const getWeekData = (allMoods) => {
       }
     }
   }
+
   for (let i = 0; i < indexes.length; i++) {
     for (let j = 0; j < week.length; j++) {
       if (indexes[i] === j) {
+        console.log("inside for loop")
         weekData.splice(j, 1, allMoods[i].feeling);
       }
     }
   }
+  
+  console.log(weekData)
   return weekData;
 };
 
@@ -65,14 +70,13 @@ export const getMonthData = (allMoods) => {
     date.setDate(date.getDate() + 1);
     monthData.push(null);
   }
-
   for (let i = 0; i < allMoods.length; i++) {
     for (let j = 0; j < days.length; j++) {
       if (allMoods[i].date === days[j]) {
         indexes.push(j);
       }
     }
-  }
+  } 
   for (let i = 0; i < indexes.length; i++) {
     for (let j = 0; j < days.length; j++) {
       if (indexes[i] === j) {

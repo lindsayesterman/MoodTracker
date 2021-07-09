@@ -57,8 +57,11 @@ export default class MoodTracker extends Component {
     };
   }
 
-  async componentDidMount() {
-    console.log(this.context);
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  async fetchData() {
     var moodTrackerRef;
     //if (currentUsers){
     if (true) {
@@ -80,7 +83,7 @@ export default class MoodTracker extends Component {
         this.addToAllMoods(doc.data());
       });
     }
-    console.log(this.state.allMoods);
+    console.log("ran mood");
   }
 
   getUserEmail = (e) => {
@@ -188,6 +191,8 @@ export default class MoodTracker extends Component {
                         pageTransition={pageTransition}
                         pageVariants={pageVariants}
                         mood={this.state.mood}
+                        addToAllMoods={this.addToAllMoods}
+                        fetchData={this.fetchData}
                         {...routeProps}
                       />
                     );
