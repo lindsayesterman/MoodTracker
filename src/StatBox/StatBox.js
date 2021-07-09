@@ -2,7 +2,7 @@ import React from "react";
 import "./StatBox.css";
 import { convertNumToEmotion } from "../helpers.js";
 
-const findMostCommon = (allMoods, item) => {
+const findMostCommonMood = (allMoods) => {
   if (allMoods.length > 0) {
     for (let i = 0; i < allMoods.length; i++) {
       allMoods.sort((x, y) => x - y);
@@ -53,7 +53,6 @@ function indexOfMax(arr) {
 const findMostCommonTag = (allMoods) => {
   if (allMoods.length > 0) {
     var arr = [];
-    console.log(allMoods);
     for (let i = 0; i < allMoods.length; i++) {
       for (let j = 0; j < allMoods[i].tags.length; j++) {
         arr.push(allMoods[i].tags[j]);
@@ -73,12 +72,10 @@ const findMostCommonTag = (allMoods) => {
       }
       prev = arr[i];
     }
-
     var result = [a, b];
     var index = indexOfMax(result[1]);
-    var second = result[0].splice(index, 1);
-    var index2 = indexOfMax(result[1]);
-    return result[0][index] + ", " + second[index2];
+    var item = result[0].splice(index, 1);
+    return item + ", " + result[0][index];
   }
 };
 
@@ -88,7 +85,7 @@ export default function StatBox(props) {
       <h3>Your most common stats</h3>
       <div className="boxInsideStatBox">
         <p>
-          <b>Mood: </b> {findMostCommon(props.allMoods, "feeling")}
+          <b>Mood: </b> {findMostCommonMood(props.allMoods, "feeling")}
         </p>
         <br />
         <p>

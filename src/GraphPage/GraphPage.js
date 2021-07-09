@@ -31,7 +31,7 @@ export default class GraphPage extends Component {
   }
 
   async componentDidMount() {
-    await this.props.fetchData()
+    await this.props.fetchData();
     this.getGraphData();
   }
 
@@ -177,7 +177,7 @@ export default class GraphPage extends Component {
               pointBackgroundColor: this.addDynamicGraphColoring(),
               pointBorderColor: "transparent",
               pointRadius: 7,
-              pointHoverRadius: 5
+              pointHoverRadius: 5,
             },
           ],
         },
