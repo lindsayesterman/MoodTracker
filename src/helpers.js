@@ -112,13 +112,24 @@ export const getYearlyAverages = (allMoods) => {
   var month = 0;
   var total = 0;
   var count = 0;
+  var numDaysCompletedInMonth = 0;
   while (date.getMonth() === month) {
     total += yearData[count];
     count++;
+    console.log(yearData[count]);
+    if (yearData[count] !== null) {
+      numDaysCompletedInMonth++;
+      console.log("numDay", numDaysCompletedInMonth);
+    }
     date.setDate(date.getDate() + 1);
     if (date.getMonth() !== month) {
       month++;
-      yearAverages.push(total / getDaysInMonth().length);
+      if (total !== 0) {
+        yearAverages.push(total / numDaysCompletedInMonth);
+      } else {
+        yearAverages.push(total / getDaysInMonth().length);
+      }
+      numDaysCompletedInMonth = 0;
       total = 0;
     }
   }
