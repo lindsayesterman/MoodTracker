@@ -57,34 +57,6 @@ export default class MoodTracker extends Component {
     };
   }
 
-  componentDidMount() {
-    this.fetchData();
-  }
-
-  async fetchData() {
-    var moodTrackerRef;
-    //if (currentUsers){
-    if (true) {
-      moodTrackerRef = db
-        .collection("moodTracker")
-        .doc("86KUJuMfQKb6QENZMTdDiSxCohn2")
-        .collection("date");
-    } else {
-      moodTrackerRef = null;
-    }
-    //if (moodTrackerRef){
-    if (true) {
-      const snapshot = await moodTrackerRef.get();
-      if (snapshot.empty) {
-        console.log("No matching documents.");
-        return;
-      }
-      snapshot.forEach((doc) => {
-        this.addToAllMoods(doc.data());
-      });
-    }
-  }
-
   getUserEmail = (e) => {
     this.setState({
       email: e.target.value,
@@ -159,6 +131,7 @@ export default class MoodTracker extends Component {
                         addToAllMoods={this.addToAllMoods}
                         db={db}
                         allMoods={this.state.allMoods}
+                        fetchData={this.fetchData}
                         {...routeProps}
                       />
                     );
@@ -175,6 +148,7 @@ export default class MoodTracker extends Component {
                         pageTransition={pageTransition}
                         pageVariants={pageVariants}
                         addToAllMoods={this.addToAllMoods}
+                        fetchData={this.fetchData}
                         db={db}
                         {...routeProps}
                       />
@@ -192,6 +166,7 @@ export default class MoodTracker extends Component {
                         mood={this.state.mood}
                         addToAllMoods={this.addToAllMoods}
                         fetchData={this.fetchData}
+                        db={db}
                         {...routeProps}
                       />
                     );

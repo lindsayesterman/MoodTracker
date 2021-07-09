@@ -18,6 +18,7 @@ import {
   getMonthData,
   getYearlyAverages,
 } from "../helpers.js";
+import { AuthContext } from "../Auth/Auth";
 
 export default class GraphPage extends Component {
   constructor(props) {
@@ -30,10 +31,44 @@ export default class GraphPage extends Component {
     };
   }
 
+  static contextType = AuthContext;
+
+  // async componentDidMount() {
+  //   if (this.props.allMoods.length === 0) {
+  //     await this.props.fetchData();
+  //   }
+  //   this.getGraphData();
+  // }
+
   async componentDidMount() {
-    await this.props.fetchData();
+    if (this.props.allMoods.length === 0) {
+      await this.fetchData();
+    }
     this.getGraphData();
   }
+
+  fetchData = async () => {
+    const { currentUser } = this.context;
+    var moodTrackerRef;
+    if (currentUser) {
+      moodTrackerRef = this.props.db
+        .collection("moodTracker")
+        .doc(currentUser.uid)
+        .collection("date");
+    } else {
+      moodTrackerRef = null;
+    }
+    if (moodTrackerRef) {
+      const snapshot = await moodTrackerRef.get();
+      if (snapshot.empty) {
+        console.log("No matching documents.");
+        return;
+      }
+      snapshot.forEach((doc) => {
+        this.props.addToAllMoods(doc.data());
+      });
+    }
+  };
 
   handleTimeRangeClicked = (e) => {
     this.setState({ timeRange: e.target.value }, this.getGraphData);
@@ -124,6 +159,7 @@ export default class GraphPage extends Component {
     const dataLabels = this.getLabelsAndDataForTimeRange().data.labels;
     const numericalData =
       this.getLabelsAndDataForTimeRange().data.datasets.data;
+    console.log(this.props.allMoods);
     const options = {
       plugins: {
         legend: {
