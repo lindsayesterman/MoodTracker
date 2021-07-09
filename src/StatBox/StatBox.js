@@ -1,6 +1,6 @@
 import React from "react";
 import "./StatBox.css";
-import { convertNumToEmotion } from '../helpers.js'
+import { convertNumToEmotion } from "../helpers.js";
 
 const findMostCommon = (allMoods, item) => {
   if (allMoods.length > 0) {
@@ -26,11 +26,13 @@ const findMostCommon = (allMoods, item) => {
         currentStreak++;
       }
 
-      var num =  currentStreak > bestStreak ? currentElem : bestElem;
+      var num = currentStreak > bestStreak ? currentElem : bestElem;
       return convertNumToEmotion(num);
     }
   } else return "Happy";
 };
+
+export const findMostCommonTags = () => {};
 
 export default function StatBox(props) {
   return (
@@ -42,7 +44,7 @@ export default function StatBox(props) {
         </p>
         <br />
         <p>
-          <b>Tags: </b> School, Work, Food
+          <b>Tags: </b> School, Work, Food {findMostCommonTags(props.allMoods)}
         </p>
       </div>
     </div>

@@ -11,7 +11,13 @@ import f5 from "../img/faceFive.svg";
 import lg from "../img/lineGraphBtn.svg";
 import bg from "../img/barGraphBtn.svg";
 import StatBox from "../StatBox/StatBox";
-import { convertNumToEmotion, getDaysInMonth, getWeekData, getMonthData, getYearlyAverages } from "../helpers.js";
+import {
+  convertNumToEmotion,
+  getDaysInMonth,
+  getWeekData,
+  getMonthData,
+  getYearlyAverages,
+} from "../helpers.js";
 
 export default class GraphPage extends Component {
   constructor(props) {
@@ -62,11 +68,7 @@ export default class GraphPage extends Component {
         backgroundColors.push("#F8C144");
       }
     }
-    if (this.state.timeRange === "week") {
-      return backgroundColors.reverse();
-    } else {
-      return backgroundColors;
-    }
+    return backgroundColors;
   };
 
   addGraphGradient = () => {
@@ -76,7 +78,6 @@ export default class GraphPage extends Component {
     gradient.addColorStop(1, "rgba(255, 255, 255, 0) 0)");
     return gradient;
   };
-
 
   getLabelsAndDataForTimeRange = () => {
     let data;
@@ -135,7 +136,7 @@ export default class GraphPage extends Component {
               return "Mood: " + convertNumToEmotion(item[0].raw);
             },
             label: function (item, everything) {
-              return; 
+              return;
             },
           },
         },
