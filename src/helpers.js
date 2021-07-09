@@ -116,10 +116,8 @@ export const getYearlyAverages = (allMoods) => {
   while (date.getMonth() === month) {
     total += yearData[count];
     count++;
-    console.log(yearData[count]);
     if (yearData[count] !== null) {
       numDaysCompletedInMonth++;
-      console.log("numDay", numDaysCompletedInMonth);
     }
     date.setDate(date.getDate() + 1);
     if (date.getMonth() !== month) {

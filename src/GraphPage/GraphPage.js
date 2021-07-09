@@ -133,7 +133,7 @@ export default class GraphPage extends Component {
         tooltip: {
           callbacks: {
             title: function (item, everything) {
-              return "Mood: " + convertNumToEmotion(item[0].raw);
+              return "Mood: " + convertNumToEmotion(Math.round(item[0].raw));
             },
             label: function (item, everything) {
               return;
