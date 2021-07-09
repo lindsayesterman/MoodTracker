@@ -47,13 +47,11 @@ export const getWeekData = (allMoods) => {
   for (let i = 0; i < indexes.length; i++) {
     for (let j = 0; j < week.length; j++) {
       if (indexes[i] === j) {
-        console.log("inside for loop")
         weekData.splice(j, 1, allMoods[i].feeling);
       }
     }
   }
   
-  console.log(weekData)
   return weekData;
 };
 

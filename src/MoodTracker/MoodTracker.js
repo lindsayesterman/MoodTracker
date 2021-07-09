@@ -83,7 +83,6 @@ export default class MoodTracker extends Component {
         this.addToAllMoods(doc.data());
       });
     }
-    console.log("ran mood");
   }
 
   getUserEmail = (e) => {
