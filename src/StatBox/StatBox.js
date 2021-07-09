@@ -32,7 +32,55 @@ const findMostCommon = (allMoods, item) => {
   } else return "Happy";
 };
 
-export const findMostCommonTags = () => {};
+function indexOfMax(arr) {
+  if (arr.length === 0) {
+    return -1;
+  }
+
+  var max = arr[0];
+  var maxIndex = 0;
+
+  for (var i = 1; i < arr.length; i++) {
+    if (arr[i] > max) {
+      maxIndex = i;
+      max = arr[i];
+    }
+  }
+
+  return maxIndex;
+}
+
+const findMostCommonTag = (allMoods) => {
+  if (allMoods.length > 0) {
+    var arr = [];
+    console.log(allMoods);
+    for (let i = 0; i < allMoods.length; i++) {
+      for (let j = 0; j < allMoods[i].tags.length; j++) {
+        arr.push(allMoods[i].tags[j]);
+      }
+    }
+    var a = [],
+      b = [],
+      prev;
+
+    arr.sort();
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] !== prev) {
+        a.push(arr[i]);
+        b.push(1);
+      } else {
+        b[b.length - 1]++;
+      }
+      prev = arr[i];
+    }
+
+    var result = [a, b];
+    var index = indexOfMax(result[1]);
+    var second = result[0].splice(index, 1);
+    var index2 = indexOfMax(result[1]);
+    return result[0][index] + ", " + second[index2];
+  }
+};
 
 export default function StatBox(props) {
   return (
@@ -44,7 +92,7 @@ export default function StatBox(props) {
         </p>
         <br />
         <p>
-          <b>Tags: </b> School, Work, Food {findMostCommonTags(props.allMoods)}
+          <b>Tags: </b> {findMostCommonTag(props.allMoods)}
         </p>
       </div>
     </div>
