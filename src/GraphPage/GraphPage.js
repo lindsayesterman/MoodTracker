@@ -92,7 +92,9 @@ export default class GraphPage extends Component {
     var backgroundColors = [];
     var data = this.getLabelsAndDataForTimeRange().data.datasets.data;
     for (let i = 0; i < data.length; i++) {
-      if (data[i] > 0 && data[i] < 1.5) {
+      if (data[i] === 0) {
+        backgroundColors.push("white");
+      } else if (data[i] > 0 && data[i] < 1.5) {
         backgroundColors.push("#7FBEF9");
       } else if (data[i] >= 1.5 && data[i] < 2.5) {
         backgroundColors.push("#BBDDFB");
@@ -104,6 +106,7 @@ export default class GraphPage extends Component {
         backgroundColors.push("#F8C144");
       }
     }
+    console.log(backgroundColors);
     return backgroundColors;
   };
 

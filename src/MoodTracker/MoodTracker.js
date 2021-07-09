@@ -112,6 +112,7 @@ export default class MoodTracker extends Component {
   };
 
   render() {
+    console.log(this.context)
     return (
       <div className="mood-tracker">
         <AnimatePresence>

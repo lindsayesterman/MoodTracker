@@ -33,7 +33,7 @@ export const getWeekData = (allMoods) => {
     let first = curr.getDate() - curr.getDay() + i;
     let day = new Date(curr.setDate(first)).toISOString().slice(0, 10);
     week.push(day);
-    weekData.push(null);
+    weekData.push(0);
   }
 
   for (let i = 0; i < allMoods.length; i++) {
@@ -66,7 +66,7 @@ export const getMonthData = (allMoods) => {
   while (date.getMonth() === month) {
     days.push(date.toISOString().slice(0, 10));
     date.setDate(date.getDate() + 1);
-    monthData.push(null);
+    monthData.push(0);
   }
   for (let i = 0; i < allMoods.length; i++) {
     for (let j = 0; j < days.length; j++) {
@@ -94,7 +94,7 @@ export const getYearlyAverages = (allMoods) => {
   while (date.getYear() + 1900 === year) {
     days.push(date.toISOString().slice(0, 10));
     date.setDate(date.getDate() + 1);
-    yearData.push(null);
+    yearData.push(0);
   }
   for (let i = 0; i < allMoods.length; i++) {
     for (let j = 0; j < days.length; j++) {
@@ -118,7 +118,7 @@ export const getYearlyAverages = (allMoods) => {
   while (date.getMonth() === month) {
     total += yearData[count];
     count++;
-    if (yearData[count] !== null) {
+    if (yearData[count] !== 0) {
       numDaysCompletedInMonth++;
     }
     date.setDate(date.getDate() + 1);
