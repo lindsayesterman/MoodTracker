@@ -1,3 +1,3 @@
-## Shimmer Summer 2021 Internship Project:
+## Shimmer Mood Tracker App
 
-MoodTracker App
+Summer 2021 Internship Project
