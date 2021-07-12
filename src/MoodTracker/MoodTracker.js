@@ -56,7 +56,7 @@ export default class MoodTracker extends Component {
       password: "",
     };
   }
-  
+
   getUserEmail = (e) => {
     this.setState({
       email: e.target.value,
@@ -148,6 +148,7 @@ export default class MoodTracker extends Component {
                         pageTransition={pageTransition}
                         pageVariants={pageVariants}
                         addToAllMoods={this.addToAllMoods}
+                        allMoods={this.state.allMoods}
                         fetchData={this.fetchData}
                         db={db}
                         {...routeProps}

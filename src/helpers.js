@@ -51,7 +51,6 @@ export const getWeekData = (allMoods) => {
       }
     }
   }
-  
   return weekData;
 };
 
@@ -74,7 +73,7 @@ export const getMonthData = (allMoods) => {
         indexes.push(j);
       }
     }
-  } 
+  }
   for (let i = 0; i < indexes.length; i++) {
     for (let j = 0; j < days.length; j++) {
       if (indexes[i] === j) {

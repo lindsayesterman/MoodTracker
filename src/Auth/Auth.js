@@ -11,7 +11,6 @@ export const AuthProvider = ({ children }) => {
     firebaseConfig.auth().onAuthStateChanged((user) => {
       if (user) {
         const uid = user.uid;
-        console.log(uid);
         firebase.firestore().collection("users").doc(uid).set({
           email: user.email,
         });

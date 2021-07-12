@@ -21,6 +21,8 @@ import {
 import { AuthContext } from "../Auth/Auth";
 
 export default class GraphPage extends Component {
+  static contextType = AuthContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -31,21 +33,47 @@ export default class GraphPage extends Component {
     };
   }
 
-  static contextType = AuthContext;
-
-  // async componentDidMount() {
-  //   if (this.props.allMoods.length === 0) {
-  //     await this.props.fetchData();
-  //   }
-  //   this.getGraphData();
-  // }
-
   async componentDidMount() {
-    if (this.props.allMoods.length === 0) {
-      await this.fetchData();
+    if (this.props.mood.feeling !== 0) {
+      await this.pushMoodToDb();
     }
+    await this.fetchData();
     this.getGraphData();
   }
+
+  pushMoodToDb = async () => {
+    var moodTrackerUserRef = this.props.db
+      .collection("moodTracker")
+      .doc(this.context.currentUser.uid);
+    var docId;
+    await moodTrackerUserRef
+      .get()
+      .then((snapshot) => (docId = snapshot.data().todaysMoodDocId));
+    if (docId === "") {
+      moodTrackerUserRef
+        .collection("date")
+        .add({
+          feeling: this.props.mood.feeling,
+          explanation: this.props.mood.explanation,
+          setMoodForToday: true,
+          tags: this.props.mood.tags,
+          date: this.props.mood.date,
+        })
+        .then(function (docRef) {
+          docId = docRef.id;
+          moodTrackerUserRef.set({ todaysMoodDocId: docId });
+        })
+        .catch(function (error) {
+          console.error("Error adding document: ", error);
+        });
+    } else {
+      await moodTrackerUserRef.collection("date").doc(docId).update({
+        feeling: this.props.mood.feeling,
+        explanation: this.props.mood.explanation,
+        tags: this.props.mood.tags,
+      });
+    }
+  };
 
   fetchData = async () => {
     const { currentUser } = this.context;
@@ -61,7 +89,6 @@ export default class GraphPage extends Component {
     if (moodTrackerRef) {
       const snapshot = await moodTrackerRef.get();
       if (snapshot.empty) {
-        console.log("No matching documents.");
         return;
       }
       snapshot.forEach((doc) => {
@@ -106,7 +133,6 @@ export default class GraphPage extends Component {
         backgroundColors.push("#F8C144");
       }
     }
-    console.log(backgroundColors);
     return backgroundColors;
   };
 
@@ -118,11 +144,11 @@ export default class GraphPage extends Component {
     return gradient;
   };
 
-  getLabelsAndDataForTimeRange = () => {
+   getLabelsAndDataForTimeRange =  () => {
     let data;
     if (this.state.timeRange === "week") {
       data = {
-        labels: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"],
+        labels: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat","s","s","s","s","s","s","s"],
         datasets: {
           data: getWeekData(this.props.allMoods),
         },
@@ -162,7 +188,6 @@ export default class GraphPage extends Component {
     const dataLabels = this.getLabelsAndDataForTimeRange().data.labels;
     const numericalData =
       this.getLabelsAndDataForTimeRange().data.datasets.data;
-    console.log(this.props.allMoods);
     const options = {
       plugins: {
         legend: {

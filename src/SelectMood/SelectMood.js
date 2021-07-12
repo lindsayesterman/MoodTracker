@@ -12,41 +12,6 @@ import { AuthContext } from "../Auth/Auth";
 export default function SelectMood(props) {
   const { currentUser } = useContext(AuthContext);
 
-  // useEffect(() => {
-  //   if (props.allMoods.length === 0) {
-  //     props.fetchData();
-  //   }
-  // }, []);
-
-  useEffect(() => {
-    var moodTrackerRef;
-    if (currentUser) {
-      moodTrackerRef = props.db
-        .collection("moodTracker")
-        .doc(currentUser.uid)
-        .collection("date");
-    } else {
-      moodTrackerRef = null;
-    }
-    async function fetchData() {
-      if (moodTrackerRef) {
-        const snapshot = await moodTrackerRef.get();
-        if (snapshot.empty) {
-          console.log("No matching documents.");
-          return;
-        }
-        snapshot.forEach((doc) => {
-          props.addToAllMoods(doc.data());
-        });
-      }
-    }
-    if (props.allMoods.length === 0) {
-      fetchData();
-    }
-  }, [props, currentUser]);
-
-  console.log(props.allMoods);
-
   return (
     <>
       <Stars></Stars>
