@@ -43,7 +43,7 @@ export default function SelectMood(props) {
     if (props.allMoods.length === 0) {
       fetchData();
     }
-  }, []);
+  }, [props, currentUser]);
 
   console.log(props.allMoods);
 

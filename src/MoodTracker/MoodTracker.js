@@ -56,7 +56,7 @@ export default class MoodTracker extends Component {
       password: "",
     };
   }
-
+  
   getUserEmail = (e) => {
     this.setState({
       email: e.target.value,
@@ -112,7 +112,6 @@ export default class MoodTracker extends Component {
   };
 
   render() {
-    console.log(this.context)
     return (
       <div className="mood-tracker">
         <AnimatePresence>
