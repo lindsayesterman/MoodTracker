@@ -148,7 +148,7 @@ export default class GraphPage extends Component {
     let data;
     if (this.state.timeRange === "week") {
       data = {
-        labels: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat","s","s","s","s","s","s","s"],
+        labels: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"],
         datasets: {
           data: getWeekData(this.props.allMoods),
         },
