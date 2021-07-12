@@ -27,7 +27,7 @@ export default class GraphPage extends Component {
     super(props);
     this.state = {
       graphData: {},
-      timeRange: "week",
+      timeRange: "month",
       lineClicked: true,
       barClicked: false,
     };
@@ -87,7 +87,7 @@ export default class GraphPage extends Component {
       moodTrackerRef = null;
     }
     if (moodTrackerRef) {
-      const snapshot = await moodTrackerRef.get();
+      const snapshot = await moodTrackerRef.orderBy('date', 'desc').get();
       if (snapshot.empty) {
         return;
       }

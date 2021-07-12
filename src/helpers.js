@@ -28,6 +28,7 @@ export const getWeekData = (allMoods) => {
   let weekData = [];
   let week = [];
   let indexes = [];
+  console.log(allMoods);
 
   for (let i = 0; i < 7; i++) {
     let first = curr.getDate() - curr.getDay() + i;
@@ -36,6 +37,7 @@ export const getWeekData = (allMoods) => {
     weekData.push(0);
   }
 
+  //get indexes of week days that have a mood
   for (let i = 0; i < allMoods.length; i++) {
     for (let j = 0; j < week.length; j++) {
       if (allMoods[i].date === week[j]) {
@@ -44,8 +46,10 @@ export const getWeekData = (allMoods) => {
     }
   }
 
+  //1
   for (let i = 0; i < indexes.length; i++) {
     for (let j = 0; j < week.length; j++) {
+      //indexes[0] = 1
       if (indexes[i] === j) {
         weekData.splice(j, 1, allMoods[i].feeling);
       }
@@ -77,6 +81,7 @@ export const getMonthData = (allMoods) => {
   for (let i = 0; i < indexes.length; i++) {
     for (let j = 0; j < days.length; j++) {
       if (indexes[i] === j) {
+        console.log(allMoods);
         monthData.splice(j, 1, allMoods[i].feeling);
       }
     }

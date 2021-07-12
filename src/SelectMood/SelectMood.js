@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import "./SelectMood.css";
 import { Link } from "react-router-dom";
 import f1 from "../img/faceOne.svg";
