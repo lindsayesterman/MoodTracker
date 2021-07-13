@@ -11,13 +11,7 @@ import f5 from "../img/faceFive.svg";
 import lg from "../img/lineGraphBtn.svg";
 import bg from "../img/barGraphBtn.svg";
 import StatBox from "../StatBox/StatBox";
-import {
-  convertNumToEmotion,
-  getDaysInMonth,
-  getWeekData,
-  getMonthData,
-  getYearlyAverages,
-} from "../helpers.js";
+import { convertNumToEmotion } from "../helpers.js";
 import { AuthContext } from "../Auth/Auth";
 
 export default class GraphPage extends Component {
@@ -90,20 +84,157 @@ export default class GraphPage extends Component {
     return gradient;
   };
 
+  getDaysInMonth = () => {
+    var now = new Date();
+    var days = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+    var arrayOfDays = [];
+    for (let i = 1; i <= days; i++) {
+      arrayOfDays.push(i);
+    }
+    return arrayOfDays;
+  };
+
+  getWeekData = (allMoods, dataRequested, index) => {
+    let curr = new Date();
+    let weekData = [];
+    let week = [];
+    let indexes = [];
+    let notesData = [];
+    let tagsData = [];
+
+    for (let i = 0; i < 7; i++) {
+      let first = curr.getDate() - curr.getDay() + i;
+      let day = new Date(curr.setDate(first)).toISOString().slice(0, 10);
+      week.push(day);
+      weekData.push(0);
+      notesData.push("");
+      tagsData.push("");
+    }
+
+    //get indexes of week days that have a mood
+    for (let i = 0; i < allMoods.length; i++) {
+      for (let j = 0; j < week.length; j++) {
+        if (allMoods[i].date === week[j]) {
+          indexes.push(j);
+        }
+      }
+    }
+
+    //add feeling num to weekdata
+    for (let i = 0; i < indexes.length; i++) {
+      for (let j = 0; j < week.length; j++) {
+        if (indexes[i] === j) {
+          weekData.splice(j, 1, allMoods[i].feeling);
+          notesData.splice(j, 1, allMoods[i].explanation);
+          tagsData.splice(j, 1, allMoods[i].tags);
+        }
+      }
+    }
+
+    if (dataRequested === "explanations") {
+      return notesData[index];
+    } else if (dataRequested === "tags") {
+      return tagsData[index];
+    } else if (dataRequested === "feelings") {
+      return weekData;
+    }
+  };
+
+  getMonthData = (allMoods) => {
+    var month = new Date().getMonth();
+    var year = new Date().getFullYear();
+    var date = new Date(year, month, 1);
+    var days = [];
+    let indexes = [];
+    var monthData = [];
+
+    while (date.getMonth() === month) {
+      days.push(date.toISOString().slice(0, 10));
+      date.setDate(date.getDate() + 1);
+      monthData.push(0);
+    }
+    for (let i = 0; i < allMoods.length; i++) {
+      for (let j = 0; j < days.length; j++) {
+        if (allMoods[i].date === days[j]) {
+          indexes.push(j);
+        }
+      }
+    }
+    for (let i = 0; i < indexes.length; i++) {
+      for (let j = 0; j < days.length; j++) {
+        if (indexes[i] === j) {
+          monthData.splice(j, 1, allMoods[i].feeling);
+        }
+      }
+    }
+    return monthData;
+  };
+
+  getYearlyAverages = (allMoods) => {
+    var year = new Date().getFullYear();
+    var date = new Date(year, 0, 1);
+    var days = [];
+    var yearData = [];
+    var indexes = [];
+    while (date.getYear() + 1900 === year) {
+      days.push(date.toISOString().slice(0, 10));
+      date.setDate(date.getDate() + 1);
+      yearData.push(0);
+    }
+    for (let i = 0; i < allMoods.length; i++) {
+      for (let j = 0; j < days.length; j++) {
+        if (allMoods[i].date === days[j]) {
+          indexes.push(j);
+        }
+      }
+    }
+    for (let i = 0; i < indexes.length; i++) {
+      for (let j = 0; j < days.length; j++) {
+        if (indexes[i] === j) {
+          yearData.splice(j, 1, allMoods[i].feeling);
+        }
+      }
+    }
+    var yearAverages = [];
+    var month = 0;
+    var total = 0;
+    var count = 0;
+    var numDaysCompletedInMonth = 0;
+    while (date.getMonth() === month) {
+      total += yearData[count];
+      count++;
+      if (yearData[count] !== 0) {
+        numDaysCompletedInMonth++;
+      }
+      date.setDate(date.getDate() + 1);
+      if (date.getMonth() !== month) {
+        month++;
+        if (total !== 0) {
+          yearAverages.push(total / numDaysCompletedInMonth);
+        } else {
+          yearAverages.push(total / this.getDaysInMonth().length);
+        }
+        numDaysCompletedInMonth = 0;
+        total = 0;
+      }
+    }
+    return yearAverages;
+  };
+
   getLabelsAndDataForTimeRange = () => {
     let data;
     if (this.state.timeRange === "week") {
       data = {
         labels: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"],
         datasets: {
-          data: getWeekData(this.props.allMoods, "feelings"),
+          data: this.getWeekData(this.props.allMoods, "feelings"),
         },
       };
     } else if (this.state.timeRange === "month") {
       data = {
-        labels: getDaysInMonth(),
+        labels: this.getDaysInMonth(),
         datasets: {
-          data: getMonthData(this.props.allMoods),
+          data: this.getMonthData(this.props.allMoods),
         },
       };
     } else if (this.state.timeRange === "year") {
@@ -123,7 +254,7 @@ export default class GraphPage extends Component {
           "Dec",
         ],
         datasets: {
-          data: getYearlyAverages(this.props.allMoods),
+          data: this.getYearlyAverages(this.props.allMoods),
         },
       };
     }
@@ -145,11 +276,11 @@ export default class GraphPage extends Component {
             title: function (item, everything) {
               return (
                 "Mood: " +
-                convertNumToEmotion(Math.round(item[0].raw)) +
-                "\nNotes: " +
-                getWeekData(allMoods, "explanations", item[0].dataIndex) +
-                "\nTags: " +
-                getWeekData(allMoods, "tags", item[0].dataIndex)
+                convertNumToEmotion(Math.round(item[0].raw)) 
+                // + "\nNotes: " +
+                // this.getWeekData(allMoods, "explanations", item[0].dataIndex) +
+                // "\nTags: " +
+                // this.getWeekData(allMoods, "tags", item[0].dataIndex)
               );
             },
             label: function (item, everything) {
