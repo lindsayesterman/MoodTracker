@@ -10,6 +10,7 @@ import LogIn from "../Auth/LogIn";
 import SignUp from "../Auth/SignUp";
 import { AuthContext } from "../Auth/Auth";
 import firebase from "../firebase";
+import { Redirect } from "react-router-dom";
 
 const pageVariants = {
   in: {
@@ -56,13 +57,6 @@ export default class MoodTracker extends Component {
     };
   }
 
-  async componentDidMount() {
-    if (this.state.allMoods.length === 0) {
-      await this.fetchData();
-    }
-    console.log(this.state.allMoods);
-  }
-
   pushMoodToDb = async () => {
     if (this.context.currentUser) {
       let state = this.state;
@@ -85,7 +79,7 @@ export default class MoodTracker extends Component {
         }
       });
       if (docId === "") {
-        moodTrackerUserRef
+        await moodTrackerUserRef
           .collection("date")
           .add({
             feeling: this.state.mood.feeling,
@@ -105,6 +99,7 @@ export default class MoodTracker extends Component {
           .catch(function (error) {
             console.error("Error adding document: ", error);
           });
+        console.log(this.state.dateMoodWasLastEntered);
       } else {
         await moodTrackerUserRef.collection("date").doc(docId).update({
           feeling: this.state.mood.feeling,
@@ -117,6 +112,7 @@ export default class MoodTracker extends Component {
 
   fetchData = async () => {
     const { currentUser } = this.context;
+    let self = this;
     var moodTrackerRef;
     if (currentUser) {
       moodTrackerRef = db
@@ -134,6 +130,13 @@ export default class MoodTracker extends Component {
       snapshot.forEach((doc) => {
         this.addToAllMoods(doc.data());
       });
+      await db
+        .collection("moodTracker")
+        .doc(currentUser.uid)
+        .get()
+        .then((doc) => {
+          self.updateLastDateMoodEntered(doc.data().lastDateEntered);
+        });
     }
   };
 
@@ -209,9 +212,12 @@ export default class MoodTracker extends Component {
         <AnimatePresence>
           <Router>
             <Switch>
+              {this.state.dateMoodWasLastEntered === this.state.mood.date
+                ? console.log("analytics")
+                : console.log("select")}
               <Route
                 exact
-                path="/"
+                path="/select"
                 render={(routeProps) => {
                   return (
                     <SelectMood
@@ -219,10 +225,6 @@ export default class MoodTracker extends Component {
                       getExp={this.getExp}
                       getTags={this.getTags}
                       getMoodClicked={this.getMoodClicked}
-                      addToAllMoods={this.addToAllMoods}
-                      db={db}
-                      allMoods={this.state.allMoods}
-                      fetchData={this.fetchData}
                       {...routeProps}
                     />
                   );
@@ -238,9 +240,6 @@ export default class MoodTracker extends Component {
                       getTags={this.getTags}
                       pageTransition={pageTransition}
                       pageVariants={pageVariants}
-                      addToAllMoods={this.addToAllMoods}
-                      allMoods={this.state.allMoods}
-                      db={db}
                       {...routeProps}
                     />
                   );

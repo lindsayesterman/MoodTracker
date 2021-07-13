@@ -34,13 +34,13 @@ export default class GraphPage extends Component {
   }
 
   async componentDidMount() {
-    this.props.removeAllMoods();
     if (this.props.mood.feeling !== 0) {
       await this.props.pushMoodToDb();
     }
-    await this.props.fetchData();
+    if (this.props.allMoods.length === 0) {
+      await this.props.fetchData();
+    }
     this.getGraphData();
-    console.log(this.props.allMoods);
   }
 
   handleTimeRangeClicked = (e) => {
@@ -217,7 +217,7 @@ export default class GraphPage extends Component {
   render() {
     return (
       <>
-        <BackBtn></BackBtn>
+        <BackBtn url="explain"></BackBtn>
         <div className="graph">
           <motion.div
             className="statContainer"

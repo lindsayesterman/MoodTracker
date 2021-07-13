@@ -8,10 +8,11 @@ import BackBtn from "../BackBtn/BackBtn";
 
 export default function MoodExp(props) {
   const tags = props.mood.tags;
+
   return (
     <>
       <Stars></Stars>
-      <BackBtn></BackBtn>
+      <BackBtn url="select"></BackBtn>
       <motion.div
         className="moodExp"
         initial="out"
@@ -110,7 +111,10 @@ export default function MoodExp(props) {
         ></input>
         <br />
         <Link to="/analytics">
-          <button className="hvr-float-shadow" type="submit">
+          <button
+            className="hvr-float-shadow"
+            type="submit"
+          >
             Submit
           </button>
         </Link>
