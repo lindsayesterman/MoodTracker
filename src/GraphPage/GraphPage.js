@@ -40,6 +40,7 @@ export default class GraphPage extends Component {
     if (this.props.allMoods.length === 0) {
       await this.fetchData();
     }
+    console.log(this.props.allMoods);
     this.getGraphData();
   }
 
@@ -53,13 +54,10 @@ export default class GraphPage extends Component {
         if (!doc.exists) {
           moodTrackerUserRef.set({ todaysMoodDocId: "" });
           docId = "";
-          console.log("doc doesnt exist, creating todaysMoodDocId");
         } else {
-          console.log("doc exists, fetching todaysMoodDocId");
           docId = doc.data().todaysMoodDocId;
         }
       });
-      console.log(docId);
       if (docId === "") {
         moodTrackerUserRef
           .collection("date")
