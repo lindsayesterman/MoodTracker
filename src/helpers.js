@@ -30,7 +30,6 @@ export const getWeekData = (allMoods, dataRequested, index) => {
   let indexes = [];
   let notesData = [];
   let tagsData = [];
-  let tagsString = "";
 
   for (let i = 0; i < 7; i++) {
     let first = curr.getDate() - curr.getDay() + i;

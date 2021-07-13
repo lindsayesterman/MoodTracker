@@ -8,7 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import Home from "../Auth/Home";
 import LogIn from "../Auth/LogIn";
 import SignUp from "../Auth/SignUp";
-import { AuthProvider, AuthContext } from "../Auth/Auth";
+import { AuthContext } from "../Auth/Auth";
 import firebase from "../firebase";
 
 const pageVariants = {
@@ -30,8 +30,6 @@ const pageVariants = {
 };
 
 const pageTransition = {
-  // type: "spring",
-  // stiffness: 120,
   transition: "linear",
   duration: 0.3,
 };
@@ -56,6 +54,76 @@ export default class MoodTracker extends Component {
       password: "",
     };
   }
+
+  async componentDidMount() {
+    if (this.state.allMoods.length === 0) {
+      await this.fetchData();
+    }
+    console.log(this.state.allMoods);
+  }
+
+  pushMoodToDb = async () => {
+    if (this.context.currentUser) {
+      var moodTrackerUserRef = db
+        .collection("moodTracker")
+        .doc(this.context.currentUser.uid);
+      var docId;
+      await moodTrackerUserRef.get().then((doc) => {
+        if (!doc.exists) {
+          moodTrackerUserRef.set({ todaysMoodDocId: "" });
+          docId = "";
+        } else {
+          docId = doc.data().todaysMoodDocId;
+        }
+      });
+      if (docId === "") {
+        moodTrackerUserRef
+          .collection("date")
+          .add({
+            feeling: this.state.mood.feeling,
+            explanation: this.state.mood.explanation,
+            setMoodForToday: true,
+            tags: this.state.mood.tags,
+            date: this.state.mood.date,
+          })
+          .then(function (docRef) {
+            docId = docRef.id;
+            moodTrackerUserRef.set({ todaysMoodDocId: docId });
+          })
+          .catch(function (error) {
+            console.error("Error adding document: ", error);
+          });
+      } else {
+        await moodTrackerUserRef.collection("date").doc(docId).update({
+          feeling: this.state.mood.feeling,
+          explanation: this.state.mood.explanation,
+          tags: this.state.mood.tags,
+        });
+      }
+    }
+  };
+
+  fetchData = async () => {
+    const { currentUser } = this.context;
+    var moodTrackerRef;
+    if (currentUser) {
+      moodTrackerRef = db
+        .collection("moodTracker")
+        .doc(currentUser.uid)
+        .collection("date");
+    } else {
+      moodTrackerRef = null;
+    }
+    if (moodTrackerRef) {
+      const snapshot = await moodTrackerRef.orderBy("date", "desc").get();
+      if (snapshot.empty) {
+        return;
+      }
+      snapshot.forEach((doc) => {
+        this.addToAllMoods(doc.data());
+      });
+    }
+  };
 
   getUserEmail = (e) => {
     this.setState({
@@ -94,6 +162,12 @@ export default class MoodTracker extends Component {
     });
   };
 
+  removeAllMoods = () => {
+    this.setState({
+      allMoods: [],
+    });
+  };
+
   getTags = (e) => {
     this.state.mood.tags.includes(e.target.value)
       ? this.removeTag(e)
@@ -115,83 +189,82 @@ export default class MoodTracker extends Component {
     return (
       <div className="mood-tracker">
         <AnimatePresence>
-          <AuthProvider>
-            <Router>
-              <Switch>
-                <Route
-                  exact
-                  path="/"
-                  render={(routeProps) => {
-                    return (
-                      <SelectMood
-                        mood={this.state.mood}
-                        getExp={this.getExp}
-                        getTags={this.getTags}
-                        getMoodClicked={this.getMoodClicked}
-                        addToAllMoods={this.addToAllMoods}
-                        db={db}
-                        allMoods={this.state.allMoods}
-                        fetchData={this.fetchData}
-                        {...routeProps}
-                      />
-                    );
-                  }}
-                />
-                <Route
-                  path="/explain"
-                  render={(routeProps) => {
-                    return (
-                      <MoodExp
-                        mood={this.state.mood}
-                        getExp={this.getExp}
-                        getTags={this.getTags}
-                        pageTransition={pageTransition}
-                        pageVariants={pageVariants}
-                        addToAllMoods={this.addToAllMoods}
-                        allMoods={this.state.allMoods}
-                        fetchData={this.fetchData}
-                        db={db}
-                        {...routeProps}
-                      />
-                    );
-                  }}
-                />
-                <Route
-                  path="/analytics"
-                  render={(routeProps) => {
-                    return (
-                      <GraphPage
-                        allMoods={this.state.allMoods}
-                        pageTransition={pageTransition}
-                        pageVariants={pageVariants}
-                        mood={this.state.mood}
-                        addToAllMoods={this.addToAllMoods}
-                        fetchData={this.fetchData}
-                        db={db}
-                        {...routeProps}
-                      />
-                    );
-                  }}
-                />
-                <Route exact path="/home" component={Home} />
-                <Route exact path="/login" component={LogIn} />
-                <Route
-                  exact
-                  path="/signup"
-                  render={(routeProps) => {
-                    return (
-                      <SignUp
-                        getUserEmail={this.getUserEmail}
-                        db={db}
-                        email={this.state.email}
-                        {...routeProps}
-                      />
-                    );
-                  }}
-                />
-              </Switch>
-            </Router>
-          </AuthProvider>
+          <Router>
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={(routeProps) => {
+                  return (
+                    <SelectMood
+                      mood={this.state.mood}
+                      getExp={this.getExp}
+                      getTags={this.getTags}
+                      getMoodClicked={this.getMoodClicked}
+                      addToAllMoods={this.addToAllMoods}
+                      db={db}
+                      allMoods={this.state.allMoods}
+                      fetchData={this.fetchData}
+                      {...routeProps}
+                    />
+                  );
+                }}
+              />
+              <Route
+                path="/explain"
+                render={(routeProps) => {
+                  return (
+                    <MoodExp
+                      mood={this.state.mood}
+                      getExp={this.getExp}
+                      getTags={this.getTags}
+                      pageTransition={pageTransition}
+                      pageVariants={pageVariants}
+                      addToAllMoods={this.addToAllMoods}
+                      allMoods={this.state.allMoods}
+                      db={db}
+                      {...routeProps}
+                    />
+                  );
+                }}
+              />
+              <Route
+                path="/analytics"
+                render={(routeProps) => {
+                  return (
+                    <GraphPage
+                      allMoods={this.state.allMoods}
+                      pageTransition={pageTransition}
+                      pageVariants={pageVariants}
+                      mood={this.state.mood}
+                      addToAllMoods={this.addToAllMoods}
+                      fetchData={this.fetchData}
+                      pushMoodToDb={this.pushMoodToDb}
+                      removeAllMoods={this.removeAllMoods}
+                      db={db}
+                      {...routeProps}
+                    />
+                  );
+                }}
+              />
+              <Route exact path="/home" component={Home} />
+              <Route exact path="/login" component={LogIn} />
+              <Route
+                exact
+                path="/signup"
+                render={(routeProps) => {
+                  return (
+                    <SignUp
+                      getUserEmail={this.getUserEmail}
+                      db={db}
+                      email={this.state.email}
+                      {...routeProps}
+                    />
+                  );
+                }}
+              />
+            </Switch>
+          </Router>
         </AnimatePresence>
       </div>
     );

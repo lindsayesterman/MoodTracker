@@ -34,77 +34,14 @@ export default class GraphPage extends Component {
   }
 
   async componentDidMount() {
+    this.props.removeAllMoods();
     if (this.props.mood.feeling !== 0) {
-      await this.pushMoodToDb();
+      await this.props.pushMoodToDb();
     }
-    if (this.props.allMoods.length === 0) {
-      await this.fetchData();
-    }
+    await this.props.fetchData();
     this.getGraphData();
+    console.log(this.props.allMoods);
   }
-
-  pushMoodToDb = async () => {
-    if (this.context.currentUser) {
-      var moodTrackerUserRef = this.props.db
-        .collection("moodTracker")
-        .doc(this.context.currentUser.uid);
-      var docId;
-      await moodTrackerUserRef.get().then((doc) => {
-        if (!doc.exists) {
-          moodTrackerUserRef.set({ todaysMoodDocId: "" });
-          docId = "";
-        } else {
-          docId = doc.data().todaysMoodDocId;
-        }
-      });
-      if (docId === "") {
-        moodTrackerUserRef
-          .collection("date")
-          .add({
-            feeling: this.props.mood.feeling,
-            explanation: this.props.mood.explanation,
-            setMoodForToday: true,
-            tags: this.props.mood.tags,
-            date: this.props.mood.date,
-          })
-          .then(function (docRef) {
-            docId = docRef.id;
-            moodTrackerUserRef.set({ todaysMoodDocId: docId });
-          })
-          .catch(function (error) {
-            console.error("Error adding document: ", error);
-          });
-      } else {
-        await moodTrackerUserRef.collection("date").doc(docId).update({
-          feeling: this.props.mood.feeling,
-          explanation: this.props.mood.explanation,
-          tags: this.props.mood.tags,
-        });
-      }
-    }
-  };
-
-  fetchData = async () => {
-    const { currentUser } = this.context;
-    var moodTrackerRef;
-    if (currentUser) {
-      moodTrackerRef = this.props.db
-        .collection("moodTracker")
-        .doc(currentUser.uid)
-        .collection("date");
-    } else {
-      moodTrackerRef = null;
-    }
-    if (moodTrackerRef) {
-      const snapshot = await moodTrackerRef.orderBy("date", "desc").get();
-      if (snapshot.empty) {
-        return;
-      }
-      snapshot.forEach((doc) => {
-        this.props.addToAllMoods(doc.data());
-      });
-    }
-  };
 
   handleTimeRangeClicked = (e) => {
     this.setState({ timeRange: e.target.value }, this.getGraphData);
