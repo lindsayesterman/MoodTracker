@@ -75,10 +75,14 @@ const findMostCommonTag = (allMoods) => {
     var result = [a, b];
     var index = indexOfMax(result[1]);
     var tag = result[0].splice(index, 1);
-    var ind = result[1].splice(index, 1);
-    var index2 = indexOfMax(result[1]);
+    var index2 = result[1].splice(index, 1);
+    index2 = indexOfMax(result[1]);
     var tag2 = result[0].splice(index2, 1);
-    return tag + ", " + tag2;
+    return tag.length > 0 && tag2.length > 0
+      ? tag + ", " + tag2
+      : tag.length > 0
+      ? tag
+      : "No tags selected yet.";
   }
 };
 

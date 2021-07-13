@@ -40,7 +40,6 @@ export default class GraphPage extends Component {
     if (this.props.allMoods.length === 0) {
       await this.fetchData();
     }
-    console.log(this.props.allMoods);
     this.getGraphData();
   }
 

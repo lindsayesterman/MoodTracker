@@ -45,10 +45,9 @@ export const getWeekData = (allMoods) => {
     }
   }
 
-  //1
+  //add feeling num to weekdata
   for (let i = 0; i < indexes.length; i++) {
     for (let j = 0; j < week.length; j++) {
-      //indexes[0] = 1
       if (indexes[i] === j) {
         weekData.splice(j, 1, allMoods[i].feeling);
       }
