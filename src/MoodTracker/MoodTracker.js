@@ -53,12 +53,18 @@ export default class MoodTracker extends Component {
       allMoods: [], //array of mood objects
       email: "",
       password: "",
-      dateMoodWasLastEntered: "",
+      dateMoodWasLastEntered: new Date().toISOString().slice(0, 10),
     };
   }
 
   async componentDidMount() {
     await this.fetchLastDateEntered();
+    this.setState({
+      mood: {
+        ...this.state.mood,
+        date: new Date().toISOString().slice(0, 10),
+      },
+    });
   }
 
   pushMoodToDb = async () => {
@@ -160,7 +166,6 @@ export default class MoodTracker extends Component {
         ...this.state.mood,
         feeling: parseFloat(e.target.id),
         key: Date.now(),
-        date: new Date().toISOString().slice(0, 10),
       },
     });
   };
@@ -215,6 +220,7 @@ export default class MoodTracker extends Component {
   };
 
   render() {
+    console.log(this.state.dateMoodWasLastEntered === this.state.mood.date);
     return (
       <div className="mood-tracker">
         <AnimatePresence>
