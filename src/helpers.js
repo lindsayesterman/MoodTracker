@@ -23,17 +23,22 @@ export const getDaysInMonth = () => {
   return arrayOfDays;
 };
 
-export const getWeekData = (allMoods) => {
+export const getWeekData = (allMoods, dataRequested, index) => {
   let curr = new Date();
   let weekData = [];
   let week = [];
   let indexes = [];
+  let notesData = [];
+  let tagsData = [];
+  let tagsString = "";
 
   for (let i = 0; i < 7; i++) {
     let first = curr.getDate() - curr.getDay() + i;
     let day = new Date(curr.setDate(first)).toISOString().slice(0, 10);
     week.push(day);
     weekData.push(0);
+    notesData.push("");
+    tagsData.push("");
   }
 
   //get indexes of week days that have a mood
@@ -50,10 +55,19 @@ export const getWeekData = (allMoods) => {
     for (let j = 0; j < week.length; j++) {
       if (indexes[i] === j) {
         weekData.splice(j, 1, allMoods[i].feeling);
+        notesData.splice(j, 1, allMoods[i].explanation);
+        tagsData.splice(j, 1, allMoods[i].tags);
       }
     }
   }
-  return weekData;
+
+  if (dataRequested === "explanations") {
+    return notesData[index];
+  } else if (dataRequested === "tags") {
+    return tagsData[index];
+  } else if (dataRequested === "feelings") {
+    return weekData;
+  }
 };
 
 export const getMonthData = (allMoods) => {

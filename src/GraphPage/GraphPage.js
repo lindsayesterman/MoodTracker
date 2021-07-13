@@ -159,7 +159,7 @@ export default class GraphPage extends Component {
       data = {
         labels: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"],
         datasets: {
-          data: getWeekData(this.props.allMoods),
+          data: getWeekData(this.props.allMoods, "feelings"),
         },
       };
     } else if (this.state.timeRange === "month") {
@@ -197,6 +197,7 @@ export default class GraphPage extends Component {
     const dataLabels = this.getLabelsAndDataForTimeRange().data.labels;
     const numericalData =
       this.getLabelsAndDataForTimeRange().data.datasets.data;
+    const { allMoods } = this.props;
     const options = {
       plugins: {
         legend: {
@@ -205,7 +206,14 @@ export default class GraphPage extends Component {
         tooltip: {
           callbacks: {
             title: function (item, everything) {
-              return "Mood: " + convertNumToEmotion(Math.round(item[0].raw));
+              return (
+                "Mood: " +
+                convertNumToEmotion(Math.round(item[0].raw)) +
+                "\nNotes: " +
+                getWeekData(allMoods, "explanations", item[0].dataIndex) +
+                "\nTags: " +
+                getWeekData(allMoods, "tags", item[0].dataIndex)
+              );
             },
             label: function (item, everything) {
               return;
