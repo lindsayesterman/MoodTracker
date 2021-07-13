@@ -28,7 +28,6 @@ export const getWeekData = (allMoods) => {
   let weekData = [];
   let week = [];
   let indexes = [];
-  console.log(allMoods);
 
   for (let i = 0; i < 7; i++) {
     let first = curr.getDate() - curr.getDay() + i;
@@ -81,7 +80,6 @@ export const getMonthData = (allMoods) => {
   for (let i = 0; i < indexes.length; i++) {
     for (let j = 0; j < days.length; j++) {
       if (indexes[i] === j) {
-        console.log(allMoods);
         monthData.splice(j, 1, allMoods[i].feeling);
       }
     }

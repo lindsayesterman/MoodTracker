@@ -27,7 +27,7 @@ export default class GraphPage extends Component {
     super(props);
     this.state = {
       graphData: {},
-      timeRange: "month",
+      timeRange: "week",
       lineClicked: true,
       barClicked: false,
     };
@@ -37,41 +37,53 @@ export default class GraphPage extends Component {
     if (this.props.mood.feeling !== 0) {
       await this.pushMoodToDb();
     }
-    await this.fetchData();
+    if (this.props.allMoods.length === 0) {
+      await this.fetchData();
+    }
     this.getGraphData();
   }
 
   pushMoodToDb = async () => {
-    var moodTrackerUserRef = this.props.db
-      .collection("moodTracker")
-      .doc(this.context.currentUser.uid);
-    var docId;
-    await moodTrackerUserRef
-      .get()
-      .then((snapshot) => (docId = snapshot.data().todaysMoodDocId));
-    if (docId === "") {
-      moodTrackerUserRef
-        .collection("date")
-        .add({
+    if (this.context.currentUser) {
+      var moodTrackerUserRef = this.props.db
+        .collection("moodTracker")
+        .doc(this.context.currentUser.uid);
+      var docId;
+      await moodTrackerUserRef.get().then((doc) => {
+        if (!doc.exists) {
+          moodTrackerUserRef.set({ todaysMoodDocId: "" });
+          docId = "";
+          console.log("doc doesnt exist, creating todaysMoodDocId");
+        } else {
+          console.log("doc exists, fetching todaysMoodDocId");
+          docId = doc.data().todaysMoodDocId;
+        }
+      });
+      console.log(docId);
+      if (docId === "") {
+        moodTrackerUserRef
+          .collection("date")
+          .add({
+            feeling: this.props.mood.feeling,
+            explanation: this.props.mood.explanation,
+            setMoodForToday: true,
+            tags: this.props.mood.tags,
+            date: this.props.mood.date,
+          })
+          .then(function (docRef) {
+            docId = docRef.id;
+            moodTrackerUserRef.set({ todaysMoodDocId: docId });
+          })
+          .catch(function (error) {
+            console.error("Error adding document: ", error);
+          });
+      } else {
+        await moodTrackerUserRef.collection("date").doc(docId).update({
           feeling: this.props.mood.feeling,
           explanation: this.props.mood.explanation,
-          setMoodForToday: true,
           tags: this.props.mood.tags,
-          date: this.props.mood.date,
-        })
-        .then(function (docRef) {
-          docId = docRef.id;
-          moodTrackerUserRef.set({ todaysMoodDocId: docId });
-        })
-        .catch(function (error) {
-          console.error("Error adding document: ", error);
         });
-    } else {
-      await moodTrackerUserRef.collection("date").doc(docId).update({
-        feeling: this.props.mood.feeling,
-        explanation: this.props.mood.explanation,
-        tags: this.props.mood.tags,
-      });
+      }
     }
   };
 
@@ -87,7 +99,7 @@ export default class GraphPage extends Component {
       moodTrackerRef = null;
     }
     if (moodTrackerRef) {
-      const snapshot = await moodTrackerRef.orderBy('date', 'desc').get();
+      const snapshot = await moodTrackerRef.orderBy("date", "desc").get();
       if (snapshot.empty) {
         return;
       }
@@ -144,7 +156,7 @@ export default class GraphPage extends Component {
     return gradient;
   };
 
-   getLabelsAndDataForTimeRange =  () => {
+  getLabelsAndDataForTimeRange = () => {
     let data;
     if (this.state.timeRange === "week") {
       data = {
