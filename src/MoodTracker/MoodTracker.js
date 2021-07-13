@@ -52,6 +52,7 @@ export default class MoodTracker extends Component {
       allMoods: [], //array of mood objects
       email: "",
       password: "",
+      dateMoodWasLastEntered: "",
     };
   }
 
@@ -65,11 +66,11 @@ export default class MoodTracker extends Component {
   pushMoodToDb = async () => {
     if (this.context.currentUser) {
       let state = this.state;
+      let self = this;
       var moodTrackerUserRef = db
         .collection("moodTracker")
         .doc(this.context.currentUser.uid);
       var docId;
-      var lastDate;
       await moodTrackerUserRef.get().then((doc) => {
         if (!doc.exists) {
           moodTrackerUserRef.set({
@@ -77,10 +78,10 @@ export default class MoodTracker extends Component {
             lastDateEntered: this.state.mood.date,
           });
           docId = "";
-          lastDate = this.state.mood.date;
+          this.updateLastDateMoodEntered(this.state.mood.date);
         } else {
           docId = doc.data().todaysMoodDocId;
-          lastDate = doc.data().lastDateEntered;
+          this.updateLastDateMoodEntered(doc.data().lastDateEntered);
         }
       });
       if (docId === "") {
@@ -95,7 +96,7 @@ export default class MoodTracker extends Component {
           })
           .then(function (docRef) {
             docId = docRef.id;
-            lastDate = state.mood.date;
+            self.updateLastDateMoodEntered(state.mood.date);
             moodTrackerUserRef.set({
               todaysMoodDocId: docId,
               lastDateEntered: state.mood.date,
@@ -193,6 +194,12 @@ export default class MoodTracker extends Component {
   addToAllMoods = (mood) => {
     this.setState({
       allMoods: this.state.allMoods.concat(mood),
+    });
+  };
+
+  updateLastDateMoodEntered = (date) => {
+    this.setState({
+      dateMoodWasLastEntered: date,
     });
   };
 
