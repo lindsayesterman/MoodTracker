@@ -57,6 +57,10 @@ export default class MoodTracker extends Component {
     };
   }
 
+  async componentDidMount() {
+    await this.fetchLastDateEntered();
+  }
+
   pushMoodToDb = async () => {
     if (this.context.currentUser) {
       let state = this.state;
@@ -112,7 +116,6 @@ export default class MoodTracker extends Component {
 
   fetchData = async () => {
     const { currentUser } = this.context;
-    let self = this;
     var moodTrackerRef;
     if (currentUser) {
       moodTrackerRef = db
@@ -130,14 +133,19 @@ export default class MoodTracker extends Component {
       snapshot.forEach((doc) => {
         this.addToAllMoods(doc.data());
       });
-      await db
-        .collection("moodTracker")
-        .doc(currentUser.uid)
-        .get()
-        .then((doc) => {
-          self.updateLastDateMoodEntered(doc.data().lastDateEntered);
-        });
     }
+  };
+
+  fetchLastDateEntered = async () => {
+    let self = this;
+    var date;
+    await db
+      .collection("moodTracker")
+      .doc(self.context.currentUser.uid)
+      .get()
+      .then((doc) => {
+        self.updateLastDateMoodEntered(doc.data().lastDateEntered);
+      });
   };
 
   getUserEmail = (e) => {
@@ -217,7 +225,7 @@ export default class MoodTracker extends Component {
                 : console.log("select")}
               <Route
                 exact
-                path="/select"
+                path="/"
                 render={(routeProps) => {
                   return (
                     <SelectMood
