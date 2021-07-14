@@ -10,7 +10,6 @@ import LogIn from "../Auth/LogIn";
 import SignUp from "../Auth/SignUp";
 import { AuthContext } from "../Auth/Auth";
 import firebase from "../firebase";
-import { Redirect } from "react-router-dom";
 
 const pageVariants = {
   in: {

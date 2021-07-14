@@ -31,14 +31,24 @@ function indexOfMax(arr) {
   return maxIndex;
 }
 
-export const findMostCommonTag = (allMoods) => {
+export const findMostCommonTag = (allMoods, month) => {
   if (allMoods.length > 0) {
     var arr = [];
-    for (let i = 0; i < allMoods.length; i++) {
-      for (let j = 0; j < allMoods[i].tags.length; j++) {
-        arr.push(allMoods[i].tags[j]);
+    if (month === "month") {
+      for (let i = 0; i < allMoods.length; i++) {
+        for (let j = 0; j < allMoods[i].tags.length; j++) {
+          arr.push(allMoods[i].tags[j]);
+        }
       }
+    } else {
+      for (let i = 0; i < month.length; i++) {
+        for (let j = 0; j < month[i].length; j++) {
+          arr.push(month[i][j]);
+        }
+      }
+      console.log(arr);
     }
+
     var a = [],
       b = [],
       prev;

@@ -189,12 +189,19 @@ export default class GraphPage extends Component {
     var yearData = [];
     var indexes = [];
     var tagsData = [];
+    var yearAverages = [];
+    var month = 0;
+    var total = 0;
+    var count = 0;
+    var totalArr = [];
+    var monthlyTags = [];
+    var numDaysCompletedInMonth = 0;
 
     while (date.getYear() + 1900 === year) {
       days.push(date.toISOString().slice(0, 10));
       date.setDate(date.getDate() + 1);
       yearData.push(0);
-      tagsData.push("");
+      tagsData.push([]);
     }
     for (let i = 0; i < allMoods.length; i++) {
       for (let j = 0; j < days.length; j++) {
@@ -211,13 +218,7 @@ export default class GraphPage extends Component {
         }
       }
     }
-    var yearAverages = [];
-    var month = 0;
-    var total = 0;
-    var count = 0;
-    var totalArr = [];
-    var monthlyTags = [];
-    var numDaysCompletedInMonth = 0;
+
     while (date.getMonth() === month) {
       total += yearData[count];
       totalArr.push(tagsData[count]);
@@ -233,15 +234,16 @@ export default class GraphPage extends Component {
           monthlyTags.push(totalArr);
         } else {
           yearAverages.push(total / this.getDaysInMonth().length);
+          monthlyTags.push("");
         }
-        totalArr = []
+        totalArr = [];
         numDaysCompletedInMonth = 0;
         total = 0;
         totalArr = [];
       }
     }
     if (dataRequested === "tags") {
-      return findMostCommonTag(allMoods, monthlyTags);
+      return findMostCommonTag(allMoods, monthlyTags[index]);
     } else {
       return yearAverages;
     }
@@ -336,6 +338,7 @@ export default class GraphPage extends Component {
         tooltip: {
           callbacks: {
             title: function (item, everything) {
+              console.log(item)
               return self.getNotesAndTagsOnGraphHover(item);
             },
             label: function (item, everything) {
