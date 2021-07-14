@@ -48,12 +48,12 @@ export default class MoodTracker extends Component {
         explanation: "",
         tags: [],
         key: "",
-        date: new Date().toISOString().slice(0, 10),
+        date: "",
       },
       allMoods: [], //array of mood objects
       email: "",
       password: "",
-      dateMoodWasLastEntered: new Date().toISOString().slice(0, 10),
+      dateMoodWasLastEntered: "",
     };
   }
 
@@ -79,24 +79,24 @@ export default class MoodTracker extends Component {
         if (!doc.exists) {
           moodTrackerUserRef.set({
             todaysMoodDocId: "",
-            lastDateEntered: this.state.mood.date,
+            lastDateEntered: state.mood.date,
           });
           docId = "";
-          this.updateLastDateMoodEntered(this.state.mood.date);
+          this.updateLastDateMoodEntered(state.mood.date);
         } else {
           docId = doc.data().todaysMoodDocId;
           this.updateLastDateMoodEntered(doc.data().lastDateEntered);
         }
       });
-      if (docId === "") {
+      if (state.mood.date !== state.dateMoodWasLastEntered) {
         await moodTrackerUserRef
           .collection("date")
           .add({
-            feeling: this.state.mood.feeling,
-            explanation: this.state.mood.explanation,
+            feeling: state.mood.feeling,
+            explanation: state.mood.explanation,
             setMoodForToday: true,
-            tags: this.state.mood.tags,
-            date: this.state.mood.date,
+            tags: state.mood.tags,
+            date: state.mood.date,
           })
           .then(function (docRef) {
             docId = docRef.id;
@@ -109,7 +109,6 @@ export default class MoodTracker extends Component {
           .catch(function (error) {
             console.error("Error adding document: ", error);
           });
-        console.log(this.state.dateMoodWasLastEntered);
       } else {
         await moodTrackerUserRef.collection("date").doc(docId).update({
           feeling: this.state.mood.feeling,
@@ -144,7 +143,6 @@ export default class MoodTracker extends Component {
 
   fetchLastDateEntered = async () => {
     let self = this;
-    var date;
     await db
       .collection("moodTracker")
       .doc(self.context.currentUser.uid)
@@ -213,22 +211,21 @@ export default class MoodTracker extends Component {
     });
   };
 
-  updateLastDateMoodEntered = (date) => {
-    this.setState({
+  updateLastDateMoodEntered = async (date) => {
+    await this.setState({
       dateMoodWasLastEntered: date,
     });
   };
 
   render() {
-    console.log(this.state.dateMoodWasLastEntered === this.state.mood.date);
     return (
       <div className="mood-tracker">
         <AnimatePresence>
           <Router>
             <Switch>
-              {this.state.dateMoodWasLastEntered === this.state.mood.date
+              {/* {this.state.dateMoodWasLastEntered === this.state.mood.date
                 ? console.log("analytics")
-                : console.log("select")}
+                : console.log("select")} */}
               <Route
                 exact
                 path="/"

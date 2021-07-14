@@ -12,7 +12,7 @@ export default function MoodExp(props) {
   return (
     <>
       <Stars></Stars>
-      <BackBtn url="select"></BackBtn>
+      <BackBtn url=""></BackBtn>
       <motion.div
         className="moodExp"
         initial="out"
