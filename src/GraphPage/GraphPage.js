@@ -140,18 +140,22 @@ export default class GraphPage extends Component {
     }
   };
 
-  getMonthData = (allMoods) => {
+  getMonthData = (allMoods, dataRequested, index) => {
     var month = new Date().getMonth();
     var year = new Date().getFullYear();
     var date = new Date(year, month, 1);
     var days = [];
     let indexes = [];
     var monthData = [];
+    let notesData = [];
+    let tagsData = [];
 
     while (date.getMonth() === month) {
       days.push(date.toISOString().slice(0, 10));
       date.setDate(date.getDate() + 1);
       monthData.push(0);
+      notesData.push("");
+      tagsData.push("");
     }
     for (let i = 0; i < allMoods.length; i++) {
       for (let j = 0; j < days.length; j++) {
@@ -164,10 +168,18 @@ export default class GraphPage extends Component {
       for (let j = 0; j < days.length; j++) {
         if (indexes[i] === j) {
           monthData.splice(j, 1, allMoods[i].feeling);
+          notesData.splice(j, 1, allMoods[i].explanation);
+          tagsData.splice(j, 1, allMoods[i].tags);
         }
       }
     }
-    return monthData;
+    if (dataRequested === "explanations") {
+      return notesData[index];
+    } else if (dataRequested === "tags") {
+      return tagsData[index];
+    } else if (dataRequested === "feelings") {
+      return monthData;
+    }
   };
 
   getYearlyAverages = (allMoods) => {
@@ -234,7 +246,7 @@ export default class GraphPage extends Component {
       data = {
         labels: this.getDaysInMonth(),
         datasets: {
-          data: this.getMonthData(this.props.allMoods),
+          data: this.getMonthData(this.props.allMoods, "feelings"),
         },
       };
     } else if (this.state.timeRange === "year") {
@@ -261,11 +273,43 @@ export default class GraphPage extends Component {
     return { data };
   };
 
+  getNotesAndTagsOnGraphHover = (item) => {
+    const { allMoods } = this.props;
+    const { timeRange } = this.state;
+    var hoverInfo;
+    if (timeRange === "week") {
+      hoverInfo =
+        "Mood: " +
+        convertNumToEmotion(Math.round(item[0].raw)) +
+        (this.getWeekData(allMoods, "explanations", item[0].dataIndex).length >
+        0
+          ? " \nNotes: " +
+            this.getWeekData(allMoods, "explanations", item[0].dataIndex)
+          : "") +
+        " \nTags: " +
+        this.getWeekData(allMoods, "tags", item[0].dataIndex);
+    } else if (timeRange === "month") {
+      hoverInfo =
+        "Mood: " +
+        convertNumToEmotion(Math.round(item[0].raw)) +
+        (this.getMonthData(allMoods, "explanations", item[0].dataIndex).length >
+        0
+          ? " \nNotes: " +
+            this.getMonthData(allMoods, "explanations", item[0].dataIndex)
+          : "") +
+        " \nTags: " +
+        this.getMonthData(allMoods, "tags", item[0].dataIndex);
+    } else if (timeRange === "year") {
+      hoverInfo = "Mood: " + convertNumToEmotion(Math.round(item[0].raw));
+    }
+    return hoverInfo;
+  };
+
   getGraphData = () => {
     const dataLabels = this.getLabelsAndDataForTimeRange().data.labels;
     const numericalData =
       this.getLabelsAndDataForTimeRange().data.datasets.data;
-    const { allMoods } = this.props;
+    let self = this;
     const options = {
       plugins: {
         legend: {
@@ -274,14 +318,7 @@ export default class GraphPage extends Component {
         tooltip: {
           callbacks: {
             title: function (item, everything) {
-              return (
-                "Mood: " +
-                convertNumToEmotion(Math.round(item[0].raw)) 
-                // + "\nNotes: " +
-                // this.getWeekData(allMoods, "explanations", item[0].dataIndex) +
-                // "\nTags: " +
-                // this.getWeekData(allMoods, "tags", item[0].dataIndex)
-              );
+              return self.getNotesAndTagsOnGraphHover(item);
             },
             label: function (item, everything) {
               return;
