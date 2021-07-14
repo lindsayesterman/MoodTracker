@@ -42,7 +42,7 @@ export default function StatBox(props) {
         </p>
         <br />
         <p>
-          <b>Tags: </b> {findMostCommonTag(props.allMoods, "month")}
+          <b>Tags: </b> {findMostCommonTag(props.allMoods, "allTime")}
         </p>
       </div>
     </div>

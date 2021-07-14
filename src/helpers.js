@@ -34,7 +34,7 @@ function indexOfMax(arr) {
 export const findMostCommonTag = (allMoods, month) => {
   if (allMoods.length > 0) {
     var arr = [];
-    if (month === "month") {
+    if (month === "allTime") {
       for (let i = 0; i < allMoods.length; i++) {
         for (let j = 0; j < allMoods[i].tags.length; j++) {
           arr.push(allMoods[i].tags[j]);
@@ -46,7 +46,6 @@ export const findMostCommonTag = (allMoods, month) => {
           arr.push(month[i][j]);
         }
       }
-      console.log(arr);
     }
 
     var a = [],
@@ -69,7 +68,7 @@ export const findMostCommonTag = (allMoods, month) => {
     var index2 = result[1].splice(index, 1);
     index2 = indexOfMax(result[1]);
     var tag2 = result[0].splice(index2, 1);
-    return tag.length > 0 && tag2.length > 0
+    return tag.length > 0 && tag2.length > 0 && month === "allTime"
       ? tag + ", " + tag2
       : tag.length > 0
       ? tag

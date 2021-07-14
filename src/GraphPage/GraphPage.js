@@ -317,9 +317,9 @@ export default class GraphPage extends Component {
         this.getMonthData(allMoods, "tags", item[0].dataIndex);
     } else if (timeRange === "year") {
       hoverInfo =
-        "Mood: " +
+        `Mood average: ` +
         convertNumToEmotion(Math.round(item[0].raw)) +
-        " \nTags: " +
+        " \nMost common tag: " +
         this.getYearlyAverages(allMoods, "tags", item[0].dataIndex);
     }
     return hoverInfo;
@@ -338,7 +338,6 @@ export default class GraphPage extends Component {
         tooltip: {
           callbacks: {
             title: function (item, everything) {
-              console.log(item)
               return self.getNotesAndTagsOnGraphHover(item);
             },
             label: function (item, everything) {
