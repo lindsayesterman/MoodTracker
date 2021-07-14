@@ -11,7 +11,7 @@ import f5 from "../img/faceFive.svg";
 import lg from "../img/lineGraphBtn.svg";
 import bg from "../img/barGraphBtn.svg";
 import StatBox from "../StatBox/StatBox";
-import { convertNumToEmotion } from "../helpers.js";
+import { convertNumToEmotion, findMostCommonTag } from "../helpers.js";
 import { AuthContext } from "../Auth/Auth";
 
 export default class GraphPage extends Component {
@@ -182,16 +182,19 @@ export default class GraphPage extends Component {
     }
   };
 
-  getYearlyAverages = (allMoods) => {
+  getYearlyAverages = (allMoods, dataRequested, index) => {
     var year = new Date().getFullYear();
     var date = new Date(year, 0, 1);
     var days = [];
     var yearData = [];
     var indexes = [];
+    var tagsData = [];
+
     while (date.getYear() + 1900 === year) {
       days.push(date.toISOString().slice(0, 10));
       date.setDate(date.getDate() + 1);
       yearData.push(0);
+      tagsData.push("");
     }
     for (let i = 0; i < allMoods.length; i++) {
       for (let j = 0; j < days.length; j++) {
@@ -204,6 +207,7 @@ export default class GraphPage extends Component {
       for (let j = 0; j < days.length; j++) {
         if (indexes[i] === j) {
           yearData.splice(j, 1, allMoods[i].feeling);
+          tagsData.splice(j, 1, allMoods[i].tags);
         }
       }
     }
@@ -211,9 +215,12 @@ export default class GraphPage extends Component {
     var month = 0;
     var total = 0;
     var count = 0;
+    var totalArr = [];
+    var monthlyTags = [];
     var numDaysCompletedInMonth = 0;
     while (date.getMonth() === month) {
       total += yearData[count];
+      totalArr.push(tagsData[count]);
       count++;
       if (yearData[count] !== 0) {
         numDaysCompletedInMonth++;
@@ -223,14 +230,21 @@ export default class GraphPage extends Component {
         month++;
         if (total !== 0) {
           yearAverages.push(total / numDaysCompletedInMonth);
+          monthlyTags.push(totalArr);
         } else {
           yearAverages.push(total / this.getDaysInMonth().length);
         }
+        totalArr = []
         numDaysCompletedInMonth = 0;
         total = 0;
+        totalArr = [];
       }
     }
-    return yearAverages;
+    if (dataRequested === "tags") {
+      return findMostCommonTag(allMoods, monthlyTags);
+    } else {
+      return yearAverages;
+    }
   };
 
   getLabelsAndDataForTimeRange = () => {
@@ -300,7 +314,11 @@ export default class GraphPage extends Component {
         " \nTags: " +
         this.getMonthData(allMoods, "tags", item[0].dataIndex);
     } else if (timeRange === "year") {
-      hoverInfo = "Mood: " + convertNumToEmotion(Math.round(item[0].raw));
+      hoverInfo =
+        "Mood: " +
+        convertNumToEmotion(Math.round(item[0].raw)) +
+        " \nTags: " +
+        this.getYearlyAverages(allMoods, "tags", item[0].dataIndex);
     }
     return hoverInfo;
   };
@@ -324,6 +342,8 @@ export default class GraphPage extends Component {
               return;
             },
           },
+          backgroundColor: "#484848",
+          padding: "7",
         },
       },
       scales: {
