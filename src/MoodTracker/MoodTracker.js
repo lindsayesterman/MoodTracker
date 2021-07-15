@@ -82,13 +82,13 @@ export default class MoodTracker extends Component {
             lastDateEntered: state.mood.date,
           });
           docId = "";
-          this.updateLastDateMoodEntered("");
+          this.updateLastDateMoodEntered("no date");
         } else {
           docId = doc.data().todaysMoodDocId;
           this.updateLastDateMoodEntered(doc.data().lastDateEntered);
         }
       });
-      if (state.mood.date !== state.dateMoodWasLastEntered) {
+      if (state.mood.date !== state.dateMoodWasLastEntered || docId === "") {
         await moodTrackerUserRef
           .collection("date")
           .add({

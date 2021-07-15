@@ -16,19 +16,17 @@ const LogIn = (props) => {
     }
   };
   const { currentUser } = useContext(AuthContext);
+
   if (currentUser) {
     return <Redirect to="/mood" />;
   }
+  
   return (
     <>
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-        />
+        <input type="email" placeholder="Email" name="email" />
         <label htmlFor="password">Password</label>
         <input type="password" name="password" placeholder="Password" />
         <button type="submit">Submit</button>

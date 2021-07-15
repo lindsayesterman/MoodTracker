@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "./Auth";
 import firebaseConfig from "../firebase.js";
 
+function signOut(e) {
+  firebaseConfig.auth().signOut();
+}
+
 const Home = () => {
   const { currentUser } = useContext(AuthContext);
   return (
@@ -14,13 +18,12 @@ const Home = () => {
           <Link to="/mood/select">Select Mood Now</Link>
           <br />
           <br />
-          <button onClick={() => firebaseConfig.auth().signOut()}>
-            Sign out
-          </button>
+          <button onClick={() => signOut()}>Sign out</button>
         </>
       ) : (
         <p>
-          <Link to="/mood/login">Log In</Link> or <Link to="/mood/signup">Sign Up</Link>
+          <Link to="/mood/login">Log In</Link> or{" "}
+          <Link to="/mood/signup">Sign Up</Link>
         </p>
       )}
     </>
