@@ -115,6 +115,7 @@ export default class MoodTracker extends Component {
           explanation: this.state.mood.explanation,
           tags: this.state.mood.tags,
         });
+        // window.location.reload();
       }
     }
   };
