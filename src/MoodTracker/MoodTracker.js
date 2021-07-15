@@ -110,12 +110,13 @@ export default class MoodTracker extends Component {
             console.error("Error adding document: ", error);
           });
       } else {
+        this.removeAllMoods();
         await moodTrackerUserRef.collection("date").doc(docId).update({
           feeling: this.state.mood.feeling,
           explanation: this.state.mood.explanation,
           tags: this.state.mood.tags,
         });
-        // window.location.reload();
+        await this.fetchData()
       }
     }
   };
