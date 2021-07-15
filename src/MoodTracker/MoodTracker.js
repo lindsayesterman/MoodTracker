@@ -10,6 +10,8 @@ import LogIn from "../Auth/LogIn";
 import SignUp from "../Auth/SignUp";
 import { AuthContext } from "../Auth/Auth";
 import firebase from "../firebase";
+import { Redirect } from "react-router-dom";
+import ConditionalRenderHelp from "../ConditionalRenderHelp";
 
 const pageVariants = {
   in: {
@@ -222,12 +224,34 @@ export default class MoodTracker extends Component {
         <AnimatePresence>
           <Router>
             <Switch>
-              {/* {this.state.dateMoodWasLastEntered === this.state.mood.date
-                ? console.log("analytics")
-                : console.log("select")} */}
               <Route
                 exact
                 path="/"
+                render={(routeProps) => {
+                  return (
+                    <ConditionalRenderHelp
+                      mood={this.state.mood}
+                      getExp={this.getExp}
+                      getTags={this.getTags}
+                      getMoodClicked={this.getMoodClicked}
+                      date={this.state.mood.date}
+                      dateMoodWasLastEntered={this.state.dateMoodWasLastEntered}
+                      allMoods={this.state.allMoods}
+                      pageTransition={pageTransition}
+                      pageVariants={pageVariants}
+                      addToAllMoods={this.addToAllMoods}
+                      fetchData={this.fetchData}
+                      pushMoodToDb={this.pushMoodToDb}
+                      removeAllMoods={this.removeAllMoods}
+                      db={db}
+                      {...routeProps}
+                    />
+                  );
+                }}
+              />
+              <Route
+                exact
+                path="/select"
                 render={(routeProps) => {
                   return (
                     <SelectMood
@@ -235,6 +259,16 @@ export default class MoodTracker extends Component {
                       getExp={this.getExp}
                       getTags={this.getTags}
                       getMoodClicked={this.getMoodClicked}
+                      date={this.state.mood.date}
+                      dateMoodWasLastEntered={this.state.dateMoodWasLastEntered}
+                      allMoods={this.state.allMoods}
+                      pageTransition={pageTransition}
+                      pageVariants={pageVariants}
+                      addToAllMoods={this.addToAllMoods}
+                      fetchData={this.fetchData}
+                      pushMoodToDb={this.pushMoodToDb}
+                      removeAllMoods={this.removeAllMoods}
+                      db={db}
                       {...routeProps}
                     />
                   );

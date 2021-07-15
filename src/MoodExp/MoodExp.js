@@ -12,7 +12,7 @@ export default function MoodExp(props) {
   return (
     <>
       <Stars></Stars>
-      <BackBtn url=""></BackBtn>
+      <BackBtn url="select"></BackBtn>
       <motion.div
         className="moodExp"
         initial="out"
@@ -111,10 +111,7 @@ export default function MoodExp(props) {
         ></input>
         <br />
         <Link to="/analytics">
-          <button
-            className="hvr-float-shadow"
-            type="submit"
-          >
+          <button className="hvr-float-shadow" type="submit">
             Submit
           </button>
         </Link>

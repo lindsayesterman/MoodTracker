@@ -385,7 +385,7 @@ export default class GraphPage extends Component {
               pointBackgroundColor: this.addDynamicGraphColoring(),
               pointBorderColor: "transparent",
               pointRadius: 7,
-              pointHoverRadius: 5,
+              pointHoverRadius: 6,
             },
           ],
         },
