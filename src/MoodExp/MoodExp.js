@@ -110,7 +110,7 @@ export default function MoodExp(props) {
           autoComplete="off"
         ></input>
         <br />
-        <Link to="/analytics">
+        <Link to="/mood/analytics">
           <button className="hvr-float-shadow" type="submit">
             Submit
           </button>

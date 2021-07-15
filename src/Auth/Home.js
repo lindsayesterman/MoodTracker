@@ -11,7 +11,7 @@ const Home = () => {
       {currentUser ? (
         <>
           <p>You are logged in</p>
-          <Link to="/">Select Mood Now</Link>
+          <Link to="/mood/select">Select Mood Now</Link>
           <br />
           <br />
           <button onClick={() => firebaseConfig.auth().signOut()}>
@@ -20,7 +20,7 @@ const Home = () => {
         </>
       ) : (
         <p>
-          <Link to="/login">Log In</Link> or <Link to="/signup">Sign Up</Link>
+          <Link to="/mood/login">Log In</Link> or <Link to="/mood/signup">Sign Up</Link>
         </p>
       )}
     </>

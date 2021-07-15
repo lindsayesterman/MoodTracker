@@ -17,7 +17,7 @@ const LogIn = (props) => {
   };
   const { currentUser } = useContext(AuthContext);
   if (currentUser) {
-    return <Redirect to="/" />;
+    return <Redirect to="/mood/select" />;
   }
   return (
     <>

@@ -23,7 +23,7 @@ export default function SelectMood(props) {
             : ":)"}{" "}
           <br /> How are you feeling today?
         </h1>
-        <Link to="/explain">
+        <Link to="/mood/explain">
           <img
             className="sad"
             alt="sad face"

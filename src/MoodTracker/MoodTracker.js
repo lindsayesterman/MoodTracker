@@ -142,14 +142,18 @@ export default class MoodTracker extends Component {
   };
 
   fetchLastDateEntered = async () => {
-    let self = this;
-    await db
-      .collection("moodTracker")
-      .doc(self.context.currentUser.uid)
-      .get()
-      .then((doc) => {
-        self.updateLastDateMoodEntered(doc.data().lastDateEntered);
-      });
+    if (this.context.currentUser) {
+      let self = this;
+      await db
+        .collection("moodTracker")
+        .doc(self.context.currentUser.uid)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            self.updateLastDateMoodEntered(doc.data().lastDateEntered);
+          }
+        });
+    }
   };
 
   getUserEmail = (e) => {
@@ -307,11 +311,11 @@ export default class MoodTracker extends Component {
                   );
                 }}
               />
-              <Route exact path="/home" component={Home} />
-              <Route exact path="/login" component={LogIn} />
+              <Route exact path="/mood/home" component={Home} />
+              <Route exact path="/mood/login" component={LogIn} />
               <Route
                 exact
-                path="/signup"
+                path="/mood/signup"
                 render={(routeProps) => {
                   return (
                     <SignUp
