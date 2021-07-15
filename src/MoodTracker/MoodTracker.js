@@ -10,7 +10,6 @@ import LogIn from "../Auth/LogIn";
 import SignUp from "../Auth/SignUp";
 import { AuthContext } from "../Auth/Auth";
 import firebase from "../firebase";
-import { Redirect } from "react-router-dom";
 import ConditionalRenderHelp from "../ConditionalRenderHelp";
 
 const pageVariants = {
@@ -226,7 +225,7 @@ export default class MoodTracker extends Component {
             <Switch>
               <Route
                 exact
-                path="/"
+                path="/mood"
                 render={(routeProps) => {
                   return (
                     <ConditionalRenderHelp
@@ -251,7 +250,7 @@ export default class MoodTracker extends Component {
               />
               <Route
                 exact
-                path="/select"
+                path="/mood/select"
                 render={(routeProps) => {
                   return (
                     <SelectMood
@@ -275,7 +274,7 @@ export default class MoodTracker extends Component {
                 }}
               />
               <Route
-                path="/explain"
+                path="/mood/explain"
                 render={(routeProps) => {
                   return (
                     <MoodExp
@@ -290,7 +289,7 @@ export default class MoodTracker extends Component {
                 }}
               />
               <Route
-                path="/analytics"
+                path="/mood/analytics"
                 render={(routeProps) => {
                   return (
                     <GraphPage

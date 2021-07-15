@@ -346,6 +346,7 @@ export default class GraphPage extends Component {
           },
           backgroundColor: "#484848",
           padding: "7",
+          xAlign: 'left'
         },
       },
       scales: {
