@@ -134,7 +134,7 @@ export default class GraphPage extends Component {
     if (dataRequested === "explanations") {
       return notesData[index];
     } else if (dataRequested === "tags") {
-      return tagsData[index].join(', ');
+      return tagsData[index].join(", ");
     } else if (dataRequested === "feelings") {
       return weekData;
     }
@@ -176,7 +176,7 @@ export default class GraphPage extends Component {
     if (dataRequested === "explanations") {
       return notesData[index];
     } else if (dataRequested === "tags") {
-      return tagsData[index];
+      return tagsData[index].join(", ");
     } else if (dataRequested === "feelings") {
       return monthData;
     }

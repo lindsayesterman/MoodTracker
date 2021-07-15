@@ -11,7 +11,7 @@ import { AuthContext } from "../Auth/Auth";
 
 export default function SelectMood(props) {
   const { currentUser } = useContext(AuthContext);
-
+  
   return (
     <>
       <Stars></Stars>
