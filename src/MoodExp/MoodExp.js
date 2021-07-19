@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./MoodExp.css";
 import Emoji from "../Emoji.js";
 import { motion } from "framer-motion";
@@ -10,7 +10,6 @@ import GraphPage from "../GraphPage/GraphPage";
 export default function MoodExp(props) {
   const tags = props.mood.tags;
   const [submitClicked, setSubmitClicked] = useState(false);
-  console.log(props.showMood, submitClicked);
   return (
     <>
       {props.showMood ? (
@@ -137,11 +136,7 @@ export default function MoodExp(props) {
                 autoComplete="off"
               ></input>
               <br />
-              <button
-                onClick={() => setSubmitClicked(true)}
-                className="hvr-float-shadow"
-                type="submit"
-              >
+              <button onClick={() => setSubmitClicked(true)} type="submit">
                 Submit
               </button>
             </motion.div>
@@ -167,26 +162,24 @@ export default function MoodExp(props) {
           ></GraphPage>
         )
       ) : (
-        <>
-          <SelectMood
-            mood={props.mood}
-            getExp={props.getExp}
-            getTags={props.getTags}
-            getMoodClicked={props.getMoodClicked}
-            date={props.mood.date}
-            dateMoodWasLastEntered={props.dateMoodWasLastEntered}
-            allMoods={props.allMoods}
-            addToAllMoods={props.addToAllMoods}
-            fetchData={props.fetchData}
-            pushMoodToDb={props.pushMoodToDb}
-            removeAllMoods={props.removeAllMoods}
-            db={props.db}
-            pageTransition={props.pageTransition}
-            pageVariants={props.pageVariants}
-            updateShowMood={props.updateShowMood}
-            showMood={props.showMood}
-          ></SelectMood>
-        </>
+        <SelectMood
+          mood={props.mood}
+          getExp={props.getExp}
+          getTags={props.getTags}
+          getMoodClicked={props.getMoodClicked}
+          date={props.mood.date}
+          dateMoodWasLastEntered={props.dateMoodWasLastEntered}
+          allMoods={props.allMoods}
+          addToAllMoods={props.addToAllMoods}
+          fetchData={props.fetchData}
+          pushMoodToDb={props.pushMoodToDb}
+          removeAllMoods={props.removeAllMoods}
+          db={props.db}
+          pageTransition={props.pageTransition}
+          pageVariants={props.pageVariants}
+          updateShowMood={props.updateShowMood}
+          showMood={props.showMood}
+        ></SelectMood>
       )}
     </>
   );
