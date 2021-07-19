@@ -18,7 +18,7 @@ const SignUp = (props) => {
   };
 
   if (currentUser) {
-    return <Redirect to="/select" />;
+    return <Redirect to="/" />;
   }
 
   return (
