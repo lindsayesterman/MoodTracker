@@ -13,6 +13,8 @@ import bg from "../img/barGraphBtn.svg";
 import StatBox from "../StatBox/StatBox";
 import { convertNumToEmotion, findMostCommonTag } from "../helpers.js";
 import { AuthContext } from "../Auth/Auth";
+import MoodExp from "../MoodExp/MoodExp";
+import SelectMood from "../SelectMood/SelectMood";
 
 export default class GraphPage extends Component {
   static contextType = AuthContext;
@@ -24,6 +26,7 @@ export default class GraphPage extends Component {
       timeRange: "week",
       lineClicked: true,
       barClicked: false,
+      graphBackBtnClicked: false,
     };
   }
 
@@ -52,6 +55,12 @@ export default class GraphPage extends Component {
     this.setState({
       barClicked: false,
       lineClicked: true,
+    });
+  };
+
+  setGraphBackBtnClicked = () => {
+    this.setState({
+      graphBackBtnClicked: true,
     });
   };
 
@@ -294,24 +303,30 @@ export default class GraphPage extends Component {
     const { timeRange } = this.state;
     var hoverInfo;
     if (timeRange === "week") {
+      let weekExp = this.getWeekData(
+        allMoods,
+        "explanations",
+        item[0].dataIndex
+      );
       hoverInfo =
         "Mood: " +
         convertNumToEmotion(Math.round(item[0].raw)) +
-        (this.getWeekData(allMoods, "explanations", item[0].dataIndex).length >
-        0
-          ? " \nNotes: " +
-            this.getWeekData(allMoods, "explanations", item[0].dataIndex)
+        (weekExp.length > 0
+          ? " \nNotes: " + weekExp.replace(/.{37}/g, "$&\n")
           : "") +
         " \nTags: " +
         this.getWeekData(allMoods, "tags", item[0].dataIndex);
     } else if (timeRange === "month") {
+      let monthExp = this.getMonthData(
+        allMoods,
+        "explanations",
+        item[0].dataIndex
+      );
       hoverInfo =
         "Mood: " +
         convertNumToEmotion(Math.round(item[0].raw)) +
-        (this.getMonthData(allMoods, "explanations", item[0].dataIndex).length >
-        0
-          ? " \nNotes: " +
-            this.getMonthData(allMoods, "explanations", item[0].dataIndex)
+        (monthExp.length > 0
+          ? " \nNotes: " + monthExp.replace(/.{37}/g, "$&\n")
           : "") +
         " \nTags: " +
         this.getMonthData(allMoods, "tags", item[0].dataIndex);
@@ -408,92 +423,136 @@ export default class GraphPage extends Component {
   render() {
     return (
       <>
-        <BackBtn url="explain"></BackBtn>
-        <div className="graph">
-          <motion.div
-            className="statContainer"
-            initial="outRight"
-            animate="in"
-            exit="outRight"
-            transition={this.props.pageTransition}
-            variants={this.props.pageVariants}
-          >
-            <h1>Your mood over time with Shimmer:)</h1>
-            <StatBox allMoods={this.props.allMoods}></StatBox>
-            <div className="buttonContainer">
-              <button
-                value="week"
-                onClick={this.handleTimeRangeClicked}
-                className="week"
-              >
-                Week
-              </button>
-              <button
-                value="month"
-                onClick={this.handleTimeRangeClicked}
-                className="month"
-              >
-                Month
-              </button>
-              <button
-                value="year"
-                onClick={this.handleTimeRangeClicked}
-                className="year"
-              >
-                Year
-              </button>
+        {!this.state.graphBackBtnClicked ? (
+          <>
+            <div onClick={this.setGraphBackBtnClicked}>
+              <BackBtn></BackBtn>
             </div>
-          </motion.div>
-          <motion.div
-            className={this.state.lineClicked ? "graphHolder" : "hidden"}
-            initial="out"
-            animate="in"
-            exit="outFade"
-            transition={this.props.pageTransition}
-            variants={this.props.pageVariants}
-          >
-            <div className="graphColOfFaces">
-              <img alt="cartoon face" src={f5}></img>
-              <img alt="cartoon face" src={f4}></img>
-              <img alt="cartoon face" src={f3}></img>
-              <img alt="cartoon face" src={f2}></img>
-              <img alt="cartoon face" src={f1}></img>
+            <div className="graph">
+              <motion.div
+                className="statContainer"
+                initial="outRight"
+                animate="in"
+                exit="outRight"
+                transition={this.props.pageTransition}
+                variants={this.props.pageVariants}
+              >
+                <h1>Your mood over time with Shimmer:)</h1>
+                <StatBox allMoods={this.props.allMoods}></StatBox>
+                <div className="buttonContainer">
+                  <button
+                    value="week"
+                    onClick={this.handleTimeRangeClicked}
+                    className="week"
+                  >
+                    Week
+                  </button>
+                  <button
+                    value="month"
+                    onClick={this.handleTimeRangeClicked}
+                    className="month"
+                  >
+                    Month
+                  </button>
+                  <button
+                    value="year"
+                    onClick={this.handleTimeRangeClicked}
+                    className="year"
+                  >
+                    Year
+                  </button>
+                </div>
+              </motion.div>
+              <motion.div
+                className={this.state.lineClicked ? "graphHolder" : "hidden"}
+                initial="out"
+                animate="in"
+                exit="outFade"
+                transition={this.props.pageTransition}
+                variants={this.props.pageVariants}
+              >
+                <div className="graphColOfFaces">
+                  <img alt="cartoon face" src={f5}></img>
+                  <img alt="cartoon face" src={f4}></img>
+                  <img alt="cartoon face" src={f3}></img>
+                  <img alt="cartoon face" src={f2}></img>
+                  <img alt="cartoon face" src={f1}></img>
+                </div>
+                <Line
+                  className="graphs"
+                  id="lineChart"
+                  data={this.state.graphData.data}
+                  options={this.state.graphData.options}
+                />
+              </motion.div>
+              <div className={this.state.barClicked ? "graphHolder" : "hidden"}>
+                <div className="graphColOfFaces">
+                  <img alt="cartoon face" src={f5}></img>
+                  <img alt="cartoon face" src={f4}></img>
+                  <img alt="cartoon face" src={f3}></img>
+                  <img alt="cartoon face" src={f2}></img>
+                  <img alt="cartoon face" src={f1}></img>
+                </div>
+                <Bar
+                  id="barChart"
+                  className="graphs"
+                  data={this.state.graphData.barData}
+                  options={this.state.graphData.options}
+                />
+              </div>
+              <img
+                onClick={this.removeLineAddBar}
+                alt="switch graph btn"
+                className="switchGraphLine"
+                src={bg}
+              ></img>
+              <img
+                onClick={this.removeBarAddLine}
+                alt="switch graph btn"
+                className="switchGraphBar"
+                src={lg}
+              ></img>
             </div>
-            <Line
-              className="graphs"
-              id="lineChart"
-              data={this.state.graphData.data}
-              options={this.state.graphData.options}
-            />
-          </motion.div>
-          <div className={this.state.barClicked ? "graphHolder" : "hidden"}>
-            <div className="graphColOfFaces">
-              <img alt="cartoon face" src={f5}></img>
-              <img alt="cartoon face" src={f4}></img>
-              <img alt="cartoon face" src={f3}></img>
-              <img alt="cartoon face" src={f2}></img>
-              <img alt="cartoon face" src={f1}></img>
-            </div>
-            <Bar
-              id="barChart"
-              className="graphs"
-              data={this.state.graphData.barData}
-              options={this.state.graphData.options}
-            />
-          </div>
-          <img
-            onClick={this.removeLineAddBar}
-            alt="switch graph btn"
-            className="switchGraphLine"
-            src={bg}
-          ></img>
-          <img
-            onClick={this.removeBarAddLine}
-            alt="switch graph btn"
-            className="switchGraphBar"
-            src={lg}
-          ></img>
-        </div>
+          </>
+        ) : this.props.mood.feeling === 0 ? (
+          <>
+            <SelectMood
+              mood={this.props.mood}
+              getExp={this.props.getExp}
+              getTags={this.props.getTags}
+              pageTransition={this.props.pageTransition}
+              pageVariants={this.props.pageVariants}
+              getMoodClicked={this.props.getMoodClicked}
+              dateMoodWasLastEntered={this.props.dateMoodWasLastEntered}
+              allMoods={this.props.allMoods}
+              addToAllMoods={this.props.addToAllMoods}
+              fetchData={this.props.fetchData}
+              pushMoodToDb={this.props.pushMoodToDb}
+              removeAllMoods={this.props.removeAllMoods}
+              db={this.props.db}
+              updateShowMood={this.props.updateShowMood}
+              showMood={this.props.showMood}
+            ></SelectMood>
+          </>
+        ) : (
+          <MoodExp
+            mood={this.props.mood}
+            getExp={this.props.getExp}
+            getTags={this.props.getTags}
+            pageTransition={this.props.pageTransition}
+            pageVariants={this.props.pageVariants}
+            getMoodClicked={this.props.getMoodClicked}
+            dateMoodWasLastEntered={this.props.dateMoodWasLastEntered}
+            allMoods={this.props.allMoods}
+            addToAllMoods={this.props.addToAllMoods}
+            fetchData={this.props.fetchData}
+            pushMoodToDb={this.props.pushMoodToDb}
+            removeAllMoods={this.props.removeAllMoods}
+            db={this.props.db}
+            updateShowMood={this.props.updateShowMood}
+            showMood={this.props.showMood}
+          />
+        )}
       </>
     );
   }

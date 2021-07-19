@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import "./MoodTracker.css";
-import SelectMood from "../SelectMood/SelectMood";
-import GraphPage from "../GraphPage/GraphPage";
-import MoodExp from "../MoodExp/MoodExp";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Home from "../Auth/Home";
@@ -50,10 +47,11 @@ export default class MoodTracker extends Component {
         key: "",
         date: "",
       },
-      allMoods: [], //array of mood objects
+      allMoods: [], //array of all mood objects
       email: "",
       password: "",
       dateMoodWasLastEntered: "",
+      showMood: true,
     };
   }
 
@@ -172,6 +170,7 @@ export default class MoodTracker extends Component {
         key: Date.now(),
       },
     });
+    this.updateShowMood(true);
   };
 
   getExp = (e) => {
@@ -223,6 +222,12 @@ export default class MoodTracker extends Component {
     });
   };
 
+  updateShowMood = (bool) => {
+    this.setState({
+      showMood: bool,
+    });
+  };
+
   render() {
     return (
       <div className="mood-tracker">
@@ -231,7 +236,7 @@ export default class MoodTracker extends Component {
             <Switch>
               <Route
                 exact
-                path="/mood"
+                path="/"
                 render={(routeProps) => {
                   return (
                     <ConditionalRenderHelp
@@ -249,75 +254,19 @@ export default class MoodTracker extends Component {
                       pushMoodToDb={this.pushMoodToDb}
                       removeAllMoods={this.removeAllMoods}
                       db={db}
+                      fetchLastDateEntered={this.fetchLastDateEntered}
+                      updateShowMood={this.updateShowMood}
+                      showMood={this.state.showMood}
                       {...routeProps}
                     />
                   );
                 }}
               />
+              <Route exact path="/home" component={Home} />
+              <Route exact path="/login" component={LogIn} />
               <Route
                 exact
-                path="/mood/select"
-                render={(routeProps) => {
-                  return (
-                    <SelectMood
-                      mood={this.state.mood}
-                      getExp={this.getExp}
-                      getTags={this.getTags}
-                      getMoodClicked={this.getMoodClicked}
-                      date={this.state.mood.date}
-                      dateMoodWasLastEntered={this.state.dateMoodWasLastEntered}
-                      allMoods={this.state.allMoods}
-                      pageTransition={pageTransition}
-                      pageVariants={pageVariants}
-                      addToAllMoods={this.addToAllMoods}
-                      fetchData={this.fetchData}
-                      pushMoodToDb={this.pushMoodToDb}
-                      removeAllMoods={this.removeAllMoods}
-                      db={db}
-                      {...routeProps}
-                    />
-                  );
-                }}
-              />
-              <Route
-                path="/mood/explain"
-                render={(routeProps) => {
-                  return (
-                    <MoodExp
-                      mood={this.state.mood}
-                      getExp={this.getExp}
-                      getTags={this.getTags}
-                      pageTransition={pageTransition}
-                      pageVariants={pageVariants}
-                      {...routeProps}
-                    />
-                  );
-                }}
-              />
-              <Route
-                path="/mood/analytics"
-                render={(routeProps) => {
-                  return (
-                    <GraphPage
-                      allMoods={this.state.allMoods}
-                      pageTransition={pageTransition}
-                      pageVariants={pageVariants}
-                      mood={this.state.mood}
-                      addToAllMoods={this.addToAllMoods}
-                      fetchData={this.fetchData}
-                      pushMoodToDb={this.pushMoodToDb}
-                      removeAllMoods={this.removeAllMoods}
-                      db={db}
-                      {...routeProps}
-                    />
-                  );
-                }}
-              />
-              <Route exact path="/mood/home" component={Home} />
-              <Route exact path="/mood/login" component={LogIn} />
-              <Route
-                exact
-                path="/mood/signup"
+                path="/signup"
                 render={(routeProps) => {
                   return (
                     <SignUp

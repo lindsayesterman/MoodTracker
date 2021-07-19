@@ -32,6 +32,8 @@ const findMostCommonMood = (allMoods) => {
   } else return "Happy";
 };
 
+
+
 export default function StatBox(props) {
   return (
     <div className="statBox">
@@ -44,6 +46,10 @@ export default function StatBox(props) {
         <p>
           <b>Tags: </b> {findMostCommonTag(props.allMoods, "allTime")}
         </p>
+        {/* <br />
+        <p>
+          <b>Happiest when: </b> {findHappiestWhen(props.allMoods)}
+        </p> */}
       </div>
     </div>
   );

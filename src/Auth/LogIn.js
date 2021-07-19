@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { AuthContext } from "./Auth";
 import firebaseConfig from "../firebase.js";
 
-const LogIn = (props) => {
+export default function LogIn(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = e.target.elements;
@@ -18,9 +18,9 @@ const LogIn = (props) => {
   const { currentUser } = useContext(AuthContext);
 
   if (currentUser) {
-    return <Redirect to="/mood" />;
+    return <Redirect to="/" />;
   }
-  
+
   return (
     <>
       <h1>Log In</h1>
@@ -33,6 +33,4 @@ const LogIn = (props) => {
       </form>
     </>
   );
-};
-
-export default LogIn;
+}

@@ -15,15 +15,15 @@ const Home = () => {
       {currentUser ? (
         <>
           <p>You are logged in</p>
-          <Link to="/mood/select">Select Mood Now</Link>
+          <Link to="/select">Select Mood Now</Link>
           <br />
           <br />
           <button onClick={() => signOut()}>Sign out</button>
         </>
       ) : (
         <p>
-          <Link to="/mood/login">Log In</Link> or{" "}
-          <Link to="/mood/signup">Sign Up</Link>
+          <Link to="/login">Log In</Link> or{" "}
+          <Link to="/signup">Sign Up</Link>
         </p>
       )}
     </>
