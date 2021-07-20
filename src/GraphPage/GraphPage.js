@@ -298,6 +298,20 @@ export default class GraphPage extends Component {
     return { data };
   };
 
+  breakString = (str, limit) => {
+    let brokenString = "";
+    for (let i = 0, count = 0; i < str.length; i++) {
+      if (count >= limit && str[i] === " ") {
+        count = 0;
+        brokenString += "\n";
+      } else {
+        count++;
+        brokenString += str[i];
+      }
+    }
+    return brokenString;
+  };
+
   getNotesAndTagsOnGraphHover = (item) => {
     const { allMoods } = this.props;
     const { timeRange } = this.state;
@@ -312,10 +326,13 @@ export default class GraphPage extends Component {
         "Mood: " +
         convertNumToEmotion(Math.round(item[0].raw)) +
         (weekExp.length > 0
-          ? " \nNotes: " + weekExp.replace(/.{37}/g, "$&\n")
+          ? " \nNotes: " + this.breakString(weekExp, 33)
           : "") +
         " \nTags: " +
-        this.getWeekData(allMoods, "tags", item[0].dataIndex);
+        this.breakString(
+          this.getWeekData(allMoods, "tags", item[0].dataIndex),
+          30
+        );
     } else if (timeRange === "month") {
       let monthExp = this.getMonthData(
         allMoods,
@@ -326,10 +343,13 @@ export default class GraphPage extends Component {
         "Mood: " +
         convertNumToEmotion(Math.round(item[0].raw)) +
         (monthExp.length > 0
-          ? " \nNotes: " + monthExp.replace(/.{37}/g, "$&\n")
+          ? " \nNotes: " + this.breakString(monthExp, 33)
           : "") +
         " \nTags: " +
-        this.getMonthData(allMoods, "tags", item[0].dataIndex);
+        this.breakString(
+          this.getMonthData(allMoods, "tags", item[0].dataIndex),
+          30
+        );
     } else if (timeRange === "year") {
       hoverInfo =
         `Mood average: ` +
