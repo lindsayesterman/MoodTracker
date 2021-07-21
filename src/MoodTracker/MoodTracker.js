@@ -57,10 +57,11 @@ export default class MoodTracker extends Component {
 
   async componentDidMount() {
     await this.fetchLastDateEntered();
+    var tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
     this.setState({
       mood: {
         ...this.state.mood,
-        date: new Date().toISOString().slice(0, 10),
+        date: new Date(Date.now() - tzoffset).toISOString().slice(0, 10),
       },
     });
   }
