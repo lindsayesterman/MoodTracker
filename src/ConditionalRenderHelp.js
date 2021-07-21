@@ -3,9 +3,13 @@ import SelectMood from "./SelectMood/SelectMood";
 import GraphPage from "./GraphPage/GraphPage";
 
 export default function ConditionalRenderHelp(props) {
+  // useEffect(() => {
+  //   props.fetchLastDateEntered.call(null);
+  // }, [props.fetchLastDateEntered]);
+
   useEffect(() => {
-    props.fetchLastDateEntered.call(null);
-  }, [props.fetchLastDateEntered]);
+    props.fetchLastDateEntered();
+  }, []);
 
   return (
     <>
