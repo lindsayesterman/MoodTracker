@@ -140,7 +140,7 @@ export default class GraphPage extends Component {
       }
     }
 
-    if (dataRequested === "explanations") {
+    if (dataRequested === "exp") {
       return notesData[index];
     } else if (dataRequested === "tags") {
       return tagsData[index].join(", ");
@@ -182,7 +182,7 @@ export default class GraphPage extends Component {
         }
       }
     }
-    if (dataRequested === "explanations") {
+    if (dataRequested === "exp") {
       return notesData[index];
     } else if (dataRequested === "tags") {
       return tagsData[index].join(", ");
@@ -319,37 +319,27 @@ export default class GraphPage extends Component {
     if (timeRange === "week") {
       let weekExp = this.getWeekData(
         allMoods,
-        "explanations",
+        "exp",
         item[0].dataIndex
       );
+      let weekTags = this.getWeekData(allMoods, "tags", item[0].dataIndex);
       hoverInfo =
         "Mood: " +
         convertNumToEmotion(Math.round(item[0].raw)) +
-        (weekExp.length > 0
-          ? " \nNotes: " + this.breakString(weekExp, 33)
-          : "") +
-        " \nTags: " +
-        this.breakString(
-          this.getWeekData(allMoods, "tags", item[0].dataIndex),
-          30
-        );
+        (weekExp ? " \nNotes: " + this.breakString(weekExp, 33) : "") +
+        (weekTags ? " \nTags: " + this.breakString(weekTags, 30) : "");
     } else if (timeRange === "month") {
       let monthExp = this.getMonthData(
         allMoods,
-        "explanations",
+        "exp",
         item[0].dataIndex
       );
+      let monthTags = this.getMonthData(allMoods, "tags", item[0].dataIndex);
       hoverInfo =
         "Mood: " +
         convertNumToEmotion(Math.round(item[0].raw)) +
-        (monthExp.length > 0
-          ? " \nNotes: " + this.breakString(monthExp, 33)
-          : "") +
-        " \nTags: " +
-        this.breakString(
-          this.getMonthData(allMoods, "tags", item[0].dataIndex),
-          30
-        );
+        (monthExp ? " \nNotes: " + this.breakString(monthExp, 33) : "") +
+        (monthTags ? " \nTags: " + this.breakString(monthTags, 30) : "");
     } else if (timeRange === "year") {
       hoverInfo =
         `Mood average: ` +
