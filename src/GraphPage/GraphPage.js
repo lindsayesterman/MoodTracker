@@ -360,6 +360,12 @@ export default class GraphPage extends Component {
     return hoverInfo;
   };
 
+  componentWillUnmount() {
+    this.setState = (state, callback) => {
+      return;
+    };
+  }
+
   getGraphData = () => {
     const dataLabels = this.getLabelsAndDataForTimeRange().data.labels;
     const numericalData =

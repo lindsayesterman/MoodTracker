@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./MoodExp.css";
 import Emoji from "../Emoji.js";
 import { motion } from "framer-motion";

@@ -4,8 +4,8 @@ import GraphPage from "./GraphPage/GraphPage";
 
 export default function ConditionalRenderHelp(props) {
   useEffect(() => {
-    props.fetchLastDateEntered();
-  }, []);
+    props.fetchLastDateEntered.call(null);
+  }, [props.fetchLastDateEntered]);
 
   return (
     <>
