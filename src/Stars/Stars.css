@@ -1,40 +1,42 @@
 .bottomLeftLarge {
-  bottom: 8px;
-  left: 9px;
+  bottom: 5px;
+  left: 20px;
+  width: 80px;
   animation-duration: 6s;
 }
 
 .topRightLarge {
   top: 5px;
-  right: 9px;
+  right: 20px;
+  width: 90px;
   animation-duration: 5s;
 }
 
 .topRightBottom {
-  top: 80px;
-  right: 50px;
+  top: 100px;
+  right: 130px;
   width: 30px;
   animation-duration: 2s;
 }
 
 .topRightTop {
-  top: 2px;
-  right: 70px;
+  top: 20px;
+  right: 120px;
   width: 30px;
   animation-duration: 3s;
 }
 
 .bottomLeftBottom {
-  bottom: 6px;
-  left: 75px;
+  bottom: 106px;
+  left: 125px;
   width: 35px;
   animation-duration: 4s;
 }
 
 .bottomLeftTop {
-  bottom: 95px;
-  left: 56px;
-  width: 20px;
+  bottom: 165px;
+  left: 66px;
+  width: 40px;
   animation-duration: 2s;
 }
 
@@ -53,11 +55,11 @@
 @keyframes star {
   0% {
     transform: scale(1);
-    filter: brightness(1);
+    filter: brightness(1.45);
   }
   25% {
     transform: scale(1.1);
-    filter: brightness(1.45);
+    filter: brightness(1);
   }
   50% {
     transform: scale(1);
@@ -73,24 +75,36 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 1050px) {
   .topRightBottom,
   .topRightTop,
   .bottomLeftBottom,
   .bottomLeftTop {
-    width: 20px;
+    width: 25px;
   }
 
   .bottomLeftTop {
-    left: 5px;
+    left: 13px;
+    bottom: 100px;
   }
 
   .topRightBottom {
     right: 10px;
-    top:90px;
+    top: 100px;
   }
 
-  .topRightTop{
-    right:70px;
+  .topRightTop {
+    right: 90px;
+    top: 5px;
+  }
+
+  .bottomLeftBottom {
+    bottom: 5px;
+    left: 110px;
+  }
+
+  .bottomLeftLarge,
+  .topRightLarge {
+    width: 55px;
   }
 }

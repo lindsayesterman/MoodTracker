@@ -317,11 +317,7 @@ export default class GraphPage extends Component {
     const { timeRange } = this.state;
     var hoverInfo;
     if (timeRange === "week") {
-      let weekExp = this.getWeekData(
-        allMoods,
-        "exp",
-        item[0].dataIndex
-      );
+      let weekExp = this.getWeekData(allMoods, "exp", item[0].dataIndex);
       let weekTags = this.getWeekData(allMoods, "tags", item[0].dataIndex);
       hoverInfo =
         "Mood: " +
@@ -329,11 +325,7 @@ export default class GraphPage extends Component {
         (weekExp ? " \nNotes: " + this.breakString(weekExp, 33) : "") +
         (weekTags ? " \nTags: " + this.breakString(weekTags, 30) : "");
     } else if (timeRange === "month") {
-      let monthExp = this.getMonthData(
-        allMoods,
-        "exp",
-        item[0].dataIndex
-      );
+      let monthExp = this.getMonthData(allMoods, "exp", item[0].dataIndex);
       let monthTags = this.getMonthData(allMoods, "tags", item[0].dataIndex);
       hoverInfo =
         "Mood: " +
@@ -445,15 +437,8 @@ export default class GraphPage extends Component {
               <BackBtn></BackBtn>
             </div>
             <div className="graph">
-              <motion.div
-                className="statContainer"
-                initial="outRight"
-                animate="in"
-                exit="outRight"
-                transition={this.props.pageTransition}
-                variants={this.props.pageVariants}
-              >
-                <h1>Your mood over time with Shimmer:)</h1>
+              <div className="graphHeaderContainer">
+                <h1>Your mood over time with Shimmer</h1>
                 <StatBox allMoods={this.props.allMoods}></StatBox>
                 <div className="buttonContainer">
                   <button
@@ -478,14 +463,9 @@ export default class GraphPage extends Component {
                     Year
                   </button>
                 </div>
-              </motion.div>
-              <motion.div
+              </div>
+              <div
                 className={this.state.lineClicked ? "graphHolder" : "hidden"}
-                initial="out"
-                animate="in"
-                exit="outFade"
-                transition={this.props.pageTransition}
-                variants={this.props.pageVariants}
               >
                 <div className="graphColOfFaces">
                   <img alt="cartoon face" src={f5}></img>
@@ -500,7 +480,7 @@ export default class GraphPage extends Component {
                   data={this.state.graphData.data}
                   options={this.state.graphData.options}
                 />
-              </motion.div>
+              </div>
               <div className={this.state.barClicked ? "graphHolder" : "hidden"}>
                 <div className="graphColOfFaces">
                   <img alt="cartoon face" src={f5}></img>

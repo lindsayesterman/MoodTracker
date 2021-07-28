@@ -6,14 +6,14 @@
   padding: 10px;
   outline: none;
   display: block;
-  font-size:15px;
+  font-size: 15px;
   margin: 25px auto 10px auto;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .moodExp h1 {
   margin-top: 60px;
-  font-size:25px;
+  font-size: 30px;
 }
 
 .moodExp div.btnTags {
@@ -26,12 +26,12 @@
   background-color: white;
   border-radius: 25px;
   padding: 3px 12px;
-  font-size:17px;
-  /* padding:7px 12px 5px 30px; */
+  font-size: 17px;
 }
 
 .moodExp button.tags:hover {
   transform: scale(1.02);
+  cursor: pointer;
 }
 
 .moodExp button[type="submit"] {
@@ -58,6 +58,7 @@
 .moodExp button[type="submit"]:active {
   background-color: white;
   color: gray;
+  cursor: pointer;
 }
 
 .workClicked {
@@ -161,15 +162,11 @@
   }
 
   .moodExp button[type="submit"] {
-    transform: scale(.9);
+    transform: scale(0.9);
   }
 }
 
 @media (max-width: 415px) {
-  .moodExp div.btnTags {
-    width: 100%;
-  }
-
   .moodExp button.tags {
     padding: 3px 10px;
     font-size: 11px;

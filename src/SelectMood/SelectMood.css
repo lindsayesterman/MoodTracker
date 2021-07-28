@@ -4,9 +4,9 @@ div.selectMood img {
   text-align: center;
   display: inline-block;
   font-size: 14px;
-  margin: 10px 5px;
-  height: 75px;
-  width: 75px;
+  margin: 10px 7px;
+  height: 85px;
+  width: 85px;
   border-radius: 50%;
 }
 
@@ -30,10 +30,11 @@ div.selectMood img:focus,
 div.selectMood img:active {
   -webkit-transform: translateY(-8px);
   transform: translateY(-8px);
+  cursor: pointer;
 }
 
-div.selectMood h1 {
-  font-size:28px;
+div.selectMood h1.welcome {
+  font-size: 28px;
   margin-top: 90px;
 }
 
@@ -92,20 +93,18 @@ div.selectMood h1 {
   }
 }
 
-
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   div.selectMood img {
-    width: 64px;
+    width: 70px;
   }
-
+  div.selectMood h1.welcome {
+    font-size: 28px;
+    margin: 80px auto 10px auto;
+  }
 }
+
 @media (max-width: 400px) {
   div.selectMood img {
     width: 60px;
-  }
-
-  div.selectMood h1 {
-    font-size: 24px;
-    margin: 80px auto 10px auto;
   }
 }
