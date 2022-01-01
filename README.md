@@ -1,5 +1,13 @@
-## Shimmer Mood Tracker App
+## Summer 2021 Internship Project
 
-**Summer 2021 Internship Project**
+**Select**
 
-Report your mood daily. Analyze how your mood progresses over time. See your most common stats.
+![select mood](https://github.com/lindsayesterman/moodTracker/blob/master/src/img/moodTrackerPg1.png?raw=true)
+
+**Explain**
+
+![select mood](https://github.com/lindsayesterman/moodTracker/blob/master/src/img/moodTrackerPg2.png?raw=true)
+
+**Analyze** 
+
+![select mood](https://github.com/lindsayesterman/moodTracker/blob/master/src/img/moodTrackerPg3.png?raw=true)
