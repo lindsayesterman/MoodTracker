@@ -77,7 +77,6 @@
 
 @media (max-width: 1050px) {
   .topRightBottom,
-  .topRightTop,
   .bottomLeftBottom,
   .bottomLeftTop {
     width: 25px;
