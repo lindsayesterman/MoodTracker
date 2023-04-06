@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/MoodTracker/static/css/main.29459403.chunk.css",
+    "main.js": "/MoodTracker/static/js/main.943fa6ee.chunk.js",
+    "main.js.map": "/MoodTracker/static/js/main.943fa6ee.chunk.js.map",
+    "runtime-main.js": "/MoodTracker/static/js/runtime-main.c7fca63b.js",
+    "runtime-main.js.map": "/MoodTracker/static/js/runtime-main.c7fca63b.js.map",
+    "static/js/2.9633fe89.chunk.js": "/MoodTracker/static/js/2.9633fe89.chunk.js",
+    "static/js/2.9633fe89.chunk.js.map": "/MoodTracker/static/js/2.9633fe89.chunk.js.map",
+    "index.html": "/MoodTracker/index.html",
+    "static/css/main.29459403.chunk.css.map": "/MoodTracker/static/css/main.29459403.chunk.css.map",
+    "static/js/2.9633fe89.chunk.js.LICENSE.txt": "/MoodTracker/static/js/2.9633fe89.chunk.js.LICENSE.txt",
+    "static/media/backBtn.2e262040.svg": "/MoodTracker/static/media/backBtn.2e262040.svg",
+    "static/media/barGraphBtn.0d30f57a.svg": "/MoodTracker/static/media/barGraphBtn.0d30f57a.svg",
+    "static/media/faceFive.e3f855ef.svg": "/MoodTracker/static/media/faceFive.e3f855ef.svg",
+    "static/media/faceFour.6b41455b.svg": "/MoodTracker/static/media/faceFour.6b41455b.svg",
+    "static/media/faceOne.fa6837e5.svg": "/MoodTracker/static/media/faceOne.fa6837e5.svg",
+    "static/media/faceThree.f0df2ab2.svg": "/MoodTracker/static/media/faceThree.f0df2ab2.svg",
+    "static/media/faceTwo.5db194b7.svg": "/MoodTracker/static/media/faceTwo.5db194b7.svg",
+    "static/media/lineGraphBtn.4a88dd84.svg": "/MoodTracker/static/media/lineGraphBtn.4a88dd84.svg",
+    "static/media/shimmerStar.c8bbbf27.svg": "/MoodTracker/static/media/shimmerStar.c8bbbf27.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c7fca63b.js",
+    "static/js/2.9633fe89.chunk.js",
+    "static/css/main.29459403.chunk.css",
+    "static/js/main.943fa6ee.chunk.js"
+  ]
+}
