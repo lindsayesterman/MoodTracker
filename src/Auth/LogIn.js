@@ -25,9 +25,7 @@ export default function LogIn(props) {
     <>
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
         <input type="email" placeholder="Email" name="email" />
-        <label htmlFor="password">Password</label>
         <input type="password" name="password" placeholder="Password" />
         <button type="submit">Submit</button>
       </form>

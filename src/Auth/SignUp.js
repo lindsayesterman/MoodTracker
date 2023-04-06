@@ -25,7 +25,6 @@ const SignUp = (props) => {
     <>
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
         <input
           onChange={props.getUserEmail}
           id="email"
@@ -34,7 +33,6 @@ const SignUp = (props) => {
           name="email"
           placeholder="Email"
         />
-        <label htmlFor="password">Password</label>
         <input type="password" name="password" placeholder="Password" />
         <button type="submit">Submit</button>
       </form>
